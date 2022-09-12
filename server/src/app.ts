@@ -1,6 +1,6 @@
 
 import express from 'express';
-import db from './models/database.config';
+import db from './config/database.config';
 import cors from 'cors';
 
 
