@@ -9,8 +9,8 @@ export const validationSchema =Joi.object({
         lastname: Joi.string().max(9).required(),
         username:Joi.string().required(),
         email:Joi.string().email().lowercase().required(),
-        phonenumber:Joi.string().required(), //is the scope of this project within Nigeria so as to include the country code
-        password:Joi.string().min(8).alphanum().required(),
+        phonenumber:Joi.string().required(), 
+        password:Joi.string().min(8).required(),
         confirmpassword:Joi.ref('password')
 })
 
