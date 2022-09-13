@@ -46,7 +46,7 @@ export async function RegisterUser(
             username: req.body.username,
             email: req.body.email,
             phonenumber: req.body.phonenumber,
-            password: req.body.password,
+            password: passwordHash,
             isVerified: false,
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
         })
