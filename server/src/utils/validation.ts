@@ -24,8 +24,6 @@ export const loginSchema = Joi.object().keys({
 export const updateProfileSchema = Joi.object().keys({
   firstname: Joi.string().trim(),
   lastname: Joi.string().trim(),
-  username: Joi.string().trim(),
-  email: Joi.string().email().trim(),
   phonenumber:Joi.string()
   .length(11)
   .pattern(/^[0-9]+$/)

@@ -135,7 +135,7 @@ exports.LoginUser = LoginUser;
 async function Updateprofile(req, res, next) {
     try {
         const { id } = req.params;
-        const { firstname, lastname, username, email, phonenumber } = req.body;
+        const { firstname, lastname, phonenumber } = req.body;
         const validateResult = validation_1.updateProfileSchema.validate(req.body, validation_1.options);
         if (validateResult.error) {
             return res.status(400).json({
@@ -151,9 +151,11 @@ async function Updateprofile(req, res, next) {
         const updaterecord = await record?.update({
             firstname,
             lastname,
-            username,
-            email,
             phonenumber
+        });
+        res.status(201).json({
+            message: 'you have successfully updated your profile',
+            record: updaterecord
         });
     }
     catch (error) {

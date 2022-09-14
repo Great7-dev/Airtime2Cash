@@ -26,8 +26,6 @@ exports.loginSchema = joi_1.default.object().keys({
 exports.updateProfileSchema = joi_1.default.object().keys({
     firstname: joi_1.default.string().trim(),
     lastname: joi_1.default.string().trim(),
-    username: joi_1.default.string().trim(),
-    email: joi_1.default.string().email().trim(),
     phonenumber: joi_1.default.string()
         .length(11)
         .pattern(/^[0-9]+$/)
