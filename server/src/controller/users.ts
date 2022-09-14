@@ -1,19 +1,20 @@
 import express, { Request, Response, NextFunction } from "express";
 import { v4 as uuidv4, validate } from "uuid";
 import { UserInstance }  from "../models/user";
-import { validationSchema,options } from '../utils/validation'
+import { validationSchema,options, loginSchema } from '../utils/validation'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { emailVerificationView } from "./mailSender";
 import { sendMail } from "./emailService";
+import { generateToken } from "../utils/utils";
 const secret = process.env.JWT_SECRET as string
 
 
 
 export async function RegisterUser(
-    req: Request,
-    res: Response,
-    next: NextFunction
+  req: Request,
+  res: Response,
+  next: NextFunction
 ) {
     const id = uuidv4();
     try {
@@ -85,4 +86,64 @@ export async function verifyUser(token:string){
     
   return await user.update({isVerified:true})  
 
+}
+
+export async function LoginUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const validationResult = loginSchema.validate(req.body, options);
+    if (validationResult.error) {
+      return res.status(400).json({
+        Error: validationResult.error.details[0].message
+      });
+    }
+    const userEmail = req.body.email;
+    const userName = req.body.username;
+    const record = userEmail
+      ? ((await UserInstance.findOne({
+          where: { email: userEmail }
+        })) as unknown as { [key: string]: string })
+      : ((await UserInstance.findOne({
+          where: { username: userName }
+        })) as unknown as { [key: string]: string });
+
+    if (!record) {
+      res.status(404).json({
+        msg: 'Incorrect username/e-mail or password '
+      });
+    } else {
+      const { id } = record;
+      const { password } = record;
+
+      const token = generateToken({ id });
+      const validUser = await bcrypt.compare(req.body.password, password);
+
+      if (!validUser) {
+        return res.status(401).json({
+          message: 'Password do not match'
+        });
+      }
+
+      if (validUser) {
+        res.cookie('authorization', token, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24
+        });
+
+        res.status(200).json({
+          record: record,
+          token: token
+        });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      msg: 'failed to login',
+      route: '/login'
+    });
+  }
 }

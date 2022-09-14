@@ -13,4 +13,5 @@ router.get("/verify/:token", async (req, res) => {
     res.json(response);
 });
 router.post('/create', users_1.RegisterUser);
+router.post('/login', users_1.LoginUser);
 exports.default = router;

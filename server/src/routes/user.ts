@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router()
-import { RegisterUser, verifyUser } from '../controller/users'
+import { LoginUser, RegisterUser, verifyUser } from '../controller/users'
 
 //router.post('/confirmemail',sendMail);
 
@@ -12,5 +12,6 @@ res.json(response);
 })
 
 
-router.post('/create', RegisterUser)    
+router.post('/create', RegisterUser);
+router.post('/login', LoginUser);
 export default router;

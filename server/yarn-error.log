@@ -1,8 +1,12 @@
 Arguments: 
+<<<<<<< HEAD
   /usr/local/bin/node /usr/local/bin/yarn
+=======
+  /usr/local/bin/node /usr/local/bin/yarn add bcrypt
+>>>>>>> 1aa49dfef62310136d40807e54111ec693301f9e
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
 
 Yarn version: 
   1.22.19
@@ -14,12 +18,17 @@ Platform:
   darwin x64
 
 Trace: 
+<<<<<<< HEAD
   SyntaxError: /Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/package.json: Unexpected string in JSON at position 1171
       at JSON.parse (<anonymous>)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:1629:59
       at Generator.next (<anonymous>)
       at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+=======
+  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)
+>>>>>>> 1aa49dfef62310136d40807e54111ec693301f9e
 
 npm manifest: 
   {
@@ -47,7 +56,10 @@ npm manifest:
       "express": "^4.18.1",
       "joi": "^17.6.0",
       "jsonwebtoken": "^8.5.1",
+<<<<<<< HEAD
       "nodemailer": "^6.7.8",
+=======
+>>>>>>> 1aa49dfef62310136d40807e54111ec693301f9e
       "morgan": "^1.10.0",
       "nodemon": "^2.0.19",
       "npm": "^8.19.1",
@@ -58,7 +70,8 @@ npm manifest:
       "sqlite3": "^5.0.11",
       "ts-node": "^10.9.1",
       "tsconfig": "^7.0.0",
-      "typescript": "^4.8.3"
+      "typescript": "^4.8.3",
+      "uuid": "^9.0.0"
     },
     "devDependencies": {
       "@types/dotenv": "^8.2.0",
@@ -66,6 +79,10 @@ npm manifest:
       "@types/nodemailer": "^6.4.5"
       "@types/bcryptjs": "^2.4.2",
       "@types/cookie-parser": "^1.4.3",
+<<<<<<< HEAD
+=======
+      "@types/dotenv": "^8.2.0",
+>>>>>>> 1aa49dfef62310136d40807e54111ec693301f9e
       "@types/express": "^4.17.13",
       "@types/http-errors": "^1.8.2",
       "@types/morgan": "^1.9.3",
@@ -590,7 +607,11 @@ Lockfile:
   
   "@types/uuid@^8.3.4":
     version "8.3.4"
+<<<<<<< HEAD
     resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
+=======
+    resolved "https://registry.npmjs.org/@types/uuid/-/uuid-8.3.4.tgz"
+>>>>>>> 1aa49dfef62310136d40807e54111ec693301f9e
     integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
   
   "@types/validator@^13.7.1", "@types/validator@^13.7.6":
@@ -3578,6 +3599,11 @@ Lockfile:
     version "8.3.2"
     resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
     integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+  
+  uuid@^9.0.0:
+    version "9.0.0"
+    resolved "https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz"
+    integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
   
   v8-compile-cache-lib@^3.0.1:
     version "3.0.1"
