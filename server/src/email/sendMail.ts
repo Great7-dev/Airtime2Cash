@@ -3,6 +3,7 @@ const forMailUser = process.env.GMAIL_USER as string;
 const forMailPass = process.env.GMAIL_PASS as string;
 const fromUser = process.env.FROM as string;
 const userSubject = process.env.SUBJECT as string;
+import 'dotenv/config'
 
 const transport = nodemailer.createTransport({
   service: 'gmail',
