@@ -21,7 +21,6 @@ async function RegisterUser(req, res, next) {
     try {
         const ValidateUser = validation_1.validationSchema.validate(req.body, validation_1.options);
         if (ValidateUser.error) {
-            console.log(ValidateUser.error);
             return res.status(400).json({
                 Error: ValidateUser.error.details[0].message,
             });
@@ -127,7 +126,6 @@ async function LoginUser(req, res, next) {
         }
     }
     catch (err) {
-        console.log(err);
         res.status(500).json({
             msg: 'failed to login',
             route: '/login'
@@ -149,18 +147,15 @@ async function forgotPassword(req, res) {
             });
         }
         const { id } = user;
-        const passPhrase = process.env.JWT_SECRET;
         const fromUser = process.env.FROM;
         const subject = process.env.SUBJECT;
         const html = (0, emailVerification_1.forgotPasswordVerification)(id);
-        // const token = jwt.sign({ id }, passPhrase, { expiresIn: '30mins' });
-        await (0, emailService_1.sendMail)(fromUser, email, subject, html);
+        await (0, emailService_1.sendMail)(html, req.body.email, subject, fromUser);
         res.status(200).json({
             message: 'Check email for the verification link',
         });
     }
     catch (error) {
-        console.log(error);
     }
 }
 exports.forgotPassword = forgotPassword;
@@ -192,7 +187,6 @@ async function changePassword(req, res) {
         });
     }
     catch (error) {
-        console.log(error);
         res.status(500).json({
             message: 'Internal server error',
         });

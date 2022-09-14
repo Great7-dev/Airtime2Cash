@@ -9,7 +9,6 @@ import { emailVerificationView } from "./mailSender";
 import { sendMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
-import  sendEmail  from "../email/sendMail";
 const secret = process.env.JWT_SECRET as string
 dotenv.config();
 
@@ -23,8 +22,6 @@ export async function RegisterUser(
     try {
         const ValidateUser = validationSchema.validate(req.body,options);
         if (ValidateUser.error) {
-            console.log(ValidateUser.error);
-            
             return res.status(400).json({
                 Error: ValidateUser.error.details[0].message,
             });
@@ -143,7 +140,6 @@ export async function LoginUser(
       }
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json({
       msg: 'failed to login',
       route: '/login'
@@ -170,23 +166,17 @@ export async function forgotPassword(req: Request, res: Response) {
     }
     
     const { id } = user;
-    const passPhrase = process.env.JWT_SECRET as string;
     const fromUser = process.env.FROM as string;
     const subject = process.env.SUBJECT as string;
     const html = forgotPasswordVerification(id);
-   
-    // const token = jwt.sign({ id }, passPhrase, { expiresIn: '30mins' });
-   
     
-    
-    await sendMail(fromUser, email, subject, html);
+    await sendMail(html, req.body.email, subject, fromUser);
     
     
     res.status(200).json({
       message: 'Check email for the verification link',
     });
   } catch (error) {
-    console.log(error);
   }
 }
 
@@ -220,7 +210,6 @@ export async function changePassword(req: Request, res: Response) {
       message: 'Password Successfully Changed',
     });
   } catch (error) {
-    console.log(error)
     res.status(500).json({
       message: 'Internal server error',
     });
