@@ -10,7 +10,6 @@ export async function sendMail(html:string, mail:string,subject:string,username:
     const password = process.env.GMAIL_PASS as string
     const email = process.env.GMAIL_USER as string
     try {
-        console.log(password, "    ", email)
         let transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -33,7 +32,6 @@ export async function sendMail(html:string, mail:string,subject:string,username:
             if (err) {
                 reject(err);
             } else {
-                console.log('Email sent:', info.response)
                 resolve(info)
             }
         })

@@ -12,7 +12,6 @@ async function sendMail(html, mail, subject, username) {
     const password = process.env.GMAIL_PASS;
     const email = process.env.GMAIL_USER;
     try {
-        console.log(password, "    ", email);
         let transporter = nodemailer_1.default.createTransport({
             service: "gmail",
             auth: {
@@ -33,7 +32,6 @@ async function sendMail(html, mail, subject, username) {
                     reject(err);
                 }
                 else {
-                    console.log('Email sent:', info.response);
                     resolve(info);
                 }
             });
