@@ -11,16 +11,14 @@ export const validationSchema = Joi.object({
     .length(11)
     .pattern(/^[0-9]+$/)
     .required(),
-  password: Joi.string()
-    .regex(/^.{4,20}$/)
-    .required(),
+  password: Joi.string().required(),
   confirmpassword: Joi.ref('password')
 });
 
 export const loginSchema = Joi.object().keys({
   email: Joi.string().email().lowercase(),
   username: Joi.string().trim(),
-  password: Joi.string().regex(/^.{4,20}$/)
+  password: Joi.string().trim()
 });
 
 //Generate Token

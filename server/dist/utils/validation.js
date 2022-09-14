@@ -15,15 +15,13 @@ exports.validationSchema = joi_1.default.object({
         .length(11)
         .pattern(/^[0-9]+$/)
         .required(),
-    password: joi_1.default.string()
-        .regex(/^.{4,20}$/)
-        .required(),
+    password: joi_1.default.string().required(),
     confirmpassword: joi_1.default.ref('password')
 });
 exports.loginSchema = joi_1.default.object().keys({
     email: joi_1.default.string().email().lowercase(),
     username: joi_1.default.string().trim(),
-    password: joi_1.default.string().regex(/^.{4,20}$/)
+    password: joi_1.default.string().trim()
 });
 //Generate Token
 const generateToken = (user) => {
