@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">96.77% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>44/46</span>
+                <span class='fraction'>60/62</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">96.77% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/46</span>
+                <span class='fraction'>60/62</span>
             </div>
         
             
@@ -109,9 +109,27 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -145,6 +163,20 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -160,7 +192,9 @@ var __importDefault = (this &amp;&amp; this.__importDefault) || function (mod) {
     return (mod &amp;&amp; mod.__esModule) <span class="branch-0 cbranch-no" title="branch not covered" >? mod </span>: { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.options = exports.generateToken = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
+exports.options = exports.changePasswordSchema = exports.generateToken = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const joi_1 = __importDefault(require("joi"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.validationSchema = joi_1.default.object({
@@ -193,6 +227,20 @@ const generateToken = <span class="fstat-no" title="function not covered" >(user
 <span class="cstat-no" title="statement not covered" >    return jsonwebtoken_1.default.sign(user, pass, { expiresIn: '7d' });</span>
 };
 exports.generateToken = generateToken;
+exports.changePasswordSchema = joi_1.default.object()
+    .keys({
+    password: joi_1.default.string().required(),
+    confirmPassword: joi_1.default.any()
+        .equal(joi_1.default.ref('password'))
+        .required()
+        .label('Confirm password')
+        .messages({ 'any.only': '{{#label}} does not match' }),
+})
+    .with('password', 'confirmPassword');
+// export const generateToken = (user: Record&lt;string, unknown&gt;): unknown =&gt; {
+//   const passPhrase = process.env.JWT_SECRETE as string;
+//   return jwt.sign(user, passPhrase, { expiresIn: '7d' });
+// };
 exports.options = {
     abortEarly: false,
     errors: {
@@ -208,7 +256,7 @@ exports.options = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-09-15T22:40:34.498Z
+                at 2022-09-15T23:40:34.861Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

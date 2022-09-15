@@ -9,7 +9,7 @@ const database_config_1 = __importDefault(require("../config/database.config"));
 require("dotenv/config");
 const request = (0, supertest_1.default)(app_1.default);
 beforeAll(async () => {
-    await database_config_1.default.sync({ force: true }).then(() => {
+    await database_config_1.default.sync({}).then(() => {
         console.log("Database connected successfully to test");
     });
 });
@@ -17,7 +17,7 @@ beforeAll(async () => {
 describe("it should test our API", () => {
     it("update user profile", async () => {
         const response = await request.post('/users/create').send({
-            firstname: "paris",
+            firstname: "parist",
             lastname: "ohis",
             email: "ddj@yahoo.com",
             username: "parisohis7",

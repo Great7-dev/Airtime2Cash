@@ -5,7 +5,7 @@ import 'dotenv/config'
 const request = supertest(app)
 
 beforeAll(async () => {
-  await db.sync({ force: true }).then(() => {
+  await db.sync({ }).then(() => {
     console.log("Database connected successfully to test");
   })
 });
@@ -13,7 +13,7 @@ beforeAll(async () => {
 describe("it should test our API", () => {
 it("update user profile", async () => {
   const response = await request.post('/users/create').send({
-    firstname: "paris",
+    firstname: "parist",
     lastname: "ohis",
     email: "ddj@yahoo.com",
     username: "parisohis7",

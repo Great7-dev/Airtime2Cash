@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/controller/mailSender.ts</title>
+    <title>Code coverage report for dist/email/emailVerification.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controller</a> mailSender.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">dist/email</a> emailVerification.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>9/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>9/25</span>
             </div>
         
             
@@ -82,7 +82,20 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -99,28 +112,33 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export function emailVerificationView(token: string): string {</span></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const link = `${process.env.BACKEND_URL}/user/verify/${token}`;</span>
-<span class="cstat-no" title="statement not covered" >  </span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var __importDefault = (this &amp;&amp; this.__importDefault) || function (mod) {
+    return (mod &amp;&amp; mod.__esModule) <span class="branch-0 cbranch-no" title="branch not covered" >? mod </span>: { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.forgotPasswordVerification = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function forgotPasswordVerification(id) {</span></span>
+<span class="cstat-no" title="statement not covered" >    const link = `${process.env.FRONTEND_URL}/forgot-password/${id}`;</span>
 <span class="cstat-no" title="statement not covered" >    let temp = `</span>
-<span class="cstat-no" title="statement not covered" >       &lt;div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;"&gt;</span>
-<span class="cstat-no" title="statement not covered" >       </span>
-<span class="cstat-no" title="statement not covered" >       &lt;h2 style="text-align: center; text-transform: uppercase;color: teal;"&gt;Welcome to Airtime to Cash POD H.&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        &lt;p&gt;Hi there, Follow the link by clicking on the button to verify your email</span>
+<span class="cstat-no" title="statement not covered" >       &lt;div style="max-width: 700px;</span>
+<span class="cstat-no" title="statement not covered" >       margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;"&gt;</span>
+<span class="cstat-no" title="statement not covered" >       &lt;h2 style="text-align: center; text-transform: uppercase;color: teal;"&gt;Change your password.&lt;/h2&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;Hi there, Follow the link by clicking on the button to change your password.</span>
 <span class="cstat-no" title="statement not covered" >        &lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >         &lt;a href=${link}</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >         style="background: crimson; text-decoration: none; color: white;padding: 10px 20px; margin: 10px 0;display: inline-block;"&gt;Click Here&lt;/a&gt;</span>
-<span class="cstat-no" title="statement not covered" >         &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >  `;</span>
+<span class="cstat-no" title="statement not covered" >         style="background: crimson; text-decoration: none; color: white;</span>
+<span class="cstat-no" title="statement not covered" >          padding: 10px 20px; margin: 10px 0;</span>
+<span class="cstat-no" title="statement not covered" >         display: inline-block;"&gt;Click here&lt;/a&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        `;</span>
 <span class="cstat-no" title="statement not covered" >    return temp;</span>
-<span class="cstat-no" title="statement not covered" >  </span>
-<span class="cstat-no" title="statement not covered" >  }</span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >}</span>
+exports.forgotPasswordVerification = forgotPasswordVerification;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

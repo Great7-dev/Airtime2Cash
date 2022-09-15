@@ -9,10 +9,8 @@ import cors from 'cors';
 import 'dotenv/config'
 
 
-
-import usersRouter from './routes/user';
 import userRouter from './routes/user';
-dotenv.config();
+
 
 db.sync()
   .then(() => {

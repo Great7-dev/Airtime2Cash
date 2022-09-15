@@ -1,5 +1,8 @@
+import dotenv from "dotenv"
 import nodemailer from 'nodemailer';
-import 'dotenv/config'
+import 'dotenv/config';
+
+
 
 
 
@@ -29,7 +32,6 @@ export async function sendMail(html:string, mail:string,subject:string,username:
             if (err) {
                 reject(err);
             } else {
-                console.log('Email sent:', info.response)
                 resolve(info)
             }
         })

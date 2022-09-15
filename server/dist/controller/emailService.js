@@ -30,7 +30,6 @@ async function sendMail(html, mail, subject, username) {
                     reject(err);
                 }
                 else {
-                    console.log('Email sent:', info.response);
                     resolve(info);
                 }
             });
