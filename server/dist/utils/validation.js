@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.options = exports.generateToken = exports.loginSchema = exports.validationSchema = void 0;
+exports.options = exports.generateToken = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 exports.validationSchema = joi_1.default.object({
@@ -22,6 +22,14 @@ exports.loginSchema = joi_1.default.object().keys({
     email: joi_1.default.string().email().lowercase(),
     username: joi_1.default.string().trim(),
     password: joi_1.default.string().trim()
+});
+exports.updateProfileSchema = joi_1.default.object().keys({
+    firstname: joi_1.default.string().trim(),
+    lastname: joi_1.default.string().trim(),
+    phonenumber: joi_1.default.string()
+        .length(11)
+        .pattern(/^[0-9]+$/)
+        .required()
 });
 //Generate Token
 const generateToken = (user) => {

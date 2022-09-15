@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.Updateprofile = exports.LoginUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -132,3 +132,37 @@ async function LoginUser(req, res, next) {
     }
 }
 exports.LoginUser = LoginUser;
+async function Updateprofile(req, res, next) {
+    try {
+        const { id } = req.params;
+        const { firstname, lastname, phonenumber } = req.body;
+        const validateResult = validation_1.updateProfileSchema.validate(req.body, validation_1.options);
+        if (validateResult.error) {
+            return res.status(400).json({
+                Error: validateResult.error.details[0].message
+            });
+        }
+        const record = await user_1.UserInstance.findByPk(id);
+        if (!record) {
+            res.status(404).json({
+                Error: "cannot find course",
+            });
+        }
+        const updaterecord = await record?.update({
+            firstname,
+            lastname,
+            phonenumber
+        });
+        res.status(201).json({
+            message: 'you have successfully updated your profile',
+            record: updaterecord
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: 'failed to update profile',
+            route: '/update/:id'
+        });
+    }
+}
+exports.Updateprofile = Updateprofile;
