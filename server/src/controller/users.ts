@@ -65,7 +65,6 @@ export async function RegisterUser(
             await sendMail(html,email,subject,username)
             
         res.json({msg:"User created successfully",record})
-
         }  
     } catch (error) {
         res.status(500).json({
@@ -140,7 +139,6 @@ export async function LoginUser(
       }
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json({
       msg: 'failed to login',
       route: '/login'
@@ -161,7 +159,7 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
       const record = await UserInstance.findByPk(id)
       if(!record){
         res.status(404).json({
-                  Error:"cannot find course",
+                  Error:"cannot find user",
             })   
     }
     const updaterecord = await record?.update({

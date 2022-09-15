@@ -124,7 +124,6 @@ async function LoginUser(req, res, next) {
         }
     }
     catch (err) {
-        console.log(err);
         res.status(500).json({
             msg: 'failed to login',
             route: '/login'
@@ -145,7 +144,7 @@ async function Updateprofile(req, res, next) {
         const record = await user_1.UserInstance.findByPk(id);
         if (!record) {
             res.status(404).json({
-                Error: "cannot find course",
+                Error: "cannot find user",
             });
         }
         const updaterecord = await record?.update({
