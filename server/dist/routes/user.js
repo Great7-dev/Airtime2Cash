@@ -15,4 +15,6 @@ router.get("/verify/:token", async (req, res) => {
 router.patch('/update/:id', users_1.Updateprofile);
 router.post('/create', users_1.RegisterUser);
 router.post('/login', users_1.LoginUser);
+router.post('/forgotpassword', users_1.forgotPassword);
+router.patch('/change-password/:id', users_1.changePassword);
 exports.default = router;

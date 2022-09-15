@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Updateprofile = exports.LoginUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.verifyUser = exports.RegisterUser = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -12,13 +13,14 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const mailSender_1 = require("./mailSender");
 const emailService_1 = require("./emailService");
 const utils_1 = require("../utils/utils");
+const emailVerification_1 = require("../email/emailVerification");
 const secret = process.env.JWT_SECRET;
+dotenv_1.default.config();
 async function RegisterUser(req, res, next) {
     const id = (0, uuid_1.v4)();
     try {
         const ValidateUser = validation_1.validationSchema.validate(req.body, validation_1.options);
         if (ValidateUser.error) {
-            console.log(ValidateUser.error);
             return res.status(400).json({
                 Error: ValidateUser.error.details[0].message,
             });
@@ -124,7 +126,6 @@ async function LoginUser(req, res, next) {
         }
     }
     catch (err) {
-        console.log(err);
         res.status(500).json({
             msg: 'failed to login',
             route: '/login'
@@ -132,6 +133,66 @@ async function LoginUser(req, res, next) {
     }
 }
 exports.LoginUser = LoginUser;
+async function forgotPassword(req, res) {
+    try {
+        const { email } = req.body;
+        const user = (await user_1.UserInstance.findOne({
+            where: {
+                email: email,
+            },
+        }));
+        if (!user) {
+            return res.status(404).json({
+                message: 'email not found',
+            });
+        }
+        const { id } = user;
+        const fromUser = process.env.FROM;
+        const subject = process.env.SUBJECT;
+        const html = (0, emailVerification_1.forgotPasswordVerification)(id);
+        await (0, emailService_1.sendMail)(html, req.body.email, subject, fromUser);
+        res.status(200).json({
+            message: 'Check email for the verification link',
+        });
+    }
+    catch (error) {
+    }
+}
+exports.forgotPassword = forgotPassword;
+async function changePassword(req, res) {
+    try {
+        const { id } = req.params;
+        const validationResult = validation_1.changePasswordSchema.validate(req.body, validation_1.options);
+        if (validationResult.error) {
+            return res.status(400).json({
+                error: validationResult.error.details[0].message,
+            });
+        }
+        const user = await user_1.UserInstance.findOne({
+            where: {
+                id: id,
+            },
+        });
+        if (!user) {
+            return res.status(403).json({
+                message: 'user does not exist',
+            });
+        }
+        const passwordHash = await bcryptjs_1.default.hash(req.body.password, 8);
+        await user?.update({
+            password: passwordHash,
+        });
+        return res.status(201).json({
+            message: 'Password Successfully Changed',
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+        });
+    }
+}
+exports.changePassword = changePassword;
 async function Updateprofile(req, res, next) {
     try {
         const { id } = req.params;
