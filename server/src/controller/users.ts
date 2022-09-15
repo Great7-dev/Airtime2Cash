@@ -89,10 +89,10 @@ export async function LoginUser(
     const userName = req.body.username;
     const record = userEmail
       ? ((await UserInstance.findOne({
-          where: { email: userEmail }
+          where: [{ email: userEmail }, { isVerified: true }]
         })) as unknown as { [key: string]: string })
       : ((await UserInstance.findOne({
-          where: { username: userName }
+          where: [{ username: userName }, { isVerified: true }]
         })) as unknown as { [key: string]: string });
 
     if (!record) {

@@ -46,8 +46,8 @@ UserInstance.init({
     avatar: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
-    },
+    }
 }, {
     sequelize: database_config_1.default,
-    tableName: "userTable",
+    tableName: 'userTable'
 });

@@ -5,7 +5,7 @@
     "scripts": {
         "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
         "lint": "eslint . --ext .ts",
-        "start": "nodemon ./src/app.ts",
+        "start": "nodemon ./bin/www",
         "compile": "tsc -w",
         "dev": "ts-node-dev --respawn ./bin/www"
     },

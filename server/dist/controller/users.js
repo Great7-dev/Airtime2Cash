@@ -75,10 +75,10 @@ async function LoginUser(req, res, next) {
         const userName = req.body.username;
         const record = userEmail
             ? (await user_1.UserInstance.findOne({
-                where: { email: userEmail }
+                where: [{ email: userEmail }, { isVerified: true }]
             }))
             : (await user_1.UserInstance.findOne({
-                where: { username: userName }
+                where: [{ username: userName }, { isVerified: true }]
             }));
         if (!record) {
             res.status(404).json({
