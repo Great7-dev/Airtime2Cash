@@ -23,6 +23,15 @@ export const loginSchema = Joi.object().keys({
   password: Joi.string().trim()
 });
 
+export const updateProfileSchema = Joi.object().keys({
+  firstname: Joi.string().trim(),
+  lastname: Joi.string().trim(),
+  phonenumber:Joi.string()
+  .length(11)
+  .pattern(/^[0-9]+$/)
+  .required()
+})
+
 //Generate Token
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
   const pass = process.env.JWT_SECRET as string;

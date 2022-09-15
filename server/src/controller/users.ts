@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express, { Request, Response, NextFunction } from "express";
 import { v4 as uuidv4, validate } from "uuid";
 import { UserInstance }  from "../models/user";
-import { validationSchema,options, loginSchema, changePasswordSchema } from '../utils/validation'
+import { validationSchema,options, loginSchema, updateProfileSchema, changePasswordSchema } from '../utils/validation'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { emailVerificationView } from "./mailSender";
@@ -215,3 +215,39 @@ export async function changePassword(req: Request, res: Response) {
     });
   }
 }
+
+export async function Updateprofile(req:Request, res:Response, next:NextFunction){
+    try{
+      const { id } = req.params
+      const {firstname,lastname,phonenumber} = req.body
+      const validateResult = updateProfileSchema.validate(req.body,options)
+        if(validateResult.error){
+            return res.status(400).json({
+                Error:validateResult.error.details[0].message
+            })
+        }
+      const record = await UserInstance.findByPk(id)
+      if(!record){
+        res.status(404).json({
+                  Error:"cannot find course",
+            })   
+    }
+    const updaterecord = await record?.update({
+        firstname,
+        lastname,
+        phonenumber
+     })
+     res.status(201).json({
+            message: 'you have successfully updated your profile',
+            record: updaterecord 
+         })
+        
+    }catch(error){
+           res.status(500).json({
+            msg:'failed to update profile',
+            route: '/update/:id'
+
+           })
+    }
+}
+

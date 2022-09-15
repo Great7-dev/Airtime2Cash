@@ -1,8 +1,6 @@
 import express from 'express';
-import { validate } from 'uuid';
-const router = express.Router();
-import { RegisterUser, LoginUser,forgotPassword,changePassword, verifyUser } from '../controller/users';
-
+const router = express.Router()
+import { changePassword, forgotPassword, LoginUser, RegisterUser, Updateprofile, verifyUser } from '../controller/users'
 
 //router.post('/confirmemail',sendMail);
 
@@ -12,6 +10,7 @@ const token = req.params.token;
 const response = await verifyUser(token);
 res.json(response);
 })
+router.patch('/update/:id', Updateprofile)
 
 
 router.post('/create', RegisterUser);
