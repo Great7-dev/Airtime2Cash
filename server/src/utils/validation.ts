@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from 'express';
 import Joi from 'joi';
 import jwt from 'jsonwebtoken';
@@ -21,11 +23,41 @@ export const loginSchema = Joi.object().keys({
   password: Joi.string().trim()
 });
 
+export const updateProfileSchema = Joi.object().keys({
+  firstname: Joi.string().trim(),
+  lastname: Joi.string().trim(),
+  phonenumber:Joi.string()
+  .length(11)
+  .pattern(/^[0-9]+$/)
+  .required()
+})
+
 //Generate Token
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
   const pass = process.env.JWT_SECRET as string;
   return jwt.sign(user, pass, { expiresIn: '7d' });
 };
+
+
+export const changePasswordSchema = Joi.object()
+  .keys({
+    password: Joi.string().required(),
+    confirmPassword: Joi.any()
+      .equal(Joi.ref('password'))
+
+      .required()
+
+      .label('Confirm password')
+
+      .messages({ 'any.only': '{{#label}} does not match' }),
+  })
+  .with('password', 'confirmPassword');
+
+// export const generateToken = (user: Record<string, unknown>): unknown => {
+//   const passPhrase = process.env.JWT_SECRETE as string;
+//   return jwt.sign(user, passPhrase, { expiresIn: '7d' });
+// };
+
 
 export const options = {
   abortEarly: false,
