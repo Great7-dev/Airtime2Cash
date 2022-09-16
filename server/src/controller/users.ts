@@ -66,7 +66,7 @@ export async function RegisterUser(
       email: req.body.email,
       phonenumber: req.body.phonenumber,
       password: passwordHash,
-      isVerified: true,
+      isVerified: false,
       avatar:
         'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000'
     });
@@ -246,7 +246,7 @@ export async function Updateprofile(
     const record = await UserInstance.findByPk(id);
     if (!record) {
       res.status(404).json({
-        Error: 'cannot find course'
+        Error: 'cannot find user'
       });
     }
     const updaterecord = await record?.update({

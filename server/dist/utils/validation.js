@@ -31,7 +31,6 @@ exports.updateProfileSchema = joi_1.default.object().keys({
     phonenumber: joi_1.default.string()
         .length(11)
         .pattern(/^[0-9]+$/)
-        .required()
 });
 //Generate Token
 const generateToken = (user) => {
@@ -46,7 +45,7 @@ exports.changePasswordSchema = joi_1.default.object()
         .equal(joi_1.default.ref('password'))
         .required()
         .label('Confirm password')
-        .messages({ 'any.only': '{{#label}} does not match' }),
+        .messages({ 'any.only': '{{#label}} does not match' })
 })
     .with('password', 'confirmPassword');
 // export const generateToken = (user: Record<string, unknown>): unknown => {
