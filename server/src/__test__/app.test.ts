@@ -89,4 +89,25 @@ describe('it should test all apis', () => {
 
     expect(response.body.status).toBe('fail');
   });
+  it('it should return status 200 for hitting thr route successfully', async () => {
+    const response = await request.post('/users/forgotpassword').send({
+      email: 'marydoe@yahoo.com'
+    });
+
+    expect(response.status).toBe(200);
+  });
+  it('it should change password successfully', async () => {
+    const response = await request.post('/users/login').send({
+      username: 'maryjoe',
+
+      password: '12345678'
+    });
+
+    const { id } = response.body.record;
+    const response2 = await request.patch(`/users/change-password/${id}`).send({
+      password: '1234567890',
+      confirmPassword: '1234567890'
+    });
+    expect(response2.status).toBe(200);
+  });
 });

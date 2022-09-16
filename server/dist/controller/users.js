@@ -57,7 +57,7 @@ async function RegisterUser(req, res, next) {
             email: req.body.email,
             phonenumber: req.body.phonenumber,
             password: passwordHash,
-            isVerified: false,
+            isVerified: true,
             avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000'
         });
         if (record) {
@@ -196,7 +196,7 @@ async function changePassword(req, res) {
         await user?.update({
             password: passwordHash
         });
-        return res.status(201).json({
+        return res.status(200).json({
             message: 'Password Successfully Changed'
         });
     }
