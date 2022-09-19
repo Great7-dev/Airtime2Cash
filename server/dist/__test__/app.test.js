@@ -13,8 +13,8 @@ beforeAll(async () => {
         console.log('Database successfully created for test');
     });
 });
+// Testing for sign up
 describe('it should test all apis', () => {
-    // Testing for sign up
     it('it should create a user', async () => {
         const response = await request.post('/users/create').send({
             firstname: 'Mary',
@@ -41,6 +41,7 @@ describe('it should test all apis', () => {
         expect(response.body).toHaveProperty('record');
         expect(response.body).toHaveProperty('token');
     });
+    // Testing for login
     it('it should login a user using username', async () => {
         const response = await request.post('/users/login').send({
             username: 'maryjoe',
@@ -61,12 +62,14 @@ describe('it should test all apis', () => {
         expect(response.body.msg).toBe('Incorrect username/e-mail or password');
         expect(response.body.status).toBe('fail');
     });
+    // Testing for forgot password
     it('it should return status 200 for hitting thr route successfully', async () => {
         const response = await request.post('/users/forgotpassword').send({
             email: 'marydoe@yahoo.com'
         });
         expect(response.status).toBe(200);
     });
+    // Testing for change password
     it('it should change password successfully', async () => {
         const response = await request.post('/users/login').send({
             username: 'maryjoe',
