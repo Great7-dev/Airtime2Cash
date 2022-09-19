@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.verifyUser = exports.RegisterUser = void 0;
-const dotenv_1 = __importDefault(require("dotenv"));
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -15,7 +14,6 @@ const emailService_1 = require("./emailService");
 const utils_1 = require("../utils/utils");
 const emailVerification_1 = require("../email/emailVerification");
 const secret = process.env.JWT_SECRET;
-dotenv_1.default.config();
 async function RegisterUser(req, res, next) {
     const id = (0, uuid_1.v4)();
     try {
@@ -64,6 +62,7 @@ async function RegisterUser(req, res, next) {
         }
     }
     catch (error) {
+        console.log(error);
         res.status(500).json({
             message: 'failed to register',
             route: '/create'
@@ -206,7 +205,7 @@ async function Updateprofile(req, res, next) {
         const record = await user_1.UserInstance.findByPk(id);
         if (!record) {
             res.status(404).json({
-                Error: "cannot find course",
+                Error: "cannot find user",
             });
         }
         const updaterecord = await record?.update({

@@ -10,7 +10,7 @@ import { sendMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
 const secret = process.env.JWT_SECRET as string
-dotenv.config();
+
 
 
 export async function RegisterUser(
@@ -65,9 +65,9 @@ export async function RegisterUser(
             await sendMail(html,email,subject,username)
             
         res.json({msg:"User created successfully",record})
-
         }  
     } catch (error) {
+      console.log(error);
         res.status(500).json({
             message:'failed to register',
             route:'/create'
@@ -229,7 +229,7 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
       const record = await UserInstance.findByPk(id)
       if(!record){
         res.status(404).json({
-                  Error:"cannot find course",
+                  Error:"cannot find user",
             })   
     }
     const updaterecord = await record?.update({
