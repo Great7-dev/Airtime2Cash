@@ -12,6 +12,7 @@ import { useState } from 'react';
 export const Signup = ({
     ...props
 }) => {
+    
     const [user, setUser] = useState({
         firstname: "",
         lastname: "",
@@ -25,6 +26,7 @@ export const Signup = ({
         setUser({ ...user, [e.target.name]: e.target.value })
         console.log(user);
     }
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (user.firstname ===""|| user.lastname ==="" || user.username ==="" || user.email==="" || user.phonenumber==="" || user.password==="" || user.confirmpassword==="") {

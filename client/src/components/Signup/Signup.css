@@ -9,14 +9,6 @@ body{
 
     background-color:#f7f7f7;
 }
-/* .frame9{
-    margin-top: -200px;
-} */
-
-/* .go{
-    background-color: black;
-} */
-
 button{
 display: flex;
 flex-direction: row;
@@ -24,18 +16,11 @@ justify-content: center;
 align-items: center;
 padding: 8px;
 gap: 8px;
-
 width: 320px;
 height: 32px;
 margin: 6% 2% -6% 0%;
 padding: 6.5%;
 border: none;
-
-/* background: rgba(0, 0, 0, 0.05); */
-
-
-/* Inside auto layout */
-
 flex: none;
 order: 0;
 /* flex-grow: 0; */
@@ -45,12 +30,9 @@ color: #F5F5F5;
 
 font-weight:600;
 line-height:14.52px ;
-/* font: inter; */
-    
 }
 .logo-heading{
-
-    margin-left: 95px;
+margin-left: 95px;
 }
 .bck_btn{
     color:rgb(50, 49, 49);
@@ -59,46 +41,25 @@ line-height:14.52px ;
     border-radius: 95px;
     padding: 2% 6% 2% 1%;
     text-decoration: none;
-
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    /* identical to box height */
-
-
     color: #21334F;
-
-
-    /* Inside auto layout */
-
-   
 }
-
 .frame9, span{
-    width: 162px;
+width: 162px;
 height: 22px;
-
 font-family: 'Inter';
 font-style: normal;
 font-weight: 700;
 font-size: 18px;
-/* line-height: 22px; */
-/* identical to box height */
-
-
 color: #21334F;
-
-
-/* Inside auto layout */
-
 flex: none;
 order: 0;
 flex-grow: 0;
 }
-
 .sign_container{
     color: #21334F;
     width: 189px;
@@ -106,43 +67,31 @@ flex-grow: 0;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
-    
-}
+    }
 .sign_in{
-    color: #DE3D6D;
-}
-
+    color: #DE3D6D;}
 .signup {
     position: relative;
     width: 100%;
     height: 100%;
-    background: rgb(245, 245, 245);
-    /* background-color: #F5844C;
-     */
+    background: rgb(245, 245, 245)
 }
-
 .signup-card {
  position: relative;
  top: 50%;
-    left: 50%;
-    transform: translate(-50%, -0.05%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 20px 50px; */
-    /* width: 70%; */
-    /* height: 800px; */
-    background: #FFFFFF;
-    margin: 10% 0% 10% 0%;
-    width: 745px;
-    height: Hug(936);
-    Padding: 100px 200px 200px 200px;
+ left: 50%;
+ transform: translate(-50%, -0.05%);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background: #FFFFFF;
+ margin: 10% 0% 10% 0%;
+ width: 745px;
+ height: Hug(936);
+ Padding: 100px 200px 200px 200px;
     /* Gap 40px */
     gap: 40px;
-
-     
 }
-
 .signup-card-padding {
     display: flex;
     flex-direction: column;
@@ -151,25 +100,20 @@ flex-grow: 0;
     gap: 40px;
     width: 320px;
     height: 680px;
-/* Inside auto layout */
     flex: none;
     order: 1;
     flex-grow: 0;
     
 }
-
 .signup-box {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
     gap: 40px;
-    
 }
-
-
 .frame10{
-    display: flex;
+display: flex;
 flex-direction: column;
 align-items: center;
 padding: 0px;
@@ -177,21 +121,31 @@ gap: 40px;
 border-radius: 6px;
 width: 300px;
 height: 455px;
-/* Inside auto layout */
-
 flex: none;
 order: 1;
 flex-grow: 0;
-
 }
-
-/* @media (max-width: 720px) {
-
-@media (max-width: 200px) {
-        input {
-            width: 20%
+@media only screen and (max-width:375px) {
+    .sign_container {
+            color: #21334F;
+            width: 189px;
+            height: 15px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 15px;
         }
+.signup-card{
+        width:5px;
+        margin:400px 10px 20px 20px;
+        padding: 0;
+        height: 20px;
     }
-} */
-
-
+        
+}
+@media only screen and (max-width:500px) {
+    .menu,
+    .main,
+    .right {
+        width: 100%;
+    }
+}
