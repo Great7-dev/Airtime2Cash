@@ -48,10 +48,9 @@ const navigate = useNavigate()
   const loginUser = async (email, password) => {
     try {
       console.log(`email: ${email}, password: ${password}`);
-      const emailRegex = new RegExp(
-        /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
-        "gm"
-      );
+
+      // eslint-disable-next-line no-useless-escape
+      const emailRegex = new RegExp( /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,"gm");
       const isValidEmail = emailRegex.test(email);
       let res;
       if (email === "" || password === "") {
@@ -75,13 +74,7 @@ const navigate = useNavigate()
       if(res.data.status === "success"){
          navigate("/card")
       }
-console.log(res)
-      localStorage.setItem("Email", res.data.record.email);
       localStorage.setItem("Token", res.data.token);
-      localStorage.setItem("Firstname", res.data.record.firstname);
-      localStorage.setItem("Lastname", res.data.record.lastname);
-      localStorage.setItem("avatar", res.data.record.avatar);
-      localStorage.setItem("phoneNumber", res.data.record.phonenumber);
       localStorage.setItem("id", res.data.record.id);
        console.log(res);
 
