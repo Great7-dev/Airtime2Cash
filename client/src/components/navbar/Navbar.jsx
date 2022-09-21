@@ -3,13 +3,16 @@ import { Navbarstyle } from "./Navbarstyles";
 import Logo from "../../assets/Airtime2cash.svg";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ dashboard }) => {
+const Navbar = ({  link, Name, clickEvent }) => {
+  let dashboard;
+localStorage.getItem("token") ? (dashboard = true) : (dashboard = false);
+console.log(dashboard)
   return (
     <Navbarstyle>
       <div>
         <img src={Logo} alt="Airtime2cash" className="navbar__logo" />
       </div>
-      {!dashboard && (
+      {!dashboard ? (
         <ul className="navbar__links">
           <li className="Home hide">Home</li>
           <li className="hide">About Us</li>
@@ -19,8 +22,13 @@ const Navbar = ({ dashboard }) => {
             <button className="btn">Login</button>
           </Link>
         </ul>
+      ) : (
+        <ul className="navbar__links">
+          <li className="Home hide">{Name}</li>
+          <img src={link} style={{borderRadius:'100px', width:'40px'}} onClick={clickEvent}/>
+        </ul>
       )}
-      {/* Create a div here to insert profile picture and user name that only displays when the dashboard prop is passed into the Navbar component */}
+
     </Navbarstyle>
   );
 };

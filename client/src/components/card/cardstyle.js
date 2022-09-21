@@ -7,12 +7,10 @@ margin: 2rem auto 1rem auto;
 background: #fff;
 display: flex;
 flex-direction: column;
-/* border: 1px solid red; */
-/* margin: 0px 0px 0px 0px; */
+
 
 .steps {
     display: flex;
-    /* border: 1px solid black; */
 }
 
 .content{
@@ -39,8 +37,6 @@ margin-left: 10px;
     margin-top: 3rem;
     display: flex;
     gap: 3.5rem;
-    /* min-width: 280px; */
-    /* border: 1px solid green; */
 }
 .box {
     min-width: 280px;
@@ -48,10 +44,8 @@ margin-left: 10px;
 }
 
 .login {
-    /* display:flex; */
     padding:3%;
     width: 334px;
-    /* height: 240px; */
 background: rgba(226, 0, 16, 0.05);
 }
 .text2{

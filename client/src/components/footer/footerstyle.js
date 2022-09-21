@@ -4,7 +4,6 @@ export const Footerstyle = styled.div`
   border: 1px solid #21334f;
   background-color: #21334f;
   padding-top: 40px;
-  /* padding-right: 76px; */
 
   p {
     margin: 0;

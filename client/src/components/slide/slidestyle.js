@@ -12,7 +12,6 @@ export const Slidestyle = styled.div`
     background: #f5f5f5;
     padding: 9% 8%;
     height: 10em;
-    /* border: 1px solid black; */
   }
   .rec.rec-arrow {
     background-color: #f5f5f5;
@@ -21,15 +20,12 @@ export const Slidestyle = styled.div`
     background-color: #bcb8b8 !important;
   }
   .slide__text1 {
-    /* display: flex; */
   }
   .text {
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
-    /* line-height: 26px; */
     color: #012a4a;
-    /* border: 1px solid red; */
   }
   .text1 {
     font-style: normal;
@@ -44,12 +40,10 @@ export const Slidestyle = styled.div`
     font-size: 16px;
     color: #012a4a;
     line-height: 24px;
-    /* border: 1px solid green; */
   }
 
   @media (max-width: 525px) {
     .slide {
-      /* font-size: 14px; */
       padding: 5% 5%;
     }
     .text {
@@ -74,7 +68,6 @@ export const Slidestyle = styled.div`
   }
   @media (max-width: 360px) {
     .slide {
-      /* font-size: 14px; */
       padding: 2% 2%;
       height: 11rem;
     }

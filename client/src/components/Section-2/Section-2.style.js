@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Signupstyle = styled.div`
+export const Section2style = styled.div`
   width: 1140px;
   height: 512px;
   margin: 80px auto;
@@ -9,7 +9,6 @@ export const Signupstyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid red; */
 
   p {
     margin: 0;
@@ -28,19 +27,16 @@ export const Signupstyle = styled.div`
 
   .images {
     position: relative;
-    /* border: 1px solid red; */
+
   }
 
   .attach {
     position: absolute;
     top: 140px;
     left: 150px;
-    /* width: 100%; */
-    /* height: 100%; */
     object-fit: cover;
   }
   .rectangle {
-    /* float: right; */
     display: flex;
     position: absolute;
     margin-left: 785px;

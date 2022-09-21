@@ -18,9 +18,9 @@ const Started = () => {
           </p>
           <p className="text1">
             Having trouble selling your overloaded airtime? You don't have to
-            <br />
+            <br/>
             worry any longer because with this app you can get paid instantly
-            <br /> for your airtime.
+            <br/> for your airtime.
           </p>
           <Link to="/users/signup">
         <button className="btn">Get Started</button>

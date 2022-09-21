@@ -1,12 +1,12 @@
 import React from "react";
-import { Signupstyle } from "./Signupstyle";
+import { Section2style } from "./Section-2.style";
 import Logo from "../../assets/Touch on iphone screen.svg";
 import Logo6 from "../../assets/group-airtime.svg";
 import {Link} from 'react-router-dom'
 
-const Signup = () => {
+const Section2 = () => {
   return (
-    <Signupstyle>
+    <Section2style>
       {/* left */}
       <div className="left-container">
         <div className="inner-container">
@@ -21,7 +21,7 @@ const Signup = () => {
             Sell Your airtime into cash anywhere you are in the world and
             receive your money into your wallet instantly
           </p>
-          <Link to="/users/login">
+          <Link to="/users/signup">
           <button className="btn">Get Started</button>
           </Link>
         </div>
@@ -34,8 +34,8 @@ const Signup = () => {
         </div>
       </div>
 
-    </Signupstyle>
+    </Section2style>
   );
 };
 
-export default Signup;
+export default Section2;
