@@ -24,7 +24,7 @@ a{
   color:black;
 }
 `
-function NavBar() {
+function CardT() {
         return (
           <Container>
             <ul>
@@ -36,4 +36,4 @@ function NavBar() {
           </Container>
         )
       }
-export default NavBar
+export default CardT
