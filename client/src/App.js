@@ -1,22 +1,29 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Login } from "./components/Login/Login";
+import { Dashboard } from "./components/Dashboard/Dashboard";
 
-import Login from "./pages/login/Login";
-import Dashboard from "./pages/dashboard/Dashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
 
 function App() {
-    return ( < BrowserRouter >
-
+    return ( <
+        BrowserRouter >
         <
         Routes >
         <
-        Route exact path = "/login"
+        Route path = "/login"
         element = { < Login / > }
-        />  <
-        Route exact path = "/dashboard"
+        /> < /
+        Routes >
+        <
+        Routes >
+        <
+        Route path = "/dashboard"
         element = { < Dashboard / > }
-        />  < /
-        Routes > < /BrowserRouter >
+        /> < /
+        Routes >
+        <
+        /BrowserRouter>
     );
 }
+
 export default App;
