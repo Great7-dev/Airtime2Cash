@@ -35,30 +35,35 @@ class Form extends Component {
                 email: this.state.email,
                 password: this.state.password
             });
-
+            
             toast.success(res.data.message, {
                 position: toast.POSITION.TOP_CENTER,
             })
-            
+            const record=res.data.record;
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("status", res.status);
+            localStorage.setItem("userId", res.data.record.id);
+            localStorage.setItem("res", JSON.stringify(record));
             
 
         } catch (error) {
             toast.error(error.respose.data.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
-            console.log(error.response.data.message);
+            //console.log(error.response.data.message);
         }
     };
     
     
     handleSubmit = (e) => {
+        const sample=localStorage.getItem("res");
+        
         e.preventDefault();
+        
         this.loginUser(this.state.email, this.state.password);
         if(localStorage.getItem("status") ==="200"){
-            console.log(localStorage.getItem("status"),"yayyyy");
-            window.location.href = '/dashboard';
+            console.log(JSON.parse(sample),"yayyyy");
+           window.location.href = '/dashboard';
             
         }
         
