@@ -22,7 +22,7 @@ const Started = () => {
             worry any longer because with this app you can get paid instantly
             <br/> for your airtime.
           </p>
-          <Link to="/users/signup">
+          <Link to="/signup">
         <button className="btn">Get Started</button>
           </Link>
         </div>

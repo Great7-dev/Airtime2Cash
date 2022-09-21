@@ -18,7 +18,7 @@ console.log(dashboard)
           <li className="hide">About Us</li>
           <li className="hide">Products</li>
           <li className="hide">Contact Us</li>
-          <Link to="/users/login">
+          <Link to="/login">
             <button className="btn">Login</button>
           </Link>
         </ul>
