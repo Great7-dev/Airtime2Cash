@@ -1,3 +1,5 @@
+import
+
 .signup,
 .signup * {
         box-sizing: border-box;
@@ -5,7 +7,7 @@
 
 body{
 
-    background-color:#f3f3f3;
+    background-color:#f7f7f7;
 }
 /* .frame9{
     margin-top: -200px;
@@ -52,7 +54,7 @@ line-height:14.52px ;
 }
 .bck_btn{
     color:rgb(50, 49, 49);
-    background-color: #f3f3f3;
+    background-color: #f7f7f7;
     border: none;
     border-radius: 95px;
     padding: 2% 6% 2% 1%;
@@ -182,3 +184,14 @@ order: 1;
 flex-grow: 0;
 
 }
+
+/* @media (max-width: 720px) {
+
+@media (max-width: 200px) {
+        input {
+            width: 20%
+        }
+    }
+} */
+
+

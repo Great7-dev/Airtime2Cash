@@ -58,6 +58,7 @@ export const Signup = ({
 
     return (
 
+        <responsive>
         <div className="signup">
 
             <div className="signup-card">
@@ -120,7 +121,7 @@ export const Signup = ({
 
                             <div className="">
                                
-                                <button  type='submit'>Signup</button>
+                                <button  type='submit'>SignUp</button>
                             </div>
 
                         </form>
@@ -134,7 +135,8 @@ export const Signup = ({
             </div>
 
 
-        </div>
+            </div>
+            </responsive>
 
     )
 }
