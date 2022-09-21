@@ -1,24 +1,22 @@
+
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
- import NavBar from './pages/updateprofile/Card';
 import UpdateProfileForm from './pages/updateprofile/UpdateProfileForm';
-
+import Login from "./components/Login/Login"
+import Card from "../src/pages/updateprofile/Card"
+import ProtectedRoute from "./ProtectedRoute";
 function App() {
     return ( 
     <div>
      <Router>
     <Routes>
-       <Route exact path='/home' element={<NavBar/>}/>
-      <Route exact path='/profile' element={ <UpdateProfileForm/> }/>
-      {/* <Route exact path='/registration' element={<Registration/>}/> */}
-      {/* <Route exact path='/login' element={<LogIn/>}/>
-      <Route exact path='/forgotPassword' element={<ForgotPassword/>}/>
-      <Route exact path='/resetPassword' element={<ResetPassword/>}/>
-      <Route exact path='/emailVerification' element={<EmailVerification/>}/> */}
+       <Route exact path='/card' element={<Card/>}/>
+      <Route exact path='/login' element={ <Login/> }/>
+       {/* <Route exact path='/profile' element={<UpdateProfileForm/>}/>  */}
+      <Route exact path='/profile' element={<ProtectedRoute ><UpdateProfileForm/></ProtectedRoute>}/>
     </Routes>
    </Router>
     </div>
-    );
+    )
 }
-
-export default App;
+export default App

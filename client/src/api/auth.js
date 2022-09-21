@@ -1,11 +1,17 @@
 import Swal from 'sweetalert2'
 import axios from "axios";
-import useNavigate from "react-router-dom"
-const REACT_BASE_URL = process.env.REACT_APP_BASE_URL
-export const updateProfile = (data,id='83da4b0f-374e-4f1d-9f97-0a5401631859') =>{
+ const localStorageId = localStorage.getItem('id') 
+//console.log(id);
+const token = localStorage.getItem('Token') 
+console.log(token);
+
+export const updateProfile = (data,id) =>{
+id  =localStorageId
     console.log("url",process.env.REACT_APP_BASE_URL);
 console.log(id);
-    axios.patch(`${process.env.REACT_APP_BASE_URL}/update/${id}`,data)
+    axios.patch(`${process.env.REACT_APP_BASE_URL}update/${id}`,data,{
+      headers:{'authorization': `Bearer ${token}`}
+    })
       .then(function (response) {
     if(response.status === 201){
         Swal.fire(
@@ -14,9 +20,6 @@ console.log(id);
             'success'
           )}
       })
-      setTimeout( ()=>{
-
-      },300)
       .catch(function (error) {
         console.log(error);
         Swal.fire({
@@ -29,9 +32,10 @@ console.log(id);
     }
 
 
-    export   const  getUser = async (id='83da4b0f-374e-4f1d-9f97-0a5401631859') =>{
+    export   const  getUser = async (id) =>{
+      id  =localStorageId
    try{ 
-    const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}user/${id}`)
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}getuser/${id}`)
     console.log("ddd",data);
     return data
      }catch(error){
