@@ -22,7 +22,7 @@ function App() {
       <Route exact path='/login' element={ <Login/> }/>
       <Route path="/checkmail" element={< CheckMail/>} />
       <Route path="/forgetpassword" element={<ForgetPassword />} />
-      <Route path="/change-password/:id" element={<ResetPassword/>} />
+      <Route path="/forgetpassword/:id" element={<ResetPassword/>} />
       <Route exact path='/profile' element={<ProtectedRoute ><UpdateProfileForm/></ProtectedRoute>}/>
     </Routes>
    </Router>

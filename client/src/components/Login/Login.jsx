@@ -59,12 +59,10 @@ const navigate = useNavigate()
         if (isValidEmail) {
           res = await client.post("/login", {
             email: email,
-            // username: email,
             password: password,
           });
         } else {
           res = await client.post("/login", {
-            // email: email,
             username: email,
             password: password,
           });
@@ -80,7 +78,7 @@ const navigate = useNavigate()
 
       toast.success(res.data.message);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.msg);
     }
   };
   // const navigate = useNavigate()
@@ -93,12 +91,12 @@ const navigate = useNavigate()
 
   return (
     // <ToastContainer>
-    <div className="login">
+    <div className="login-container">
       <div className="login-card">
         <div className="login-card-padding">
           <div className="login-box">
             <div className="login-heading">
-              <Logo />
+              <Logo/>
             </div>
             <DivLogin>
               <h2>Login</h2>
@@ -128,7 +126,7 @@ const navigate = useNavigate()
               </div>
               <DivPara>
                 <p>
-                  <Link to="/forgot-password">Forgot password?</Link>
+                  <Link to="/forgetpassword">Forgot password?</Link>
                 </p>
               </DivPara>
 

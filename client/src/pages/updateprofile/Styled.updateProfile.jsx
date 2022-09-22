@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 
@@ -34,15 +33,14 @@ const AfterNavBar = styled.div`
     width: 10rem;
     
   } ;
-`;
+`
 
 const InputStyle = styled.input`
  display:flex;
  flex-direction:column;
-
 width: 320px;
 height: 48px;
-font-size:14px
+font-size:14px;
 padding: 12px 20px;
 margin: 15px 0;
 box-sizing: border-box;
@@ -54,14 +52,14 @@ box-sizing: border-box;
 @media screen and (max-width: 800px) {
     width: 280px;
     height: 30px;
-    font-size:10px
+    font-size:10px;
   }
 @media screen and (max-width: 500px) {
     width: 260px;
     height: 25px;
     font-size: 10px
   }
-`;
+`
 
 const SaveBtnStyle = styled.button`
   width: 198px;
@@ -81,7 +79,6 @@ const SaveBtnStyle = styled.button`
     height: 50px;
   }
 `
-
 export {
     SaveBtnStyle,
     InputStyle,

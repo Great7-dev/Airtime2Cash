@@ -4,14 +4,14 @@ import axios from "../../api/axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ResetPasswordStyle from "./ResetPassword.style";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 function ResetPassword() {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
-
+const navigate = useNavigate()
   let { id } = useParams();
   const changePassword = async(password, cPassword)=>{
     try {
@@ -22,7 +22,9 @@ function ResetPassword() {
         password: password,
         confirmPassword: confirmPassword
       })
-
+if (response.status === 200){
+  navigate("/login")
+}
       toast.success(response.data.message)
       console.log(response)
     } catch (error) {
@@ -41,7 +43,6 @@ function ResetPassword() {
   return (
     <ResetPasswordStyle>
       <div className="main-container">
-        <h1></h1>
         <div className="container">
           <div className="image-div">
             <img src={AirtimeToCash} alt="Airtime to cash" />

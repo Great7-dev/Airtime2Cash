@@ -9,7 +9,7 @@ const Card = () => {
   return (
     <Cardstyle>
       <div className="steps">
-        <img src={Logo} alt="Rectangle" className="rectangle" />
+        <img src={Logo} alt="Rectangle" className="rectangle"/>
         <div className="content">
             <p className="text">
             Change Surplus Airtime

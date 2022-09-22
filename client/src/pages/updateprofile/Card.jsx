@@ -28,10 +28,10 @@ function CardT() {
         return (
           <Container>
             <ul>
-                <a href='/profile'><img src={layer5} alt="" />  Account</a>
-                <a href=''><img src={layer11} alt="" /> Setting</a>
-                <a href=''><img src={vector} alt=""/> Help center</a>
-                <a href=''><img src={vector2} alt=""/> Logout</a>
+                <a href='/profile'><img src={layer5} alt="icon" />  Account</a>
+                <a href='/#'><img src={layer11} alt="icon" /> Setting</a>
+                <a href='/#'><img src={vector} alt="icon"/> Help center</a>
+                <a href='/#'><img src={vector2} alt="icon"/> Logout</a>
             </ul>
           </Container>
         )

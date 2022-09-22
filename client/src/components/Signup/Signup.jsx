@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import Logo from '../utils/Logo/Logo';
 import InputField from '../utils/Input/Input';
@@ -5,7 +7,6 @@ import InputField from '../utils/Input/Input';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-import { useState } from 'react';
 import { Responsive } from './signUpStyle';
 
 const initialValue = {
@@ -25,9 +26,9 @@ export const Signup = ({
     const [user, setUser] = useState(initialValue);
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
-        console.log(user);
+        console.log(user,"gggg");
     }
-    
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if (user.firstname ===""|| user.lastname ==="" || user.username ==="" || user.email==="" || user.phonenumber==="" || user.password==="" || user.confirmpassword==="") {
@@ -46,15 +47,25 @@ export const Signup = ({
                 confirmpassword: user.confirmpassword
             });
             console.log("RESPONSE", res);
+            if(res.status === 200){
+                navigate("/login")
+            }
             toast.success("User created successfully", {
                 position: "top-center",
             });
             setUser(initialValue)
-
+console.log(res.data.message);
 
         } catch (error) {
-            toast.error("All fields are required", {
-                position: "top-center",
+            const E_error = error.response.data.Error;
+            const M_error = error.response.data.msg;
+            if (E_error) {
+                toast.error(E_error, {
+                    position: "bottom-center",
+                });
+            }
+            toast.error(M_error, {
+                position: "bottom-center",
             });
         }
 
@@ -124,13 +135,13 @@ export const Signup = ({
                             </div>
 
                             <div className="">
-                               
-                                <button  type='submit'>SignUp</button>
+                    
+                                <button  className="submit-btn" type='submit'>SignUp</button>
                             </div>
 
                         </form>
                         <div className='sign_container'>
-                            Already have an account?<a href='/' className='sign_in'> Sign in</a>
+                            Already have an account?<a href='/login' className='sign_in'> Sign in</a>
                         </div>
                     </div>
 

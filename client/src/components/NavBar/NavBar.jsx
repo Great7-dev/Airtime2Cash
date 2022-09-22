@@ -25,7 +25,7 @@ console.log(dashboard)
       ) : (
         <ul className="navbar__links">
           <li className="Home hide">{Name}</li>
-          <img src={link} style={{borderRadius:'100px', width:'40px'}} onClick={clickEvent}/>
+          <img src={link} alt="Airtime2cash" style={{borderRadius:'100px', width:'40px'}} onClick={clickEvent}/>
         </ul>
       )}
 

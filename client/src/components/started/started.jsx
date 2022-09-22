@@ -12,8 +12,8 @@ const Started = () => {
         <div className="test">
         <p className="text">
             Surplus Airtime?
-            <br />
-            Don’t worry we <br />
+            <br/>
+            Don’t worry we <br/>
             got you covered
           </p>
           <p className="text1">

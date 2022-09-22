@@ -28,7 +28,7 @@ margin-left: 10px;
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
-line-height: 24px;
+line-height: 20px;
 color: #03435F;
 margin-left: 10px;
 }

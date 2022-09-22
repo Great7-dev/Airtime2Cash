@@ -52,7 +52,7 @@ const ForgetPassword = () => {
       <ToastContainer />
     <div className="outer-parent">
       <div className="parentdiv"> 
-      <form onSubmit={handleSubmit}>
+      <form className='forgot-form' onSubmit={handleSubmit}>
         <div className='top'>
         <h3 className="title">Forgot password</h3>
         <p className="forget-paragraph">Enter the email associated with your account and we’ll send an email with instruction to reset your password</p>
