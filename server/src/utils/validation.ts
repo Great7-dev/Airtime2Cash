@@ -15,7 +15,7 @@ export const validationSchema = Joi.object({
     .required(),
   password: Joi.string().required(),
   confirmpassword: Joi.ref('password')
-});
+}).with('password', 'confirmpassword');
 
 export const loginSchema = Joi.object().keys({
   email: Joi.string().email().lowercase(),
@@ -26,10 +26,10 @@ export const loginSchema = Joi.object().keys({
 export const updateProfileSchema = Joi.object().keys({
   firstname: Joi.string().trim(),
   lastname: Joi.string().trim(),
-  phonenumber: Joi.string()
-    .length(11)
-    .pattern(/^[0-9]+$/)
-});
+  phonenumber:Joi.string()
+  .length(11)
+  .pattern(/^[0-9]+$/)
+})
 
 //Generate Token
 export const generateToken = (user: { [key: string]: unknown }): unknown => {

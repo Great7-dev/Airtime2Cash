@@ -19,7 +19,7 @@ exports.validationSchema = joi_1.default.object({
         .required(),
     password: joi_1.default.string().required(),
     confirmpassword: joi_1.default.ref('password')
-});
+}).with('password', 'confirmpassword');
 exports.loginSchema = joi_1.default.object().keys({
     email: joi_1.default.string().email().lowercase(),
     username: joi_1.default.string().trim(),
