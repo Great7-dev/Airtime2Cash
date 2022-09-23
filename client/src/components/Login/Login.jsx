@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { Link,useNavigate } from "react-router-dom";
+import { login } from "../../api/auth";
+
 const DivPara = styled.div`
   width: 100%;
   margin-top: -11px;
@@ -38,47 +40,38 @@ const BtnContainer = styled.div`
 `;
 
 
-const client = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_URL}`,
-});
+
  const Login = ({ ...props }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 const navigate = useNavigate()
   const loginUser = async (email, password) => {
     try {
-      console.log(`email: ${email}, password: ${password}`);
 
       // eslint-disable-next-line no-useless-escape
       const emailRegex = new RegExp( /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,"gm");
+
       const isValidEmail = emailRegex.test(email);
       let res;
       if (email === "" || password === "") {
         return toast.error("Email or password cannot be empty");
-      } else {
-        if (isValidEmail) {
-          res = await client.post("/login", {
-            email: email,
-            password: password,
-          });
-        } else {
-          res = await client.post("/login", {
-            username: email,
-            password: password,
-          });
-        }
-      }
-      
-      if(res.data.status === "success"){
-         navigate("/card")
-      }
-      localStorage.setItem("Token", res.data.token);
-      localStorage.setItem("id", res.data.record.id);
-       console.log(res);
+      } 
 
-      toast.success(res.data.message);
-    } catch (error) {
-      toast.error(error.response.data.msg);
+        if (isValidEmail) {
+          res = await login({email, password})
+          console.log(res)
+     
+      localStorage.setItem("Email", res.record.email);
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("id", res.record.id);
+
+      toast.success(res.msg);
+   
+        navigate("/card")
+  
+    }
+  } catch (error) {
+      toast.error(error);
     }
   };
   // const navigate = useNavigate()

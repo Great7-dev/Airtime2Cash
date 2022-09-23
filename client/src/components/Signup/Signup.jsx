@@ -8,6 +8,7 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { Responsive } from './signUpStyle';
+import {signupHandler} from "../../api/auth";
 
 const initialValue = {
     firstname: "",
@@ -26,18 +27,12 @@ export const Signup = ({
     const [user, setUser] = useState(initialValue);
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
-        console.log(user,"gggg");
     }
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if (user.firstname ===""|| user.lastname ==="" || user.username ==="" || user.email==="" || user.phonenumber==="" || user.password==="" || user.confirmpassword==="") {
-        //     toast.error("All fields are required", {
-        //         position: "top-center",
-        //     });
-        // }
-        try {
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/create`, {
+    
+        const response = await signupHandler({
                 firstname: user.firstname,
                 lastname: user.lastname,
                 username: user.username,
@@ -45,20 +40,19 @@ export const Signup = ({
                 phonenumber: user.phonenumber,
                 password: user.password,
                 confirmpassword: user.confirmpassword
-            });
-            console.log("RESPONSE", res);
-            if(res.status === 200){
+            })
+            console.log("RESPONSE", response);
+            if(response.status === 200){
                 navigate("/login")
             }
             toast.success("User created successfully", {
                 position: "top-center",
             });
             setUser(initialValue)
-console.log(res.data.message);
 
-        } catch (error) {
-            const E_error = error.response.data.Error;
-            const M_error = error.response.data.msg;
+          {
+            const E_error = response.data.Error;
+            const M_error = response.data.msg;
             if (E_error) {
                 toast.error(E_error, {
                     position: "bottom-center",
