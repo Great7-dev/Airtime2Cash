@@ -4,8 +4,8 @@ import styled from "styled-components"
 import { useForm } from "react-hook-form";
 import {updateProfile,getUser} from "../../api/auth"
 import {SaveBtnStyle,InputStyle,Container, AfterNavBar} from "./Styled.updateProfile.jsx"
-
-
+import Navbar from "../../components/NavBar/NavBar";
+import CardT from "./CardT";
 
 //React Form
 function Form() {
@@ -23,6 +23,7 @@ function Form() {
       };
   return (
     <div>
+      <Navbar/>
       <AfterNavBar>
         <Container>
         <div>

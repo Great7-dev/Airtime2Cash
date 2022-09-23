@@ -11,7 +11,7 @@ export const Slidestyle = styled.div`
     margin: 10px;
     background: #f5f5f5;
     padding: 9% 8%;
-    height: 10em;
+    height: 13em;
   }
   .rec.rec-arrow {
     background-color: #f5f5f5;
@@ -44,7 +44,8 @@ export const Slidestyle = styled.div`
 
   @media (max-width: 525px) {
     .slide {
-      padding: 5% 5%;
+      padding: 5% 7%;
+      height: 11em;
     }
     .text {
       margin: 0;
@@ -59,7 +60,7 @@ export const Slidestyle = styled.div`
   @media (max-width: 417px) {
     .slide {
       /* font-size: 14px; */
-      height: 11rem;
+      height: 12rem;
     }
     .text {
       margin: 0;
@@ -69,7 +70,7 @@ export const Slidestyle = styled.div`
   @media (max-width: 360px) {
     .slide {
       padding: 2% 2%;
-      height: 11rem;
+      height: 12rem;
     }
     .text {
       margin: 0;

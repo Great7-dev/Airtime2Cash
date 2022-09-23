@@ -7,19 +7,19 @@ import Text from '../components/text/text'
 import Slide from '../components/slide/slide'
 import Footer from '../components/footer/footer'
 import Navbar from "../components/NavBar/NavBar"
+import CardT from './updateprofile/CardT'
 // localStorage.setItem('userName', 'Michael')
 
 const Landingpage = () => {
     const handleIMGcLICK = (e) => {
         e.preventDefault()
-        console.log('clicked')
+        alert("Hello")
+        
     }
-
-// const userName = localStorage.getItem('userName')
 
     return (
         <Landingpagestyle>
-            <Navbar link={'https://i.pinimg.com/564x/e9/39/f7/e939f772951d80f1811a5b6c2b16089c.jpg'} clickEvent={handleIMGcLICK}/>
+            <Navbar link={'https://i.pinimg.com/564x/e9/39/f7/e939f772951d80f1811a5b6c2b16089c.jpg'}  onClick={handleIMGcLICK}/>
             <Started/>
             <Card/>
             <Section2/>

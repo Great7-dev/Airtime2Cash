@@ -2,7 +2,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import UpdateProfileForm from './pages/updateprofile/UpdateProfileForm';
 import Login from "./components/Login/Login"
-import CardT from "../src/pages/updateprofile/Card"
+import CardT from "../src/pages/updateprofile/CardT"
 import ProtectedRoute from "./ProtectedRoute";
 import { Signup } from './components/Signup/Signup';
 import CheckMail from './pages/Checkmail/CheckMail';
