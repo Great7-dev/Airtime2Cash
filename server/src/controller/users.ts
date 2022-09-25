@@ -9,6 +9,8 @@ import { emailVerificationView } from "./mailSender";
 import { sendMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
+import { AccountInstance } from "../models/account";
+
 const secret = process.env.JWT_SECRET as string
 
 
@@ -87,12 +89,13 @@ export async function verifyUser(token: string) {
 }
 
 export async function getUser(
-  req: Request,
+  req: Request|any,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const { id } = req.params;
+    const id=req.user.id;
+    //const { id } = req.params;
     const record = await UserInstance.findOne({ where: { id } });
 
     res.status(200).json({"record":record});
@@ -266,3 +269,27 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
     });
   }
 }
+
+export async function getUserRecords(
+  req: Request|any,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const userId = req.user.id;
+    const record = (await UserInstance.findOne({
+      where: { id: userId },
+      include: [{ model: AccountInstance, as: "accounts" }],
+    })) as unknown as { [key: string]: string };
+
+    res.status(200).json({
+      record: record,
+    });
+  } catch (err) {
+    res.status(500).json({
+      msg: "failed to login",
+      route: "/login",
+    });
+  }
+}
+

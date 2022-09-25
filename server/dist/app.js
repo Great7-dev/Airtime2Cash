@@ -10,6 +10,7 @@ const database_config_1 = __importDefault(require("./config/database.config"));
 const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
 const user_1 = __importDefault(require("./routes/user"));
+const account_1 = __importDefault(require("./routes/account"));
 database_config_1.default.sync()
     .then(() => {
     console.log('Database conneted successfully');
@@ -25,6 +26,7 @@ app.use(express_1.default.urlencoded({ extended: false }));
 //app.use(express.static(path.join("public")));
 // app.use('/user', usersRouter);
 app.use('/users', user_1.default);
+app.use('/account', account_1.default);
 app.use(function (req, res, next) {
     next((0, http_errors_1.default)(404));
 });

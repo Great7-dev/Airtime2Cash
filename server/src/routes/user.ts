@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router()
-// import { LoginUser, RegisterUser, Updateprofile, verifyUser } from '../controller/users'
+
 import { auth } from '../middleware/auth';
-import { changePassword, forgotPassword, LoginUser, RegisterUser, Updateprofile, verifyUser,getUser } from '../controller/users'
+import { changePassword, forgotPassword, LoginUser, RegisterUser, Updateprofile, verifyUser,getUser, getUserRecords } from '../controller/users'
 
 router.get("/verify/:token", async(req, res) => {
 const token = req.params.token;
@@ -13,9 +13,10 @@ router.patch('/update/:id',auth, Updateprofile)
 
 
 router.post('/create', RegisterUser);
-router.get('/getuser/:id', getUser);
+router.get('/getuser/:id',auth, getUser);
 router.post('/login', LoginUser);
 router.post('/forgotpassword', forgotPassword )
 router.patch('/change-password/:id', changePassword);
+router.get('/userrecords', auth,getUserRecords);
 
 export default router;

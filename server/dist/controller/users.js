@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.getUserRecords = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -13,6 +13,7 @@ const mailSender_1 = require("./mailSender");
 const emailService_1 = require("./emailService");
 const utils_1 = require("../utils/utils");
 const emailVerification_1 = require("../email/emailVerification");
+const account_1 = require("../models/account");
 const secret = process.env.JWT_SECRET;
 async function RegisterUser(req, res, next) {
     const id = (0, uuid_1.v4)();
@@ -82,7 +83,8 @@ async function verifyUser(token) {
 exports.verifyUser = verifyUser;
 async function getUser(req, res, next) {
     try {
-        const { id } = req.params;
+        const id = req.user.id;
+        //const { id } = req.params;
         const record = await user_1.UserInstance.findOne({ where: { id } });
         res.status(200).json({ "record": record });
     }
@@ -245,3 +247,22 @@ async function Updateprofile(req, res, next) {
     }
 }
 exports.Updateprofile = Updateprofile;
+async function getUserRecords(req, res, next) {
+    try {
+        const userId = req.user.id;
+        const record = (await user_1.UserInstance.findOne({
+            where: { id: userId },
+            include: [{ model: account_1.AccountInstance, as: "accounts" }],
+        }));
+        res.status(200).json({
+            record: record,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            msg: "failed to login",
+            route: "/login",
+        });
+    }
+}
+exports.getUserRecords = getUserRecords;

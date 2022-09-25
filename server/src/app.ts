@@ -9,6 +9,7 @@ import 'dotenv/config';
 
 
 import userRouter from './routes/user';
+import accountRouter from './routes/account';
 
 
 db.sync()
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use('/user', usersRouter);
 
 app.use('/users', userRouter);
+app.use('/account', accountRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
