@@ -5,8 +5,10 @@ width :100%;
 display: flex;
 justify-content: space-between;
 align-items: center;
-padding: 13px 190px 13px 150px;
+padding: 10px 190px 10px 150px;
 box-sizing: border-box;
+/* position:fixed;
+background-color: white; */
 
 ul {
 list-style-type: none;
@@ -35,7 +37,7 @@ line-height: 19px;
 text-align: center;
 color: #DE3D6D;
 }
-.btn{
+.btnn{
 background:linear-gradient(101.31deg, #DE3D6D 42.62%, #F5844C 104.19%);
 border-radius: 4px;
 padding: 10px 25px 10px 25px;
