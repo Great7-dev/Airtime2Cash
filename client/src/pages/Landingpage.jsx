@@ -19,7 +19,7 @@ const Landingpage = () => {
 
     return (
         <Landingpagestyle>
-            <Navbar link={'https://i.pinimg.com/564x/e9/39/f7/e939f772951d80f1811a5b6c2b16089c.jpg'}  onClick={handleIMGcLICK}/>
+            <Navbar onClick={handleIMGcLICK}/>
             <Started/>
             <Card/>
             <Section2/>

@@ -5,16 +5,10 @@ import axios from "../../api/axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-
+import { handleResend } from "../../api/auth";
 const CheckMail = () => {
   const navigate = useNavigate()
-  const handleResend = async () => {
-    const email = JSON.parse(localStorage.getItem('Email'))
-    const response = await axios.post('/users/forgotpassword', { ...email })
-    if (response.status === 200) {
-      toast.success('Verification link sent!')
-    }
-  }
+  
 
   const goBack = () => {
     navigate('/login')

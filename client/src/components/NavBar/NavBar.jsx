@@ -8,7 +8,7 @@ import { set } from "react-hook-form";
 const Navbar = ({Name}) => {
   let dashboard;
 localStorage.getItem("token") ? (dashboard = true) : (dashboard = false);
-console.log(dashboard)
+
 
 // const handleClick = () => {
 

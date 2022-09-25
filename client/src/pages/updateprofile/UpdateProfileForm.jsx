@@ -17,6 +17,7 @@ function Form() {
     }
     loadUser()
   },[])
+  
     const { register, formState: { errors }, handleSubmit } = useForm()
     const onSubmit = (data) => {
         updateProfile(data)

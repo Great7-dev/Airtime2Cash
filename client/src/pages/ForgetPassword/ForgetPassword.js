@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2'
+import { submitHandler } from "../../api/auth";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState({ email: '' })
@@ -20,28 +21,25 @@ const ForgetPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const response = await axios.post('/users/forgotpassword', {
-        ...email
-      })
+    const response = await submitHandler(email)
+    console.log(response);
       if (response.status === 200) {
         localStorage.setItem('Email', JSON.stringify(email))
         toast.success('Reset email sent!')
         setTimeout(() => {
           navigate('/checkmail')
-        }, 4000)
-      }
-    } catch (error) {
-      console.log("ERROR", error)
+        }, 4000)}
+      else {
       // toast.error('Invalid Email. Please retry')
       Swal.fire({
         title: 'Error!',
-        text: error.response.data.message,
+        text: "oops something went wrong",
         icon: 'error',
         confirmButtonText: 'OK'
       })
     }
-  }
+    }
+  
 
   const goBack = () => {
     navigate('/login')
@@ -52,7 +50,7 @@ const ForgetPassword = () => {
       <ToastContainer />
     <div className="outer-parent">
       <div className="parentdiv"> 
-      <form className='forgot-form' onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className='top'>
         <h3 className="title">Forgot password</h3>
         <p className="forget-paragraph">Enter the email associated with your account and we’ll send an email with instruction to reset your password</p>

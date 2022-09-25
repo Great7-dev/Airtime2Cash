@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import AirtimeToCash from "./img/AirtimeToCash.png";
-import axios from "../../api/axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ResetPasswordStyle from "./ResetPassword.style";
 import { useParams, useNavigate } from 'react-router-dom';
-
+import { responseHandler } from "../../api/auth";
 
 function ResetPassword() {
 
@@ -18,10 +17,9 @@ const navigate = useNavigate()
       if(password === "" || confirmPassword === ""){
         return toast.error("Password cannot be empty")
       }
-      const response = await axios.patch(`/users/change-password/${id}`,{
-        password: password,
-        confirmPassword: confirmPassword
-      })
+    const response = await responseHandler(id,{
+      password,confirmPassword
+    })
 if (response.status === 200){
   navigate("/login")
 }
