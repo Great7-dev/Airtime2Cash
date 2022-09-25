@@ -24,11 +24,19 @@ export const Signup = ({
     ...props
 }) => {
     
-    const [user, setUser] = useState(initialValue);
+    const [user, setUser] = useState({
+        firstname: "",
+        lastname: "",
+        username: "",
+        email: "",
+        phonenumber: "",
+        password: "",
+        confirmpassword: ""
+    })
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
-    const navigate = useNavigate()
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
     
