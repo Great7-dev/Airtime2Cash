@@ -14,6 +14,7 @@ router.get("/verify/:token", async (req, res) => {
     res.json(response);
 });
 router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
+router.get('/user/:id', users_1.getUsers);
 router.post('/create', users_1.RegisterUser);
 router.post('/login', users_1.LoginUser);
 router.post('/forgotpassword', users_1.forgotPassword);

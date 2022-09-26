@@ -1,6 +1,6 @@
 export function emailVerificationView(token: string): string {
 
-    const link = `${process.env.BACKEND_URL}/user/verify/${token}`;
+    const link = `${process.env.BACKEND_URL}/users/verify/${token}`;
   
     let temp = `
        <div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">

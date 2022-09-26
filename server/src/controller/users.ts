@@ -85,7 +85,6 @@ export async function verifyUser(token:string){
     if(!user) throw new Error('user not found')
     
   return await user.update({isVerified:true})  
-
 }
 
 export async function LoginUser(
@@ -249,5 +248,21 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
 
            })
     }
-}
+  }
+
+export async function getUsers(req:Request, res:Response, next:NextFunction){
+    try{
+      const id = req.params.id
+      const record = await UserInstance.findOne({where:{id}})
+      res.status(200).json({
+        record
+      })
+    }catch(error){
+      res.status(500).json({
+        msg:'failed to get user',
+        route: '/user/:id'
+
+       })
+    }
+  }
 
