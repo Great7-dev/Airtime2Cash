@@ -6,7 +6,7 @@ import Section2 from '../components/Section-2/Section-2'
 import Text from '../components/text/text'
 import Slide from '../components/slide/slide'
 import Footer from '../components/footer/footer'
-import Navbar from "../components/NavBar/NavBar"
+import Navbar from "../components/Navbar/NavBar";
 import CardT from './updateprofile/CardT'
 // localStorage.setItem('userName', 'Michael')
 

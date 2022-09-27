@@ -1,20 +1,20 @@
-import "./Input.css";
+import { StyleInput } from "../../Signup/signUpStyle";
+// import "./Input.css";
 
 const InputField = ({ ...props }) => {
   return (
-    <div className="input-group">
-      <div className="input-label">{props.label}</div>
       <div>
-        <input
+      <div className="input-label">{props.label}</div>
+
+        <StyleInput 
           name={props.name}
           type={props.type}
           value={props.value}
           className={props.class}
-          placeholder={props.placeholder}
+          placeholder={props.placeholder}   
           onChange={props.change}
         />
       </div>
-    </div>
   );
 };
 

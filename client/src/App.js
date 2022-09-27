@@ -9,6 +9,9 @@ import CheckMail from "./pages/Checkmail/CheckMail";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Landingpage from "./pages/Landingpage";
+import Dashboard from './components/dashbard/dashboard';
+// import Mymodal  from './components/dashbard/Modal/Modal';
+
 import TransactionHistory from "./transaction-history/TransactionHistory";
 
 function App() {
@@ -18,6 +21,7 @@ function App() {
         <Routes>
           <Route exact path="/history" element={<TransactionHistory />} />
           <Route exact path="/card" element={<CardT />} />
+          <Route path="/dashboard" element={ <Dashboard/>} />
           <Route path="/" element={<Landingpage />} />
           <Route path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
