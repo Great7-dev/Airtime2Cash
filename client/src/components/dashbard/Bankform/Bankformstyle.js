@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const BankForm = styled.form`
+  margin-top: 2rem;
   .Acct {
     display: flex;
     font-family: "Inter";
@@ -10,6 +11,7 @@ export const BankForm = styled.form`
   }
   .bank-header {
     display: flex;
+    margin: 0;
     justify-content: space-between;
   }
   .viewacctselect {
@@ -33,7 +35,7 @@ export const BankForm = styled.form`
   input {
     padding: 1rem;
     margin: 8px 0px 16px 0px;
-    /* opacity: 0.3; */
+    opacity: 0.3;
   }
   .btnnn {
     cursor: pointer;
@@ -62,14 +64,14 @@ export const BankForm = styled.form`
   }
 `;
 
-export const CustomStyle ={
-  control:(base)=>({
+export const CustomStyle = {
+  control: (base) => ({
     ...base,
     // border: "1px solid #DE3D6D",
     minHeight: 48,
     marginBottom: 15,
-    marginTop:10,
-    fontSize:13,
+    marginTop: 10,
+    fontSize: 13,
     "&:hover": {
       // borderColor: "#DE3D6D",
     },
@@ -78,10 +80,10 @@ export const CustomStyle ={
     ...base,
     padding: "0 6px",
   }),
-  input:(base)=>({
+  input: (base) => ({
     ...base,
-   margin:0,
-   padding:0,
-   color:"#c4c4c4",
+    margin: 0,
+    padding: 0,
+    color: "#c4c4c4",
   }),
-}
+};

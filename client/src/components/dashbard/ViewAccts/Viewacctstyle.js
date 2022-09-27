@@ -20,3 +20,16 @@ export const Viewacct = styled.div`
     border: none;
   }
 `;
+
+export const HeadingStyle = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-left: 15%;
+  gap: 140px;
+  margin-bottom: 2rem;
+  margin-top: 60px;
+  h1 {
+    margin: 0;
+  }
+`;

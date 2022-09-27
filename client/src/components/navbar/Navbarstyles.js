@@ -38,6 +38,7 @@ text-align: center;
 color: #DE3D6D;
 }
 .btnn{
+  cursor: pointer;
 background:linear-gradient(101.31deg, #DE3D6D 42.62%, #F5844C 104.19%);
 border-radius: 4px;
 padding: 10px 25px 10px 25px;
