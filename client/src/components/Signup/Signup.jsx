@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Signup.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Logo from '../utils/Logo/Logo';
 import InputField from '../utils/Input/Input';
 //import { Button } from '../utils/Button/Button';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-import { Responsive } from './signUpStyle';
-import {signupHandler} from "../../api/auth";
+import {  SignupWrapper, StyledButton, StyledForm, StyleInput } from './signUpStyle';
+import {signupHandler} from "../../api/auth"; 
 
 const initialValue = {
     firstname: "",
@@ -51,7 +50,7 @@ export const Signup = ({
             })
             console.log("RESPONSE", response);
             if(response.status === 200){
-                navigate("/login")
+                Navigate("/login")
             }
             toast.success("User created successfully", {
                 position: "top-center",
@@ -73,86 +72,76 @@ export const Signup = ({
 
     }
 
-    return (
-
-        <Responsive>
+    return ( 
+            <SignupWrapper>
         <div className="signup">
-
-            <div className="signup-card">
-
-
-                <div className="signup-box">
-
-                    <div className="logo-heading">
+ 
+                
                         <Logo />
-                    </div>
+              
 
                         <a href='/' className='bck_btn'>
-                            <IoIosArrowRoundBack /> Go back
+                            <IoIosArrowRoundBack className='Icon' /> Go back
                         </a>
-                        
-                    <div className=" frame9">
-                        <ToastContainer />
-                        <span>Create an account</span>
-                    </div>
+                  
+                        <span className='CreateLabel'>Create an account</span>
+          
 
 
-                    <div className="frame10">
-                        <form onSubmit={handleSubmit}>
+                        <StyledForm onSubmit={handleSubmit}>
                             <div className="">
-                                <InputField name="firstname" type="text" class="input" label="First Name"
+                                <InputField name="firstname" type="text" className="input" label="First Name"
                                     value={user?.firstname} change={handleChange}
                                     pattern="^[A-Za-z0-9]{3,16}$" placeholder="Enter your first name" />
                             </div>
                             <div className="">
-                                <InputField name="lastname" type="text" class="input" label="Last Name"
+                                <InputField name="lastname" type="text" className="input" label="Last Name"
                                     value={user?.lastname} change={handleChange}
                                     pattern="^[A-Za-z0-9]{3,16}$" placeholder="Enter your last name" />
                             </div>
                             <div className="">
-                                <InputField name="username" type="text" class="input" label="User Name"
+                                <InputField name="username" type="text" className="input" label="User Name"
                                     value={user?.username} change={handleChange}
                                     pattern="^[A-Za-z0-9]{3,16}$" placeholder="Enter your user name" />
                             </div>
                             <div className="">
-                                <InputField name="email" type="email" class="input" label="Email"
+                                <InputField name="email" type="email" className="input" label="Email"
                                     value={user?.email} change={handleChange}
                                     placeholder="Enter your email" />
                             </div>
                             <div className="">
-                                <InputField name="phonenumber" type="text" class="input" label="Phone Number"
+                                <InputField name="phonenumber" type="text" className="input" label="Phone Number"
                                     value={user?.phonenumber} change={handleChange}
                                     placeholder="Enter your Phone number" />
                             </div>
                             <div className="">
-                                <InputField name="password" type="password" class="input" label="Password"
+                                <InputField name="password" type="password" className="input" label="Password"
                                     value={user?.password} change={handleChange}
                                     pattern="(^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
                                     placeholder="Enter your password" />
                             </div>
                             <div className="">
-                                <InputField name="confirmpassword" type="password" class="input" label="Confirm Password"
+                                <InputField name="confirmpassword" type="password" className="input" label="Confirm Password"
                                     value={user?.confirmpassword} change={handleChange}
                                     placeholder="Confirm password" />
                             </div>
 
                             <div className="">
                     
-                                <button  className="submit-btn" type='submit'>SignUp</button>
+                                <StyledButton  className="submit-btn" type='submit'>SignUp</StyledButton>
                             </div>
 
-                        </form>
-                        <div className='sign_container'>
-                            Already have an account?<a href='/login' className='sign_in'> Sign in</a>
+                        </StyledForm>
+                        <div className='SignUpFooter'>
+                            <label>Already have an account?</label><a href='/login' className='sign_in'> Sign in</a>
                         </div>
                     </div>
 
-                </div>
-            </div>
+        
+       
 
+            </SignupWrapper>
 
-            </div>
-            </Responsive>
 
     )
 }

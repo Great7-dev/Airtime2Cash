@@ -6,7 +6,6 @@ import SubmitButton from "../utils/SubmitButton/SubmitButton";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import { Link,useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
 
@@ -102,8 +101,8 @@ const navigate = useNavigate()
                   label="Email"
                   placeholder="Enter your email or username"
                   name="email"
-                  value={email}
                   change={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
               </div>
               <div className="">
