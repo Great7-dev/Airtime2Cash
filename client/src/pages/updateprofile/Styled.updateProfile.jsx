@@ -20,6 +20,7 @@ const AfterNavBar = styled.div`
   align-content:center;
   align-items:center;
   background:white;
+
   @media screen and (max-width: 900px) {
     padding: 45px 140px;
     width: 20rem;
