@@ -21,7 +21,7 @@ const Section2 = () => {
             Sell Your airtime into cash anywhere you are in the world and
             receive your money into your wallet instantly
           </p>
-          <Link to="/users/signup">
+          <Link to="/signup">
           <button className="btn">Get Started</button>
           </Link>
         </div>

@@ -66,7 +66,7 @@ const navigate = useNavigate()
 
       toast.success(res.msg);
    
-        navigate("/card")
+        navigate("/dashboard")
   
     }
   } catch (error) {
