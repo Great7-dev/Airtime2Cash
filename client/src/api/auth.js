@@ -112,6 +112,16 @@ export const handleAddBank = async (data) => {
   }
 };
 
-//  export const client = axios.create({
-//   baseURL: `${process.env.REACT_APP_BASE_URL}`,
-// });
+export const getUserBanks = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await client.get(`/userrecords`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return await response.data.record.accounts
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
