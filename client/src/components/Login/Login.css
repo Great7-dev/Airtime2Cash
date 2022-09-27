@@ -57,7 +57,7 @@ h2{
   margin-left: 50px;
 }
 input{
-  width: 20px;
+  /* width: 20px; */
   height: 100px;
 }
   .login {
@@ -92,7 +92,7 @@ input{
   }
 
   form input {
-    width: 220px;
+    /* width: 220px; */
     height: 40px;
     display: block;
     margin-right: auto;

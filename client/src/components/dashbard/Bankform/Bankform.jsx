@@ -11,7 +11,10 @@ import { successModalState } from "../../../atoms/successModalAtom";
 
 const Bankform = () => {
   const [bankInfo, setBankInfo] = useState({});
- 
+
+  const [formState, setFormState] = useRecoilState(bankFormState);
+  const [modal, setModal] = useRecoilState(successModalState);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBankInfo({ ...bankInfo, [name]: value });
@@ -19,9 +22,6 @@ const Bankform = () => {
   const handleBankChange = (selectedOption) => {
     setBankInfo({ ...bankInfo, bankName: selectedOption.value });
   };
-  const [formState, setFormState] = useRecoilState(bankFormState);
-  const [modal, setModal] = useRecoilState(successModalState);
-  
 
   const handleSubmit = async (e) => {
     try {
@@ -41,10 +41,10 @@ const Bankform = () => {
         <p className="viewacctselect" onClick={() => setFormState(false)}>
           View Bank accounts
         </p>
-      </div>
+        </div>
       {formState ? (
         <form action="" className="bankform">
-          <label htmlFor="">Bank Name</label>
+          <label htmlFor="" className="texts">Bank Name</label>
           {/* <input type="text" placeholder="Bank Name" name="Bankname"  onChange={handleChange}  /> */}
 
           <Select
@@ -56,14 +56,14 @@ const Bankform = () => {
             onChange={handleBankChange}
           />
 
-          <label htmlFor="">Account Name</label>
+          <label htmlFor="" className="texts">Account Name</label>
           <input
             type="text"
             placeholder="Account Name"
             name="accName"
             onChange={handleChange}
           />
-          <label htmlFor="">Account Number</label>
+          <label htmlFor="" className="texts">Account Number</label>
           <input
             type="text"
             placeholder="Account Number"

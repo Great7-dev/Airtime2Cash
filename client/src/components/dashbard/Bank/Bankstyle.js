@@ -21,6 +21,7 @@ export const Bank = styled.div`
 
   .acctinfo {
     /* font-family: 'Inter'; */
+
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -29,8 +30,10 @@ export const Bank = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding-left: 1rem;
   }
   .acctinfo p {
+    text-align: left;
   }
   .btnn {
     align-self: center;
@@ -40,5 +43,19 @@ export const Bank = styled.div`
     padding: 10px;
     border-radius: 100px;
   }
-  
+  @media(max-width: 599px){
+    p{
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  @media (max-width: 360px) {
+    .acctinfo {
+      font-size: 9px;
+      margin-left: 2rem;
+    }
+    .btnn{
+      font-size: 9px;
+    }
+  }
 `;

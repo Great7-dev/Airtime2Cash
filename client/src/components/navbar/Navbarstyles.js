@@ -8,7 +8,7 @@ align-items: center;
 padding: 10px 190px 10px 150px;
 box-sizing: border-box;
 /* position:fixed;
-background-color: white; */
+background-color: white;  */
 
 ul {
 list-style-type: none;
