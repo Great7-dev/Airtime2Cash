@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import Button from  '../../styles/ButtonStyles'
 import TabNavItem from "./TabNavItem";
 import TabContent from "./TabContent";
-import './dashboard.css'
+import "./dashboard.css";
 import Bankform from "./Bankform/Bankform";
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -49,13 +49,11 @@ const Tabs = () => {
           </p>
         </TabContent>
         <TabContent id="tab3" activeTab={activeTab}>
-           <Bankform/>
+          <Bankform/>
         </TabContent>
         <TabContent id="tab4" activeTab={activeTab}>
-          <p>
-            {/* <Error /> */}
-            <h1>Transaction History Here</h1>
-          </p>
+          {/* <Error /> */}
+          {/* <h1>Transaction History Here</h1> */}
         </TabContent>
       </div>
       {/* <Button>Sell Airtime</Button> */}

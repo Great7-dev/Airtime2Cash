@@ -1,36 +1,33 @@
 
 .rectangle2 {
-    position: absolute;
     width: 1440px;
     height: 271px;
-    left: 0px;
-    top: 96px;
     background: rgba(222, 61, 109, 0.1);
 }
-
+.dash{
+    border: 1px solid red;
+    width:100%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40%;
+  margin: 0;
+    /* margin-left: 100px; */
+}
 .frame1 {
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px;
-    gap: 60px;
-
-    position: absolute;
-    width: 679px;
-    height: 1106px;
-    left: 380px;
-    top: 176px;
-    bottom: 80px;
-
+    text-align: center;
+    width: 60%;
+    height: 700px;
+    margin-left: 320px;
     background: #FFFFFF;
     border: 1px solid #D9D9D9;
 
 }
-
 .dashboard {
-
-    /* Dashboard */
+/* Dashboard */
     width: 169px;
     height: 39px;
     font-family: 'Inter';
@@ -40,46 +37,7 @@
     line-height: 39px;
     /* identical to box height */
     color: #012A4A;
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
     margin-bottom: 20px;
-}
-
-.imagename {
-    float: right;
-    margin: 39px -140px 40px 40px;
-
-}
-
-.tunde {
-    /* Tunde */
-    border-radius: 50px;
-    margin: 25px 150px 40px 40px;
-    float: right;
-    width: 47px;
-    height: 47px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    color: #012A4A;
-    /* Inside auto layout */
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-
-.pic {
-    position: absolute;
-    width: 91px;
-    height: 36px;
-    left: 1199px;
-    top: 30px;
 }
 
 .sellAirtime {
@@ -110,31 +68,21 @@
     line-height: 17px;
     /* identical to box height */
     color: #012A4A;
-    /* Inside auto layout */
     flex: none;
     order: 1;
     flex-grow: 0;
 }
 
-.ManageBankAccount { 
-    /* Manage bank account */
+.ManageBankAccount {
     width: 147px;
-    height: 17px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
+    height: 17px;   
     color: #012A4A;
-    /* Inside auto layout */
     flex: none;
     order: 2;
     flex-grow: 0;
 }
 
 .TransactionHistory {
-    /* Transaction history */
     width: 127px;
     height: 17px;
     font-family: 'Inter';
@@ -144,22 +92,19 @@
     line-height: 17px;
     /* identical to box height */
     color: #012A4A;
-    /* Inside auto layout */
     flex: none;
     order: 3;
     flex-grow: 0;
 }
-
 .nav {
-    /* Auto layout */
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding: 0px;
     gap: 26px;
-    width: 558px;
+    width: 100%;
     height: 21px;
-    /* Inside auto layout */
+
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -169,107 +114,123 @@
 
 /* new */
 .TabStyle {
-    width: 99%;
+    width: 97%;
     height: auto;
     min-height: 400px;
-    /* background: #e5e5e2; */
-    margin: 0.5rem auto 1.5rem;
+    margin: 1.5rem auto 1.5rem;
     padding: 2rem 1rem;
-    /* color: #e8f0f2; */
-    /* // border: 4px sol */
-    /* 
-  // border-radius: 2rem; */
-    @media (max-width: 769px) {
-
-        padding: 2rem 0;
-
-    }
-
+    color: #e8f0f2;
 }
-
-/* Tab Navigation */
 
 ul.nav {
     width: 100%;
     margin: -0.5rem auto 2rem;
     display: flex;
-    flex-direction: row;
-    gap:20px;
     align-items: center;
     justify-content: space-between;
-    /* // border: 1px solid #39a2db; */
     border-radius: 2rem;
     padding-left: 0px;
-
-
-    @media (max-width: 768px) {
-
-        width: 90%;
-
-    }
-
 }
-
-
-
 ul.nav li {
-    width: 100%;
-    display:flex;
-    gap:26px;
-    /* padding: 1rem; */
+    width: 50%;
+    padding: 1rem;
     list-style: none;
     text-align: center;
     cursor: pointer;
     transition: all 0.7s;
-    /* height: 17px; */
+    height: 17px;
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #012a4a;
-    /* flex-grow: 0; */
+    flex-grow: 0;
 }
-
-
-
 ul.nav li:first-child {
     border-bottom-left-radius: 2rem;
     border-top-left-radius: 2rem;
 }
-
 ul.nav li:last-child {
     border-bottom-right-radius: 2rem;
     border-top-right-radius: 2rem;
 }
 
-
-
-/* ul.nav {
-
-    background: rgba(50, 224, 196, 0.15);
-
-    text-decoration: underline red 2px;
-
-} */
-
-
-
 ul.nav li.active {
-
-    /* background: #39a2db; */
     text-decoration: underline red 2px;
-
 }
-
-
-
-/* Tab Content Styles */
-
 .TabContent {
 
     font-size: 2rem;
 
-    /* text-align: center; */
+    text-align: center;
 
 }
+.money {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    width: 551px;
+    height: 160px;
+color: white;
+    background: #DE3D6D;
+    border-radius: 24px;
+}
+.fig{
+margin: 0px 0px 1px 10px;
+color: white;
+}
+.walletBalance {
+/* Wallet balance */
+
+
+    width: 110px;
+    height: 19px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #FFFFFF;
+
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;  
+}
+.account{
+    width: 95px;
+    height: 24px;
+ font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 12px;
+        background-color: #DE3D6D;
+        border-radius:10px ;
+        padding:5px ;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+    }
+
+
+    @media screen and (max-width: 800px) {
+.frame1{
+    width: 100%;
+    /* background: red; */
+    margin-right: 30px;
+    margin-left: 0px;
+}
+.rectangle2{
+    max-width: 107%;
+}
+.money{
+    width: auto;
+}
+    }

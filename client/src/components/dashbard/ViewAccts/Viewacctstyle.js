@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Viewacct = styled.div`
+width:100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -18,5 +19,31 @@ export const Viewacct = styled.div`
     color: #ffffff;
     align-items: center;
     border: none;
+  }
+
+  @media (max-width: 599px) {
+    .btnnnn {
+      margin: 40px 32px 0 32px;
+    }
+  
+  }
+  @media (max-width: 360px) {
+    .btnnnn {
+      margin: 50px 40px 0 45px;
+    }
+  
+  }
+`;
+
+export const HeadingStyle = styled.div`
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-left: 15%;
+  gap: 140px;
+  margin-bottom: 2rem;
+  margin-top: 60px;
+  h1 {
+    margin: 0;
   }
 `;
