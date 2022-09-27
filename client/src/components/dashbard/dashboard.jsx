@@ -9,6 +9,7 @@ import { bankFormState } from "../../atoms/bankFormAtom";
 import { successModalState } from "../../atoms/successModalAtom";
 import { useRecoilState } from "recoil";
 import { HeadingStyle } from "./ViewAccts/Viewacctstyle";
+import TransactionHistory from "../../transaction-history/TransactionHistory";
 
 function Dashboard() {
   const [formState, setFormState] = useRecoilState(bankFormState);
@@ -58,11 +59,9 @@ function Dashboard() {
               ) : active === menu[1] ? (
                 <h3> WIthdraw Balance component here</h3>
               ) : active === menu[2] ? (
-                // <h3> Manage Bank Account component here</h3>
                 <Bankform />
               ) : (
-                <h3>Transaction History comt here</h3>
-                // <TransactionHistory/>
+                <TransactionHistory/>
               )}
             </div>
           </div>
