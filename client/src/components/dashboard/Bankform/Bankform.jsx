@@ -9,12 +9,10 @@ import { handleAddBank } from "../../../api/auth";
 import Mymodal from "../Modal/Modal";
 import { successModalState } from "../../../atoms/successModalAtom";
 
+
 const Bankform = () => {
   const [bankInfo, setBankInfo] = useState({});
 
-  const [formState, setFormState] = useRecoilState(bankFormState);
-  const [modal, setModal] = useRecoilState(successModalState);
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBankInfo({ ...bankInfo, [name]: value });
@@ -22,6 +20,8 @@ const Bankform = () => {
   const handleBankChange = (selectedOption) => {
     setBankInfo({ ...bankInfo, bankName: selectedOption.value });
   };
+  const [formState, setFormState] = useRecoilState(bankFormState);
+  const [modal, setModal] = useRecoilState(successModalState);
 
   const handleSubmit = async (e) => {
     try {
@@ -41,7 +41,7 @@ const Bankform = () => {
         <p className="viewacctselect" onClick={() => setFormState(false)}>
           View Bank accounts
         </p>
-        </div>
+      </div>
       {formState ? (
         <form action="" className="bankform">
           <label htmlFor="" className="texts">Bank Name</label>

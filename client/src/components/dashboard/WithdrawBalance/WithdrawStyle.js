@@ -7,9 +7,11 @@ export const WithdrawStyle = styled.form `
     font-family: "Inter";
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 14px;
+    margin-bottom: 2rem;
   }
   .sellAirtime-header {
+    width:83%%;
     display: flex;
     margin: 0;
     justify-content: space-between;
@@ -28,25 +30,43 @@ export const WithdrawStyle = styled.form `
   }
   .bankform {
     display: flex;
+    margin:auto;
+    width:100%;
     flex-direction: column;
-    margin: 20px 0px 0px 0px;
+   
     font-size: 1rem;
   }
   input, select {
+    width:100%;
     padding: 1rem;
     margin: 8px 0px 16px 0px;
     opacity: 0.3;
   }
-  .withdraw_input_background{
+
+  label{
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #012A4A;
+    width:100%;
+  }
+  .withdraw_input_background, select{
         background: rgba(0, 0, 0, 0.04);
         border: none;
        
     }
-  
+  input .input {
+    padding: 1rem;
+    margin: 20px 0 0 0;
+    font-size: 1rem;
+  }
   .btnnn {
     cursor: pointer;
     display: flex;
-    margin-top: 50px;
+    margin-top: 15px;
+    margin-bottom: 25px;
     padding: 16.5px 71px;
     align-self: start;
     background: linear-gradient(107.45deg, #de3d6d 47.58%, #f5844c 104.23%);
@@ -78,7 +98,6 @@ export const CustomStyle = {
         marginBottom: 15,
         marginTop: 10,
         fontSize: 13,
-        backgroundColor:'rgba(0, 0, 0, 0.04)',
         "&:hover": {
             // borderColor: "#DE3D6D",
         },

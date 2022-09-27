@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import "./dashboard.css";
 import Tab from "./Tab";
-import Navbar from "../../components/Navbar/NavBar";
+import Navbar from "../Navbar/NavBar";
 // import TransactionHistory from "../transaction-history/TransactionHistory";
 import Bankform from "./Bankform/Bankform";
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -28,7 +28,7 @@ function Dashboard() {
     <div className="App">
       <Navbar />
       <div className="rectangle2">
-        <h1></h1>
+       
        
         <div className="frame1">
           {active === menu[0] || active === menu[1] ? (

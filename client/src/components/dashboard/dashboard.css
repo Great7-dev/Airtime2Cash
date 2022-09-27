@@ -1,31 +1,43 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 1440px;
+    width: 100vw;
+    background-color: #f5f5f5;
+}
+
 .rectangle2 {
-    width: 1440px;
+    width: 100vw;
     height: 271px;
     background: rgba(222, 61, 109, 0.1);
 }
-.dash{
+
+.dash {
     border: 1px solid red;
-    width:100%;
+    width: 100%;
     display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40%;
-  margin: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 40%;
+    margin: 0;
     /* margin-left: 100px; */
 }
+
 .frame1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 60%;
-    height: 700px;
-    margin-left: 320px;
+    height: 1106px;
+    margin-left: 300px;
+    margin-top: 10%;
     background: #FFFFFF;
-    border: 1px solid #D9D9D9;
+    border: 1px solid;
 }
+
 .dashboard {
-/* Dashboard */
+    /* Dashboard */
     width: 169px;
     height: 39px;
     font-family: 'Inter';
@@ -71,9 +83,16 @@
     flex-grow: 0;
 }
 
+
+/* .banner-container{
+width: 100vw;
+height: 10%;
+background-color: #DE3D6D;
+} */
+
 .ManageBankAccount {
     width: 147px;
-    height: 17px;   
+    height: 17px;
     color: #012A4A;
     flex: none;
     order: 2;
@@ -94,6 +113,7 @@
     order: 3;
     flex-grow: 0;
 }
+
 .nav {
     display: flex;
     flex-direction: row;
@@ -115,8 +135,8 @@
     width: 97%;
     height: auto;
     min-height: 400px;
-    margin: 1.5rem auto 1.5rem;
-    padding: 2rem 1rem;
+    /* margin: 1.5rem auto 1.5rem; */
+    /* padding: 2rem 1rem; */
     color: #e8f0f2;
 }
 
@@ -129,9 +149,10 @@ ul.nav {
     border-radius: 2rem;
     padding-left: 0px;
 }
+
 ul.nav li {
     width: 50%;
-    padding: 1rem;
+    /* padding: 1rem; */
     list-style: none;
     text-align: center;
     cursor: pointer;
@@ -139,16 +160,18 @@ ul.nav li {
     height: 17px;
     font-family: "Inter";
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
+    /* font-weight: 400; */
+    font-size: 5px;
     line-height: 17px;
     color: #012a4a;
     flex-grow: 0;
 }
+
 ul.nav li:first-child {
     border-bottom-left-radius: 2rem;
     border-top-left-radius: 2rem;
 }
+
 ul.nav li:last-child {
     border-bottom-right-radius: 2rem;
     border-top-right-radius: 2rem;
@@ -157,76 +180,77 @@ ul.nav li:last-child {
 ul.nav li.active {
     text-decoration: underline red 2px;
 }
+
 .TabContent {
-
     font-size: 2rem;
-
     text-align: center;
-
 }
-.money {
 
+.money {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 24px;
-    width: 551px;
+    width: 74%;
     height: 160px;
-color: white;
+    color: white;
     background: #DE3D6D;
     border-radius: 24px;
+    margin-bottom: 15px;
 }
-.fig{
-margin: 0px 0px 1px 10px;
-color: white;
-}
-.walletBalance {
 
+.fig {
+    margin: 0px 0px 1px 10px;
+    color: white;
+}
+
+.walletBalance {
+    /* Wallet balance */
     width: 110px;
     height: 19px;
-
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-
     color: #FFFFFF;
-
-
     flex: none;
     order: 0;
-    flex-grow: 0;  
+    flex-grow: 0;
 }
-.account{
+
+.account {
     width: 95px;
     height: 24px;
- font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 10px;
-            line-height: 12px;
-        background-color: #DE3D6D;
-        border-radius:10px ;
-        padding:5px ;
-            flex: none;
-            order: 0;
-            flex-grow: 0;
-    }
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    background-color: #DE3D6D;
+    border-radius: 10px;
+    padding: 5px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
 
-
-    @media screen and (max-width: 800px) {
-.frame1{
-    width: 100%;
-    /* background: red; */
-    margin-right: 30px;
-    margin-left: 0px;
-}
-.rectangle2{
-    max-width: 107%;
-}
-.money{
-    width: auto;
-}
+@media screen and (max-width: 800px) {
+    .frame1 {
+        width: 100%;
+        margin-right: 15px;
+        margin-left: 1px;
+        border: none;
+        padding-right: 5px;
     }
+    .rectangle2 {
+        max-width: 107%;
+    }
+    .nav {
+        font-size: 10px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+}

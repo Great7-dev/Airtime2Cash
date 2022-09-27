@@ -47,4 +47,3 @@ export const HeadingStyle = styled.div`
     margin: 0;
   }
 `;
-
