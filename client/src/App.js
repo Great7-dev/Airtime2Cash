@@ -9,8 +9,9 @@ import CheckMail from "./pages/Checkmail/CheckMail";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Landingpage from "./pages/Landingpage";
-import TransactionHistory from "./transaction-history/TransactionHistory";
 import Dashboard from "./components/dashbard/dashboard";
+
+import TransactionHistory from "./transaction-history/TransactionHistory";
 
 function App() {
   return (

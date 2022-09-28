@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 // import {useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import axios from "axios";
 const client = axios.create({
@@ -77,6 +77,9 @@ export const responseHandler = async (id, data) => {
     return error;
   }
 };
+const client2 = axios.create({
+  baseURL: `${process.env.REACT_APP_ACCT_BASE_URL}`,
+});
 
 export const signupHandler = async (data) => {
   try {
@@ -87,6 +90,26 @@ export const signupHandler = async (data) => {
   }
 };
 
-//  export const client = axios.create({
-//   baseURL: `${process.env.REACT_APP_BASE_URL}`,
-// });
+export const handleAddBank = async (data) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await client2.post(`/account/createbankaccount`, data, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUserBanks = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await client.get(`/userrecords`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return await response.data.record.accounts;
+  } catch (error) {
+    console.log(error);
+  }
+};

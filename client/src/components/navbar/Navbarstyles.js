@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Navbarstyle = styled.div`
+<<<<<<< HEAD
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -13,6 +14,34 @@ export const Navbarstyle = styled.div`
     margin: 0;
     padding: 0;
   }
+=======
+width :100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 190px 10px 150px;
+box-sizing: border-box;
+/* position:fixed;
+background-color: white;  */
+
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+.navbar__links{
+display: flex;
+align-items: center;
+gap: 30px;
+color: #012A4A;
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+}
+>>>>>>> 9b415f3cb6e656605f9f1e677944708a1940113a
 
   .navbar__links {
     display: flex;
@@ -26,6 +55,7 @@ export const Navbarstyle = styled.div`
     text-align: center;
   }
 
+<<<<<<< HEAD
   .Home {
     font-style: normal;
     font-weight: 700;
@@ -44,6 +74,27 @@ export const Navbarstyle = styled.div`
     font-size: 16px;
     border: none;
   }
+=======
+.Home{
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+color: #DE3D6D;
+}
+.btnn{
+  cursor: pointer;
+background:linear-gradient(101.31deg, #DE3D6D 42.62%, #F5844C 104.19%);
+border-radius: 4px;
+padding: 10px 25px 10px 25px;
+color: #ffffff;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+border: none;
+}
+>>>>>>> 9b415f3cb6e656605f9f1e677944708a1940113a
 
   @media (max-width: 1105px) {
     padding: 13px 100px;

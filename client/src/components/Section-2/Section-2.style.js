@@ -81,6 +81,7 @@ export const Section2style = styled.div`
   }
 
   .btn {
+    cursor: pointer;
     padding: 14.5px 40px;
     background: linear-gradient(107.45deg, #de3d6d 47.58%, #f5844c 104.23%);
     border-radius: 4px;
