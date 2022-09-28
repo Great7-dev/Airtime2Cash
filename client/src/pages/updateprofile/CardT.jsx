@@ -6,8 +6,12 @@ import vector from "./images/Vector.svg"
 import vector2 from "./images/Vector2.svg"
 
 const Container = styled.div`
+position: absolute;
+bottom: -11em;
+right: 1em;
 ul{
-  display:flex;
+
+  display:${props => props.display};
   flex-direction:column;
   justify-content: space-between;
   float:right;
@@ -16,17 +20,24 @@ ul{
   height: 9rem;
   width: 10rem;
   border-radius: 10px;
-  border: solid black 3px;
-  box-shadow: 5px 10px #888888;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+  padding: 1em;
+  align-items: flex-start;
 }
 a{
   text-decoration:none;
   color:black;
+  transition: color .5s;
 }
+a:hover{
+  color:#DE3D6D;
+  cursor: pointer;
+}
+
 `
-function CardT() {
+function CardT({display}) {
         return (
-          <Container>
+          <Container display={display}>
             <ul>
                 <a href='/profile'><img src={layer5} alt="icon" />  Account</a>
                 <a href='/#'><img src={layer11} alt="icon" /> Setting</a>

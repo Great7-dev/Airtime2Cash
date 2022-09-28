@@ -5,7 +5,7 @@ import { Container } from './TransactionHistory.style'
 function WithdrawFund() {
   return (
     <Container className='media'>
-    <div>
+    <div className='box'>
         <p className='left-side-p'><span>Today</span>,10:25AM</p>
         <p className='left-side-p'>Withdraw fund</p>
         <p className='left-side-p'>25/5/2022</p>

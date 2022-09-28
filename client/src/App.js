@@ -10,12 +10,14 @@ import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Landingpage from "./pages/Landingpage";
 import TransactionHistory from "./transaction-history/TransactionHistory";
+import Dashboard from "./components/dashbard/dashboard";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
+          <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/history" element={<TransactionHistory />} />
           <Route exact path="/card" element={<CardT />} />
           <Route path="/" element={<Landingpage />} />

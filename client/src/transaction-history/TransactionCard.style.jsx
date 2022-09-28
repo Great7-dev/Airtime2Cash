@@ -8,4 +8,5 @@ export const Parent = styled.div`
     justify-content: space-between;
     background-color: #fff;
     margin: 6px 6px 6px 6px;
+    padding-top: 1rem;
 `
