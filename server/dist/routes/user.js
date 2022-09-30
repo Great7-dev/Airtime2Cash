@@ -5,15 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
+// import { LoginUser, RegisterUser, Updateprofile, verifyUser } from '../controller/users'
+const auth_1 = require("../middleware/auth");
 const users_1 = require("../controller/users");
-//router.post('/confirmemail',sendMail);
 router.get("/verify/:token", async (req, res) => {
     const token = req.params.token;
     const response = await (0, users_1.verifyUser)(token);
-    res.json(response);
+    //res.json(response);
+    res.redirect("http://localhost:3000/login");
 });
-router.patch('/update/:id', users_1.Updateprofile);
+router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
 router.post('/create', users_1.RegisterUser);
+router.get('/getuser/:id', users_1.getUser);
 router.post('/login', users_1.LoginUser);
 router.post('/forgotpassword', users_1.forgotPassword);
 router.patch('/change-password/:id', users_1.changePassword);

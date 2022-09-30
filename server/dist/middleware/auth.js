@@ -9,38 +9,44 @@ const secret = process.env.JWT_SECRET;
 const user_1 = require("../models/user");
 async function auth(req, res, next) {
     try {
-        const auth = 
-        // req.headers["authorization"] || req.headers["Authorization"];
-        req.cookies.authorization;
-        if (!auth) {
-            res.status(401).json({
-                Error: 'Kindly login from the login page'
+        const authorization = req.headers.authorization;
+        //  const authorization = localStorage.getItem("Token");
+        //  console.log(authorization)
+        if (!authorization && !req.cookies.mytoken) {
+            res.status(401);
+            res.json({
+                Error: 'kindly sign in as a user'
             });
         }
-        // const token = authorization?.slice(7, authorization.length) as string;
-        const token = auth;
+        //hide part of the token 
+        const token = authorization?.slice(7, authorization.length) || req.cookies.mytoken;
         let verified = jsonwebtoken_1.default.verify(token, secret);
+        console.log(req.headers);
         if (!verified) {
-            return res.status(401).json({
-                Error: 'Verification failed, access denied'
+            res.status(401);
+            res.json({
+                Error: 'User not verified, you cant access this route'
             });
+            return;
         }
         const { id } = verified;
         const user = await user_1.UserInstance.findOne({ where: { id } });
         if (!user) {
-            return res.status(404).json({
-                Error: 'User verification failed'
+            res.status(404);
+            res.json({
+                Error: 'user not verified'
             });
+            return;
         }
         req.user = verified;
         next();
     }
     catch (error) {
-        console.log(error);
-        res.status(403).json({
-            error,
-            Error: 'You are not logged in'
+        res.status(500);
+        res.json({
+            Error: "user not logged in"
         });
+        return;
     }
 }
 exports.auth = auth;

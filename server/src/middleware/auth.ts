@@ -3,47 +3,50 @@ import jwt from 'jsonwebtoken';
 const secret = process.env.JWT_SECRET as string;
 import { UserInstance } from '../models/user';
 
-export async function auth(
-  req: Request | any,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    const auth =
-      // req.headers["authorization"] || req.headers["Authorization"];
-      req.cookies.authorization;
-    if (!auth) {
-      res.status(401).json({
-        Error: 'Kindly login from the login page'
-      });
-    }
-    // const token = authorization?.slice(7, authorization.length) as string;
-    const token = auth;
-    let verified = jwt.verify(token, secret);
+export async function auth (req:Request | any,res:Response,next:NextFunction){
+    
 
-    if (!verified) {
-      return res.status(401).json({
-        Error: 'Verification failed, access denied'
-      });
-    }
-    const { id } = verified as { [key: string]: string };
-
-    const user = await UserInstance.findOne({ where: { id } });
-
-    if (!user) {
-      return res.status(404).json({
-        Error: 'User verification failed'
-      });
-    }
-
-    req.user = verified;
-    next();
-  } catch (error) {
-    console.log(error);
-
-    res.status(403).json({
-      error,
-      Error: 'You are not logged in'
-    });
+  try{
+     const authorization = req.headers.authorization;
+    //  const authorization = localStorage.getItem("Token");
+    //  console.log(authorization)
+     if(!authorization && !req.cookies.mytoken){
+         res.status(401)
+         res.json({
+             Error:'kindly sign in as a user'
+         })
+     }
+     //hide part of the token 
+     const token = authorization?.slice(7,authorization.length) as string || req.cookies.mytoken
+     let verified = jwt.verify(token, secret);
+     console.log(req.headers);
+     
+ 
+     if(!verified){
+         res.status(401)
+         res.json({
+             Error: 'User not verified, you cant access this route'
+         })
+         return
+     }
+     const {id} = verified as {[key:string]:string}
+ 
+     const user = await UserInstance.findOne({where:{id}})
+     if(!user){
+         res.status(404)
+         res.json({
+             Error:'user not verified'
+         })
+         return
+     }
+     req.user = verified 
+     next()
+  }catch (error){
+     res.status(500)
+     res.json({
+         Error:"user not logged in"
+     })
+     return
   }
-}
+ 
+ }

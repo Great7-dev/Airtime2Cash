@@ -19,7 +19,7 @@ exports.validationSchema = joi_1.default.object({
         .required(),
     password: joi_1.default.string().required(),
     confirmpassword: joi_1.default.ref('password')
-});
+}).with('password', 'confirmpassword');
 exports.loginSchema = joi_1.default.object().keys({
     email: joi_1.default.string().email().lowercase(),
     username: joi_1.default.string().trim(),
@@ -30,7 +30,8 @@ exports.updateProfileSchema = joi_1.default.object().keys({
     lastname: joi_1.default.string().trim(),
     phonenumber: joi_1.default.string()
         .length(11)
-        .pattern(/^[0-9]+$/)
+        .pattern(/^[0-9]+$/),
+    email: joi_1.default.string().email()
 });
 //Generate Token
 const generateToken = (user) => {
