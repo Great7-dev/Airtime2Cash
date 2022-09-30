@@ -86,7 +86,8 @@ export async function verifyUser(token: string) {
   if (!user) throw new Error('user not found');
 
   return await user.update({ isVerified: true });
-}
+} 
+
 
 export async function getUser(
   req: Request|any,
@@ -254,21 +255,40 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
             })   
     }
     const updaterecord = await record?.update({
-      firstname,
-      lastname,
-      phonenumber
-    });
-    res.status(201).json({
-      message: 'you have successfully updated your profile',
-      record: updaterecord
-    });
-  } catch (err) {
-    res.status(500).json({
-      msg: 'failed to update profile',
-      route: '/update/:id'
-    });
+        firstname,
+        lastname,
+        phonenumber
+     })
+     res.status(201).json({
+            message: 'you have successfully updated your profile',
+            record: updaterecord 
+         })
+        
+    }catch(error){
+           res.status(500).json({
+            msg:'failed to update profile',
+            route: '/update/:id'
+
+           })
+    }
   }
-}
+
+export async function getUsers(req:Request, res:Response, next:NextFunction){
+    try{
+      const id = req.params.id
+      const record = await UserInstance.findOne({where:{id}})
+      res.status(200).json({
+        record
+      })
+    }catch(error){
+      res.status(500).json({
+        msg:'failed to get user',
+        route: '/user/:id'
+
+       })
+    }
+  }
+
 
 export async function getUserRecords(
   req: Request|any,
