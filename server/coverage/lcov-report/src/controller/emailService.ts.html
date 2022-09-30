@@ -23,20 +23,43 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
+                <span class="strong">92.68% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>38/41</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">60% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>3/5</span>
+=======
                 <span class="strong">20.93% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>9/43</span>
+>>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
+<<<<<<< HEAD
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+=======
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/0</span>
+>>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
             </div>
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
+                <span class="strong">92.68% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>38/41</span>
+=======
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/1</span>
@@ -47,6 +70,7 @@
                 <span class="strong">20.93% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>9/43</span>
+>>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
             </div>
         
             
@@ -61,7 +85,11 @@
             </div>
         </template>
     </div>
+<<<<<<< HEAD
+    <div class='status-line high'></div>
+=======
     <div class='status-line low'></div>
+>>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -104,6 +132,90 @@
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
+<<<<<<< HEAD
+<a name='L42'></a><a href='#L42'>42</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import nodemailer from 'nodemailer';
+import 'dotenv/config';
+&nbsp;
+export async function sendMail(
+  html: string,
+  mail: string,
+  subject: string,
+  username: string
+) {
+  const password = process.env.EMAIL_PASS as string;
+  const email = process.env.USER_EMAIL as string;
+  try {
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: email,
+        pass: password
+      }
+    });
+&nbsp;
+    let mailOptions = {
+      from: email,
+      username: username,
+      to: mail,
+      subject: subject,
+      html: html
+    };
+&nbsp;
+    return new Promise((resolve, reject) =&gt; {
+      transporter.sendMail(mailOptions, (err, info) =&gt; {
+        if (err) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >          reject(err);</span>
+        } else {
+          resolve(info);
+        }
+      });
+    });
+  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >    return err;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+}
+=======
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
@@ -192,6 +304,7 @@ export <span class="fstat-no" title="function not covered" >async function sendM
 <span class="cstat-no" title="statement not covered" >       return err</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
+>>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -199,7 +312,15 @@ export <span class="fstat-no" title="function not covered" >async function sendM
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at 2022-09-16T08:06:07.904Z
+=======
+<<<<<<< HEAD
+                at 2022-09-16T08:39:43.892Z
+=======
+                at 2022-09-15T23:40:34.861Z
+>>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+>>>>>>> ee52ed6f8a9f81b28537b0dd26e996f0872e8f41
             </div>
         <script src="../../prettify.js"></script>
         <script>

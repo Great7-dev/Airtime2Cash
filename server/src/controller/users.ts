@@ -9,6 +9,8 @@ import { emailVerificationView } from "./mailSender";
 import { sendMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
+import { AccountInstance } from "../models/account";
+
 const secret = process.env.JWT_SECRET as string
 
 
@@ -73,18 +75,37 @@ export async function RegisterUser(
             route:'/create'
 
         })
-        
     }
-}
+  }
 
-export async function verifyUser(token:string){
-    const decode = jwt.verify(token,process.env.JWT_SECRET as string)
-    const details = decode as unknown as Record<string,unknown>
-    const id = details.id as string
-    const user = await UserInstance.findByPk(id)
-    if(!user) throw new Error('user not found')
-    
-  return await user.update({isVerified:true})  
+export async function verifyUser(token: string) {
+  const decode = jwt.verify(token, process.env.JWT_SECRET as string);
+  const details = decode as unknown as Record<string, unknown>;
+  const id = details.id as string;
+  const user = await UserInstance.findByPk(id);
+  if (!user) throw new Error('user not found');
+
+  return await user.update({ isVerified: true });
+} 
+
+
+export async function getUser(
+  req: Request|any,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id=req.user.id;
+    //const { id } = req.params;
+    const record = await UserInstance.findOne({ where: { id } });
+
+    res.status(200).json({"record":record});
+  } catch (error) {
+    res.status(500).json({
+      msg: "Invalid User",
+      route: "/read/:id",
+    });
+  }
 }
 
 export async function LoginUser(
@@ -103,17 +124,13 @@ export async function LoginUser(
     const userName = req.body.username;
     const record = userEmail
       ? ((await UserInstance.findOne({
-          where: { email: userEmail }
+          where: [{ email: userEmail }]
         })) as unknown as { [key: string]: string })
       : ((await UserInstance.findOne({
-          where: { username: userName }
+          where: [{ username: userName }]
         })) as unknown as { [key: string]: string });
-
-    if (!record) {
-      res.status(404).json({
-        msg: 'Incorrect username/e-mail or password '
-      });
-    } else {
+        
+        if(record.isVerified){
       const { id } = record;
       const { password } = record;
 
@@ -122,7 +139,7 @@ export async function LoginUser(
 
       if (!validUser) {
         return res.status(401).json({
-          message: 'Password do not match'
+          msg: 'Password do not match'
         });
       }
 
@@ -133,49 +150,55 @@ export async function LoginUser(
         });
 
         res.status(200).json({
+          status: 'success',
+          msg: 'login successful',
           record: record,
           token: token
         });
       }
+    } else{
+      return res.status(400).json({
+        msg: "Please verify your email address"
+      });
     }
-  } catch (err) {
+   } catch (err) {
     res.status(500).json({
-      msg: 'failed to login',
+      msg: 'Incorrect username or email',
       route: '/login'
     });
   }
 }
 
-
 export async function forgotPassword(req: Request, res: Response) {
   try {
-    
     const { email } = req.body;
-   
+
     const user = (await UserInstance.findOne({
       where: {
-        email: email,
-      },
+        email: email
+      }
     })) as unknown as { [key: string]: string };
-    
+
     if (!user) {
       return res.status(404).json({
-        message: 'email not found',
+        message: 'email not found'
       });
     }
-    
+
     const { id } = user;
     const fromUser = process.env.FROM as string;
     const subject = process.env.SUBJECT as string;
     const html = forgotPasswordVerification(id);
-    
+
     await sendMail(html, req.body.email, subject, fromUser);
-    
-    
+
     res.status(200).json({
-      message: 'Check email for the verification link',
+      message: 'Check email for the verification link'
     });
   } catch (error) {
+    res.status(500).json({
+      message: 'Internal server error'
+    });
   }
 }
 
@@ -186,31 +209,31 @@ export async function changePassword(req: Request, res: Response) {
     const validationResult = changePasswordSchema.validate(req.body, options);
     if (validationResult.error) {
       return res.status(400).json({
-        error: validationResult.error.details[0].message,
+        error: validationResult.error.details[0].message
       });
     }
 
     const user = await UserInstance.findOne({
       where: {
-        id: id,
-      },
+        id: id
+      }
     });
     if (!user) {
       return res.status(403).json({
-        message: 'user does not exist',
+        message: 'user does not exist'
       });
     }
     const passwordHash = await bcrypt.hash(req.body.password, 8);
 
     await user?.update({
-      password: passwordHash,
+      password: passwordHash
     });
-    return res.status(201).json({
-      message: 'Password Successfully Changed',
+    return res.status(200).json({
+      message: 'Password Successfully Changed'
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Internal server error',
+      message: 'Internal server error'
     });
   }
 }
@@ -265,4 +288,48 @@ export async function getUsers(req:Request, res:Response, next:NextFunction){
        })
     }
   }
+
+
+export async function getUserRecords(
+  req: Request|any,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const userId = req.user.id;
+    const record = (await UserInstance.findOne({
+      where: { id: userId },
+      include: [{ model: AccountInstance, as: "accounts" }],
+    })) as unknown as { [key: string]: string };
+
+    res.status(200).json({
+      record: record,
+    });
+  } catch (err) {
+    res.status(500).json({
+      msg: "failed to login",
+      route: "/login",
+    });
+  }
+}
+
+
+export async function LogoutUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+   localStorage.removeItem('token');
+   localStorage.removeItem('Email');
+   localStorage.removeItem('id');
+   const link = `${process.env.FRONTEND_URL}`;
+   res.redirect(`${link}/login`)
+  } catch (err) {
+    res.status(500).json({
+      msg: "failed to logout",
+      route: "/logout",
+    });
+  }
+}
 

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.LogoutUser = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -13,6 +13,7 @@ const mailSender_1 = require("./mailSender");
 const emailService_1 = require("./emailService");
 const utils_1 = require("../utils/utils");
 const emailVerification_1 = require("../email/emailVerification");
+const account_1 = require("../models/account");
 const secret = process.env.JWT_SECRET;
 async function RegisterUser(req, res, next) {
     const id = (0, uuid_1.v4)();
@@ -80,6 +81,21 @@ async function verifyUser(token) {
     return await user.update({ isVerified: true });
 }
 exports.verifyUser = verifyUser;
+async function getUser(req, res, next) {
+    try {
+        const id = req.user.id;
+        //const { id } = req.params;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        res.status(200).json({ "record": record });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "Invalid User",
+            route: "/read/:id",
+        });
+    }
+}
+exports.getUser = getUser;
 async function LoginUser(req, res, next) {
     try {
         const validationResult = validation_1.loginSchema.validate(req.body, validation_1.options);
@@ -92,24 +108,19 @@ async function LoginUser(req, res, next) {
         const userName = req.body.username;
         const record = userEmail
             ? (await user_1.UserInstance.findOne({
-                where: { email: userEmail }
+                where: [{ email: userEmail }]
             }))
             : (await user_1.UserInstance.findOne({
-                where: { username: userName }
+                where: [{ username: userName }]
             }));
-        if (!record) {
-            res.status(404).json({
-                msg: 'Incorrect username/e-mail or password '
-            });
-        }
-        else {
+        if (record.isVerified) {
             const { id } = record;
             const { password } = record;
             const token = (0, utils_1.generateToken)({ id });
             const validUser = await bcryptjs_1.default.compare(req.body.password, password);
             if (!validUser) {
                 return res.status(401).json({
-                    message: 'Password do not match'
+                    msg: 'Password do not match'
                 });
             }
             if (validUser) {
@@ -118,15 +129,22 @@ async function LoginUser(req, res, next) {
                     maxAge: 1000 * 60 * 60 * 24
                 });
                 res.status(200).json({
+                    status: 'success',
+                    msg: 'login successful',
                     record: record,
                     token: token
                 });
             }
         }
+        else {
+            return res.status(400).json({
+                msg: "Please verify your email address"
+            });
+        }
     }
     catch (err) {
         res.status(500).json({
-            msg: 'failed to login',
+            msg: 'Incorrect username or email',
             route: '/login'
         });
     }
@@ -137,12 +155,12 @@ async function forgotPassword(req, res) {
         const { email } = req.body;
         const user = (await user_1.UserInstance.findOne({
             where: {
-                email: email,
-            },
+                email: email
+            }
         }));
         if (!user) {
             return res.status(404).json({
-                message: 'email not found',
+                message: 'email not found'
             });
         }
         const { id } = user;
@@ -151,10 +169,13 @@ async function forgotPassword(req, res) {
         const html = (0, emailVerification_1.forgotPasswordVerification)(id);
         await (0, emailService_1.sendMail)(html, req.body.email, subject, fromUser);
         res.status(200).json({
-            message: 'Check email for the verification link',
+            message: 'Check email for the verification link'
         });
     }
     catch (error) {
+        res.status(500).json({
+            message: 'Internal server error'
+        });
     }
 }
 exports.forgotPassword = forgotPassword;
@@ -164,30 +185,30 @@ async function changePassword(req, res) {
         const validationResult = validation_1.changePasswordSchema.validate(req.body, validation_1.options);
         if (validationResult.error) {
             return res.status(400).json({
-                error: validationResult.error.details[0].message,
+                error: validationResult.error.details[0].message
             });
         }
         const user = await user_1.UserInstance.findOne({
             where: {
-                id: id,
-            },
+                id: id
+            }
         });
         if (!user) {
             return res.status(403).json({
-                message: 'user does not exist',
+                message: 'user does not exist'
             });
         }
         const passwordHash = await bcryptjs_1.default.hash(req.body.password, 8);
         await user?.update({
-            password: passwordHash,
+            password: passwordHash
         });
-        return res.status(201).json({
-            message: 'Password Successfully Changed',
+        return res.status(200).json({
+            message: 'Password Successfully Changed'
         });
     }
     catch (error) {
         res.status(500).json({
-            message: 'Internal server error',
+            message: 'Internal server error'
         });
     }
 }
@@ -242,3 +263,38 @@ async function getUsers(req, res, next) {
     }
 }
 exports.getUsers = getUsers;
+async function getUserRecords(req, res, next) {
+    try {
+        const userId = req.user.id;
+        const record = (await user_1.UserInstance.findOne({
+            where: { id: userId },
+            include: [{ model: account_1.AccountInstance, as: "accounts" }],
+        }));
+        res.status(200).json({
+            record: record,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            msg: "failed to login",
+            route: "/login",
+        });
+    }
+}
+exports.getUserRecords = getUserRecords;
+async function LogoutUser(req, res, next) {
+    try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('Email');
+        localStorage.removeItem('id');
+        const link = `${process.env.FRONTEND_URL}`;
+        res.redirect(`${link}/login`);
+    }
+    catch (err) {
+        res.status(500).json({
+            msg: "failed to logout",
+            route: "/logout",
+        });
+    }
+}
+exports.LogoutUser = LogoutUser;

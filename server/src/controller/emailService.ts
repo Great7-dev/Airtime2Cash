@@ -1,10 +1,5 @@
-import dotenv from "dotenv"
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
-
-
-
-
 
 export async function sendMail(html:string, mail:string,subject:string,username:string) {
     const password = process.env.EMAIL_PASS as string
@@ -35,9 +30,8 @@ export async function sendMail(html:string, mail:string,subject:string,username:
                 resolve(info)
             }
         })
-    }
-        )
+    })
     } catch (err) {
        return err
         }
-    }
+      }

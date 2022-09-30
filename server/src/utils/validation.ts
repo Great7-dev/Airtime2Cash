@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import Joi from 'joi';
@@ -37,7 +37,6 @@ export const generateToken = (user: { [key: string]: unknown }): unknown => {
   return jwt.sign(user, pass, { expiresIn: '7d' });
 };
 
-
 export const changePasswordSchema = Joi.object()
   .keys({
     password: Joi.string().required(),
@@ -48,7 +47,7 @@ export const changePasswordSchema = Joi.object()
 
       .label('Confirm password')
 
-      .messages({ 'any.only': '{{#label}} does not match' }),
+      .messages({ 'any.only': '{{#label}} does not match' })
   })
   .with('password', 'confirmPassword');
 
@@ -56,7 +55,12 @@ export const changePasswordSchema = Joi.object()
 //   const passPhrase = process.env.JWT_SECRETE as string;
 //   return jwt.sign(user, passPhrase, { expiresIn: '7d' });
 // };
-
+export const createAccountSchema = Joi.object().keys({
+  bankName: Joi.string().required(),
+  accNumber: Joi.string().trim().required().pattern(/^[0-9]+$/).length(10),
+  accName: Joi.string().required(),
+  wallet: Joi.number().min(0)
+});
 
 export const options = {
   abortEarly: false,
