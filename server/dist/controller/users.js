@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LogoutUser = exports.getUserRecords = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.LogoutUser = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -239,7 +239,7 @@ async function Updateprofile(req, res, next) {
             record: updaterecord
         });
     }
-    catch (err) {
+    catch (error) {
         res.status(500).json({
             msg: 'failed to update profile',
             route: '/update/:id'
@@ -247,6 +247,22 @@ async function Updateprofile(req, res, next) {
     }
 }
 exports.Updateprofile = Updateprofile;
+async function getUsers(req, res, next) {
+    try {
+        const id = req.params.id;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        res.status(200).json({
+            record
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: 'failed to get user',
+            route: '/user/:id'
+        });
+    }
+}
+exports.getUsers = getUsers;
 async function getUserRecords(req, res, next) {
     try {
         const userId = req.user.id;

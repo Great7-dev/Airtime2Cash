@@ -14,6 +14,7 @@ router.get("/verify/:token", async (req, res) => {
     res.redirect(`${link}/login`);
 });
 router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
+router.get('/user/:id', users_1.getUsers);
 router.post('/create', users_1.RegisterUser);
 router.get('/getuser/:id', auth_1.auth, users_1.getUser);
 router.post('/login', users_1.LoginUser);
