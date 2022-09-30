@@ -294,22 +294,3 @@ export async function getUserRecords(
 }
 
 
-export async function LogoutUser(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-   localStorage.removeItem('token');
-   localStorage.removeItem('Email');
-   localStorage.removeItem('id');
-   const link = `${process.env.FRONTEND_URL}`;
-   res.redirect(`${link}/login`)
-  } catch (err) {
-    res.status(500).json({
-      msg: "failed to logout",
-      route: "/logout",
-    });
-  }
-}
-

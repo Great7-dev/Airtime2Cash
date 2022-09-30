@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LogoutUser = exports.getUserRecords = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.getUserRecords = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -266,19 +266,3 @@ async function getUserRecords(req, res, next) {
     }
 }
 exports.getUserRecords = getUserRecords;
-async function LogoutUser(req, res, next) {
-    try {
-        localStorage.removeItem('token');
-        localStorage.removeItem('Email');
-        localStorage.removeItem('id');
-        const link = `${process.env.FRONTEND_URL}`;
-        res.redirect(`${link}/login`);
-    }
-    catch (err) {
-        res.status(500).json({
-            msg: "failed to logout",
-            route: "/logout",
-        });
-    }
-}
-exports.LogoutUser = LogoutUser;
