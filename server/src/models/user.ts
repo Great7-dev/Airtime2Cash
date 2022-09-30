@@ -1,66 +1,67 @@
-import { DataTypes , Model} from "sequelize";
-import db from "../config/database.config";
+import { DataTypes, Model } from 'sequelize';
+import db from '../config/database.config';
+import { AccountInstance } from './account';
 
-    
 interface UserAtrribute {
-    id:string
-    firstname: string;
-    lastname: string;
-    username: string;
-    email: string;
-    phonenumber: number;
-    password: string;
-    isVerified: boolean;
-    avatar: string;
-}  
+  id: string;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
+  phonenumber: number;
+  password: string;
+  isVerified: boolean;
+  avatar: string;
+}
 export class UserInstance extends Model<UserAtrribute> {}
 
-
-UserInstance.init({
+UserInstance.init(
+  {
     id: {
-        type: DataTypes.UUIDV4,
-        primaryKey: true,
-        allowNull:false
+      type: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false
     },
 
     firstname: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     lastname: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     username: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     phonenumber: {
-        type: DataTypes.TEXT,
-        allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     isVerified: {
-        type: DataTypes.BOOLEAN,
-        allowNull:false
-        
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     },
     avatar: {
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-},
-    {
-        sequelize: db,
-        tableName:"userTable",
+      type: DataTypes.STRING,
+      allowNull: false
     }
+  },
+  {
+    sequelize: db,
+    tableName: 'userTable'
+  }
+);
 
-    
-    )
+UserInstance.hasMany(AccountInstance, { foreignKey: "userId", as: "accounts" });
+
+AccountInstance.belongsTo(UserInstance, { foreignKey: "userId", as: "user" });
