@@ -10,4 +10,5 @@ const accounts_1 = require("../controller/accounts");
 router.post('/createbankaccount', auth_1.auth, accounts_1.CreateAccount);
 router.get('/getbankaccount/:id', accounts_1.getBankAccount);
 router.delete('/deletebankaccount/:id', accounts_1.deleteBankAccount);
+router.post('/sellairtime', auth_1.auth, accounts_1.sellAirtime);
 exports.default = router;

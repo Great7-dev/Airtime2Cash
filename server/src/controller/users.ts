@@ -10,6 +10,7 @@ import { sendMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
 import { AccountInstance } from "../models/account";
+import { defaultValueSchemable } from "sequelize/types/utils";
 
 const secret = process.env.JWT_SECRET as string
 
@@ -56,7 +57,8 @@ export async function RegisterUser(
             phonenumber: req.body.phonenumber,
             password: passwordHash,
             isVerified: false,
-            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
+            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+            wallet: 0
         })
         if (record) {
             const email = req.body.email as string;
@@ -113,15 +115,18 @@ export async function LoginUser(
   res: Response,
   next: NextFunction
 ) {
-  try {
+  try { 
     const validationResult = loginSchema.validate(req.body, options);
+    
     if (validationResult.error) {
       return res.status(400).json({
         Error: validationResult.error.details[0].message
       });
     }
+   
     const userEmail = req.body.email;
     const userName = req.body.username;
+   
     const record = userEmail
       ? ((await UserInstance.findOne({
           where: [{ email: userEmail }]
@@ -129,7 +134,7 @@ export async function LoginUser(
       : ((await UserInstance.findOne({
           where: [{ username: userName }]
         })) as unknown as { [key: string]: string });
-        
+        //console.log("yayyy")
         if(record.isVerified){
       const { id } = record;
       const { password } = record;
@@ -148,7 +153,7 @@ export async function LoginUser(
           httpOnly: true,
           maxAge: 1000 * 60 * 60 * 24
         });
-
+        
         res.status(200).json({
           status: 'success',
           msg: 'login successful',

@@ -50,7 +50,8 @@ async function RegisterUser(req, res, next) {
             phonenumber: req.body.phonenumber,
             password: passwordHash,
             isVerified: false,
-            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
+            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+            wallet: 0
         });
         if (record) {
             const email = req.body.email;
@@ -113,6 +114,7 @@ async function LoginUser(req, res, next) {
             : (await user_1.UserInstance.findOne({
                 where: [{ username: userName }]
             }));
+        //console.log("yayyy")
         if (record.isVerified) {
             const { id } = record;
             const { password } = record;

@@ -16,3 +16,20 @@ export function emailVerificationView(token: string): string {
   `;
   return temp;
 }
+
+
+export function transactionNotification( firstname:string, lastname:string,phonenumber:string,airtimeAmount:number,network:string): string {
+  const str =`${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network.`;
+            
+
+  let temp = `
+       <div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+       
+       <h2 style="text-align: center; text-transform: uppercase;color: teal;">Airtime to Cash Transaction Notification</h2>
+
+        <p>${str}
+        </p>
+         </div>
+  `;
+  return temp;
+}
