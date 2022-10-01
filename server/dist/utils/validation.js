@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.options = exports.changePasswordSchema = exports.generateToken = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
+exports.options = exports.createAccountSchema = exports.changePasswordSchema = exports.generateToken = exports.updateWalletSchema = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const joi_1 = __importDefault(require("joi"));
@@ -33,6 +33,7 @@ exports.updateProfileSchema = joi_1.default.object().keys({
         .pattern(/^[0-9]+$/),
     email: joi_1.default.string().email()
 });
+exports.updateWalletSchema = joi_1.default.string().email();
 //Generate Token
 const generateToken = (user) => {
     const pass = process.env.JWT_SECRET;
@@ -53,6 +54,12 @@ exports.changePasswordSchema = joi_1.default.object()
 //   const passPhrase = process.env.JWT_SECRETE as string;
 //   return jwt.sign(user, passPhrase, { expiresIn: '7d' });
 // };
+exports.createAccountSchema = joi_1.default.object().keys({
+    bankName: joi_1.default.string().required(),
+    accNumber: joi_1.default.string().trim().required().pattern(/^[0-9]+$/).length(10),
+    accName: joi_1.default.string().required(),
+    wallet: joi_1.default.number().min(0)
+});
 exports.options = {
     abortEarly: false,
     errors: {

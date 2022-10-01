@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.UpdateWallet = exports.LogoutUser = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -13,6 +13,7 @@ const mailSender_1 = require("./mailSender");
 const emailService_1 = require("./emailService");
 const utils_1 = require("../utils/utils");
 const emailVerification_1 = require("../email/emailVerification");
+const account_1 = require("../models/account");
 const secret = process.env.JWT_SECRET;
 async function RegisterUser(req, res, next) {
     const id = (0, uuid_1.v4)();
@@ -48,6 +49,7 @@ async function RegisterUser(req, res, next) {
             email: req.body.email,
             phonenumber: req.body.phonenumber,
             password: passwordHash,
+            wallet: 0,
             isVerified: false,
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
         });
@@ -118,7 +120,7 @@ async function LoginUser(req, res, next) {
             const validUser = await bcryptjs_1.default.compare(req.body.password, password);
             if (!validUser) {
                 return res.status(401).json({
-                    msg: 'Wrong Password!'
+                    msg: 'Password do not match'
                 });
             }
             if (validUser) {
@@ -230,15 +232,14 @@ async function Updateprofile(req, res, next) {
         const updaterecord = await record?.update({
             firstname,
             lastname,
-            phonenumber,
-            email
+            phonenumber
         });
         res.status(201).json({
             message: 'you have successfully updated your profile',
             record: updaterecord
         });
     }
-    catch (err) {
+    catch (error) {
         res.status(500).json({
             msg: 'failed to update profile',
             route: '/update/:id'
@@ -246,3 +247,97 @@ async function Updateprofile(req, res, next) {
     }
 }
 exports.Updateprofile = Updateprofile;
+async function getUsers(req, res, next) {
+    try {
+        const id = req.params.id;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        res.status(200).json({
+            record
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: 'failed to get user',
+            route: '/user/:id'
+        });
+    }
+}
+exports.getUsers = getUsers;
+async function getUserRecords(req, res, next) {
+    try {
+        const userId = req.user.id;
+        const record = (await user_1.UserInstance.findOne({
+            where: { id: userId },
+            include: [{ model: account_1.AccountInstance, as: "accounts" }],
+        }));
+        res.status(200).json({
+            record: record,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            msg: "failed to login",
+            route: "/login",
+        });
+    }
+}
+exports.getUserRecords = getUserRecords;
+async function LogoutUser(req, res, next) {
+    try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('Email');
+        localStorage.removeItem('id');
+        const link = `${process.env.FRONTEND_URL}`;
+        res.redirect(`${link}/login`);
+    }
+    catch (err) {
+        res.status(500).json({
+            msg: "failed to logout",
+            route: "/logout",
+        });
+    }
+}
+exports.LogoutUser = LogoutUser;
+async function UpdateWallet(req, res) {
+    try {
+        const { amount, email } = req.body;
+        console.log(amount);
+        const validateResult = validation_1.updateWalletSchema.validate(req.body.email, validation_1.options);
+        console.log(validateResult);
+        if (validateResult.error) {
+            return res.status(400).json({
+                Error: validateResult.error.details[0].message
+            });
+        }
+        const record = await user_1.UserInstance.findOne({ where: { email } });
+        const wallet = record?.getDataValue("wallet");
+        console.log(`this is my wallet ${wallet}`);
+        const updatedWallet = wallet + amount;
+        if (!record) {
+            return res.status(404).json({
+                Error: "Cannot Find User",
+            });
+        }
+        const updaterecord = await record?.update({
+            wallet: updatedWallet
+        });
+        if (updaterecord) {
+            const email = req.body.email;
+            const subject = "Wallet Update Notification";
+            const username = req.body.username;
+            const html = (0, mailSender_1.emailWalletView)();
+            await (0, emailService_1.sendMail)(html, email, subject, username);
+        }
+        return res.status(201).json({
+            message: 'The user account has been successfully credited',
+            record: updaterecord
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: 'Failed to credit user Account',
+            route: '/update-wallet'
+        });
+    }
+}
+exports.UpdateWallet = UpdateWallet;

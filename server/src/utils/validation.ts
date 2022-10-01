@@ -26,11 +26,14 @@ export const loginSchema = Joi.object().keys({
 export const updateProfileSchema = Joi.object().keys({
   firstname: Joi.string().trim(),
   lastname: Joi.string().trim(),
-  phonenumber:Joi.string()
-  .length(11)
-  .pattern(/^[0-9]+$/),
+  phonenumber: Joi.string()
+    .length(11)
+    .pattern(/^[0-9]+$/),
   email: Joi.string().email()
 })
+
+export const updateWalletSchema = Joi.string().email()
+
 
 //Generate Token
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
@@ -56,6 +59,12 @@ export const changePasswordSchema = Joi.object()
 //   const passPhrase = process.env.JWT_SECRETE as string;
 //   return jwt.sign(user, passPhrase, { expiresIn: '7d' });
 // };
+export const createAccountSchema = Joi.object().keys({
+  bankName: Joi.string().required(),
+  accNumber: Joi.string().trim().required().pattern(/^[0-9]+$/).length(10),
+  accName: Joi.string().required(),
+  wallet: Joi.number().min(0)
+});
 
 export const options = {
   abortEarly: false,

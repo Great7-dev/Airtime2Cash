@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '../config/database.config';
+import { AccountInstance } from './account';
 
 interface UserAtrribute {
   id: string;
@@ -9,10 +10,13 @@ interface UserAtrribute {
   email: string;
   phonenumber: number;
   password: string;
+  wallet?: number;
   isVerified: boolean;
   avatar: string;
 }
-export class UserInstance extends Model<UserAtrribute> {}
+export class UserInstance extends Model<UserAtrribute> {
+  wallet: any;
+}
 
 UserInstance.init(
   {
@@ -46,6 +50,10 @@ UserInstance.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    wallet: {
+      type: DataTypes.NUMBER,
+      defaultValue: 0,
+    },
     isVerified: {
       type: DataTypes.BOOLEAN,
       allowNull: false
@@ -60,3 +68,7 @@ UserInstance.init(
     tableName: 'userTable'
   }
 );
+
+UserInstance.hasMany(AccountInstance, { foreignKey: "userId", as: "accounts" });
+
+AccountInstance.belongsTo(UserInstance, { foreignKey: "userId", as: "user" });
