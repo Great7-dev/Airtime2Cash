@@ -35,6 +35,7 @@ export const updateProfileSchema = Joi.object().keys({
 export const updateWalletSchema = Joi.string().email()
 
 
+
 //Generate Token
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
   const pass = process.env.JWT_SECRET as string;
@@ -65,6 +66,13 @@ export const createAccountSchema = Joi.object().keys({
   accName: Joi.string().required(),
   wallet: Joi.number().min(0)
 });
+
+export const sellAirtimeSchema = Joi.object().keys({
+  userID: Joi.string(),
+  airtimeAmount: Joi.number().required(),
+  network: Joi.string().required(),
+  phoneNumber: Joi.string().required().pattern(/^[0-9]+$/).length(11)
+})
 
 export const options = {
   abortEarly: false,

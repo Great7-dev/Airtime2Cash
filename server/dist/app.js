@@ -11,7 +11,7 @@ const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
 const user_1 = __importDefault(require("./routes/user"));
 const account_1 = __importDefault(require("./routes/account"));
-database_config_1.default.sync()
+database_config_1.default.sync({ force: false })
     .then(() => {
     console.log('Database conneted successfully');
 })
@@ -23,6 +23,8 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: false }));
+//app.use(express.static(path.join("public")));
+// app.use('/user', usersRouter);
 app.use('/users', user_1.default);
 app.use('/account', account_1.default);
 app.use(function (req, res, next) {

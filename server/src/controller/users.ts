@@ -10,6 +10,7 @@ import { sendMail, sendWalletMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
 import { AccountInstance } from "../models/account";
+import { defaultValueSchemable } from "sequelize/types/utils";
 
 const secret = process.env.JWT_SECRET as string
 
@@ -55,9 +56,9 @@ export async function RegisterUser(
       email: req.body.email,
       phonenumber: req.body.phonenumber,
       password: passwordHash,
-      wallet: 0,
       isVerified: false,
-      avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
+      avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+      wallet: 0
     })
     if (record) {
       const email = req.body.email as string;
@@ -90,6 +91,26 @@ export async function verifyUser(token: string) {
 }
 
 
+// export async function getUser(
+//   req: Request | any,
+//   res: Response,
+//   next: NextFunction
+// ) {
+//   try {
+//     const id = req.user.id;
+//     //const { id } = req.params;
+//     const record = await UserInstance.findOne({ where: { id } });
+
+//     res.status(200).json({ "record": record });
+//   } catch (error) {
+//     res.status(500).json({
+//       msg: "Invalid User",
+//       route: "/read/:id",
+//     });
+//   }
+// }
+
+
 export async function getUser(
   req: Request,
   res: Response,
@@ -114,13 +135,16 @@ export async function LoginUser(
 ) {
   try {
     const validationResult = loginSchema.validate(req.body, options);
+
     if (validationResult.error) {
       return res.status(400).json({
         Error: validationResult.error.details[0].message
       });
     }
+
     const userEmail = req.body.email;
     const userName = req.body.username;
+
     const record = userEmail
       ? ((await UserInstance.findOne({
         where: [{ email: userEmail }]
@@ -236,7 +260,7 @@ export async function changePassword(req: Request, res: Response) {
 export async function Updateprofile(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params
-    const { firstname, lastname, phonenumber, email } = req.body
+    const { firstname, lastname, phonenumber } = req.body
     const validateResult = updateProfileSchema.validate(req.body, options)
     if (validateResult.error) {
       return res.status(400).json({
@@ -309,7 +333,7 @@ export async function getUserRecords(
 }
 
 
-export async function LogoutUser(
+export default async function LogoutUser(
   req: Request,
   res: Response,
   next: NextFunction
@@ -335,12 +359,8 @@ export async function LogoutUser(
 export async function UpdateWallet(req: Request, res: Response) {
   try {
     const { amount, email } = req.body
-    console.log(amount);
-
-
 
     const validateResult = updateWalletSchema.validate(req.body.email, options)
-    console.log(validateResult);
     if (validateResult.error) {
       return res.status(400).json({
         Error: validateResult.error.details[0].message
@@ -348,7 +368,6 @@ export async function UpdateWallet(req: Request, res: Response) {
     }
     const record = await UserInstance.findOne({ where: { email } })
     const wallet = record?.getDataValue("wallet")
-    console.log(`this is my wallet ${wallet}`)
     const updatedWallet = wallet + amount
     if (!record) {
       return res.status(404).json({

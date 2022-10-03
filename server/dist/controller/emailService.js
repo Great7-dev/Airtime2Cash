@@ -74,3 +74,8 @@ async function sendWalletMail(html, mail, subject, username) {
     }
 }
 exports.sendWalletMail = sendWalletMail;
+// })
+// } catch (err) {
+//    return err
+//     }
+//   }

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn
+  /usr/local/bin/node /usr/local/bin/yarn start
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/dec/Library/Application Support/cloud-code/installer/google-cloud-sdk/bin
@@ -84,7 +84,7 @@ npm manifest:
   }
   =======
   }
-  >>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+  >>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 
 yarn manifest: 
   No manifest

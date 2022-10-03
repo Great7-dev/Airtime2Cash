@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateWallet = exports.LogoutUser = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.UpdateWallet = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -49,9 +49,9 @@ async function RegisterUser(req, res, next) {
             email: req.body.email,
             phonenumber: req.body.phonenumber,
             password: passwordHash,
-            wallet: 0,
             isVerified: false,
-            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
+            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+            wallet: 0
         });
         if (record) {
             const email = req.body.email;
@@ -82,6 +82,23 @@ async function verifyUser(token) {
     return await user.update({ isVerified: true });
 }
 exports.verifyUser = verifyUser;
+// export async function getUser(
+//   req: Request | any,
+//   res: Response,
+//   next: NextFunction
+// ) {
+//   try {
+//     const id = req.user.id;
+//     //const { id } = req.params;
+//     const record = await UserInstance.findOne({ where: { id } });
+//     res.status(200).json({ "record": record });
+//   } catch (error) {
+//     res.status(500).json({
+//       msg: "Invalid User",
+//       route: "/read/:id",
+//     });
+//   }
+// }
 async function getUser(req, res, next) {
     try {
         const { id } = req.params;
@@ -216,7 +233,7 @@ exports.changePassword = changePassword;
 async function Updateprofile(req, res, next) {
     try {
         const { id } = req.params;
-        const { firstname, lastname, phonenumber, email } = req.body;
+        const { firstname, lastname, phonenumber } = req.body;
         const validateResult = validation_1.updateProfileSchema.validate(req.body, validation_1.options);
         if (validateResult.error) {
             return res.status(400).json({
@@ -297,13 +314,11 @@ async function LogoutUser(req, res, next) {
         });
     }
 }
-exports.LogoutUser = LogoutUser;
+exports.default = LogoutUser;
 async function UpdateWallet(req, res) {
     try {
         const { amount, email } = req.body;
-        console.log(amount);
         const validateResult = validation_1.updateWalletSchema.validate(req.body.email, validation_1.options);
-        console.log(validateResult);
         if (validateResult.error) {
             return res.status(400).json({
                 Error: validateResult.error.details[0].message
@@ -311,7 +326,6 @@ async function UpdateWallet(req, res) {
         }
         const record = await user_1.UserInstance.findOne({ where: { email } });
         const wallet = record?.getDataValue("wallet");
-        console.log(`this is my wallet ${wallet}`);
         const updatedWallet = wallet + amount;
         if (!record) {
             return res.status(404).json({

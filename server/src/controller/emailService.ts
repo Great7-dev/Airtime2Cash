@@ -73,3 +73,8 @@ export async function sendWalletMail(html: string, mail: string, subject: string
         return err
     }
 }
+    // })
+    // } catch (err) {
+    //    return err
+    //     }
+    //   }
