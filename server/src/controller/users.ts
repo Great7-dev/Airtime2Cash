@@ -21,6 +21,7 @@ export async function RegisterUser(
   next: NextFunction
 ) {
     const id = uuidv4();
+
     try {
         const ValidateUser = validationSchema.validate(req.body,options);
         if (ValidateUser.error) {
@@ -66,7 +67,7 @@ export async function RegisterUser(
             const html:string = emailVerificationView(token)
             await sendMail(html,email,subject,username)
             
-        res.json({msg:"User created successfully",record})
+        res.json({msg:"User created successfully",record, token})
         }  
     } catch (error) {
       console.log(error);
@@ -86,7 +87,8 @@ export async function verifyUser(token: string) {
   if (!user) throw new Error('user not found');
 
   return await user.update({ isVerified: true });
-}
+} 
+
 
 export async function getUser(
   req: Request|any,
@@ -240,7 +242,7 @@ export async function changePassword(req: Request, res: Response) {
 export async function Updateprofile(req:Request, res:Response, next:NextFunction){
     try{
       const { id } = req.params
-      const {firstname,lastname,phonenumber} = req.body
+      const {firstname,lastname,phonenumber, wallet} = req.body
       const validateResult = updateProfileSchema.validate(req.body,options)
         if(validateResult.error){
             return res.status(400).json({
@@ -254,21 +256,41 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
             })   
     }
     const updaterecord = await record?.update({
-      firstname,
-      lastname,
-      phonenumber
-    });
-    res.status(201).json({
-      message: 'you have successfully updated your profile',
-      record: updaterecord
-    });
-  } catch (err) {
-    res.status(500).json({
-      msg: 'failed to update profile',
-      route: '/update/:id'
-    });
+        firstname,
+        lastname,
+        phonenumber,
+        wallet
+     })
+     res.status(201).json({
+            message: 'you have successfully updated your profile',
+            record: updaterecord 
+         })
+        
+    }catch(error){
+           res.status(500).json({
+            msg:'failed to update profile',
+            route: '/update/:id'
+
+           })
+    }
   }
-}
+
+export async function getUsers(req:Request, res:Response, next:NextFunction){
+    try{
+      const id = req.params.id
+      const record = await UserInstance.findOne({where:{id}})
+      res.status(200).json({
+        record
+      })
+    }catch(error){
+      res.status(500).json({
+        msg:'failed to get user',
+        route: '/user/:id'
+
+       })
+    }
+  }
+
 
 export async function getUserRecords(
   req: Request|any,
@@ -289,6 +311,26 @@ export async function getUserRecords(
     res.status(500).json({
       msg: "failed to login",
       route: "/login",
+    });
+  }
+}
+
+
+export async function LogoutUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+   localStorage.removeItem('token');
+   localStorage.removeItem('Email');
+   localStorage.removeItem('id');
+   const link = `${process.env.FRONTEND_URL}`;
+   res.redirect(`${link}/login`)
+  } catch (err) {
+    res.status(500).json({
+      msg: "failed to logout",
+      route: "/logout",
     });
   }
 }

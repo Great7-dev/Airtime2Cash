@@ -44,6 +44,10 @@ UserInstance.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false
     },
+    wallet: {
+        type: sequelize_1.DataTypes.NUMBER,
+        defaultValue: 0
+    },
     avatar: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false

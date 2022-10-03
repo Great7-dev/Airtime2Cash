@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserRecords = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.LogoutUser = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -59,7 +59,7 @@ async function RegisterUser(req, res, next) {
             const token = jsonwebtoken_1.default.sign({ id }, secret, { expiresIn: '7d' });
             const html = (0, mailSender_1.emailVerificationView)(token);
             await (0, emailService_1.sendMail)(html, email, subject, username);
-            res.json({ msg: "User created successfully", record });
+            res.json({ msg: "User created successfully", record, token });
         }
     }
     catch (error) {
@@ -216,7 +216,7 @@ exports.changePassword = changePassword;
 async function Updateprofile(req, res, next) {
     try {
         const { id } = req.params;
-        const { firstname, lastname, phonenumber } = req.body;
+        const { firstname, lastname, phonenumber, wallet } = req.body;
         const validateResult = validation_1.updateProfileSchema.validate(req.body, validation_1.options);
         if (validateResult.error) {
             return res.status(400).json({
@@ -232,14 +232,15 @@ async function Updateprofile(req, res, next) {
         const updaterecord = await record?.update({
             firstname,
             lastname,
-            phonenumber
+            phonenumber,
+            wallet
         });
         res.status(201).json({
             message: 'you have successfully updated your profile',
             record: updaterecord
         });
     }
-    catch (err) {
+    catch (error) {
         res.status(500).json({
             msg: 'failed to update profile',
             route: '/update/:id'
@@ -247,6 +248,22 @@ async function Updateprofile(req, res, next) {
     }
 }
 exports.Updateprofile = Updateprofile;
+async function getUsers(req, res, next) {
+    try {
+        const id = req.params.id;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        res.status(200).json({
+            record
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: 'failed to get user',
+            route: '/user/:id'
+        });
+    }
+}
+exports.getUsers = getUsers;
 async function getUserRecords(req, res, next) {
     try {
         const userId = req.user.id;
@@ -266,3 +283,19 @@ async function getUserRecords(req, res, next) {
     }
 }
 exports.getUserRecords = getUserRecords;
+async function LogoutUser(req, res, next) {
+    try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('Email');
+        localStorage.removeItem('id');
+        const link = `${process.env.FRONTEND_URL}`;
+        res.redirect(`${link}/login`);
+    }
+    catch (err) {
+        res.status(500).json({
+            msg: "failed to logout",
+            route: "/logout",
+        });
+    }
+}
+exports.LogoutUser = LogoutUser;

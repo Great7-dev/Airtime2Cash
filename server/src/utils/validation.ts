@@ -28,7 +28,8 @@ export const updateProfileSchema = Joi.object().keys({
   lastname: Joi.string().trim(),
   phonenumber:Joi.string()
   .length(11)
-  .pattern(/^[0-9]+$/)
+  .pattern(/^[0-9]+$/),
+  wallet: Joi.number()
 })
 
 //Generate Token

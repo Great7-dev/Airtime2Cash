@@ -12,6 +12,7 @@ interface UserAtrribute {
   password: string;
   isVerified: boolean;
   avatar: string;
+  wallet?:number
 }
 export class UserInstance extends Model<UserAtrribute> {}
 
@@ -50,6 +51,10 @@ UserInstance.init(
     isVerified: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    wallet:{
+      type:DataTypes.NUMBER, 
+      defaultValue:0
     },
     avatar: {
       type: DataTypes.STRING,

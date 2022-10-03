@@ -30,7 +30,8 @@ exports.updateProfileSchema = joi_1.default.object().keys({
     lastname: joi_1.default.string().trim(),
     phonenumber: joi_1.default.string()
         .length(11)
-        .pattern(/^[0-9]+$/)
+        .pattern(/^[0-9]+$/),
+    wallet: joi_1.default.number()
 });
 //Generate Token
 const generateToken = (user) => {
