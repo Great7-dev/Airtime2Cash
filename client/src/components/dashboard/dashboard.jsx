@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import "./dashboard.css";
+//import "./dashboard.css";
 import Tab from "./Tab";
 import Navbar from "../Navbar/NavBar";
 // import TransactionHistory from "../transaction-history/TransactionHistory";
@@ -51,10 +51,10 @@ function Dashboard() {
           ) : (
             <h1>{active}</h1>
           )}
-          <div className="l">
+          <div className="ul">
             <div className="nav">
               {menu.map((item, index) => (
-                <div onClick={() => setActive(item)}>{item}</div>
+                <div onClick={() => setActive(item)} >{item}</div>
               ))}
             </div>
             <div className="outlet">

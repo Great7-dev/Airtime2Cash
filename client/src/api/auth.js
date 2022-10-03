@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 // import {useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
 const client = axios.create({
@@ -55,11 +56,31 @@ export const getUser = async(id) => {
 
 export const login = async(data) => {
     try {
-        const res = await client.post("/login", {
-            email: data.email,
-            password: data.password,
-        });
-        return res.data;
+        // eslint-disable-next-line no-useless-escape
+        const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, "gm");
+        const isValidEmail = emailRegex.test(data.email);
+
+        if (data.email === "" || data.password === "") {
+            return toast.error("Email or password cannot be empty");
+        }
+        if (isValidEmail) {
+
+            const res = await client.post("/login", {
+                email: data.email,
+                password: data.password,
+            });
+            return res.data;
+        } else {
+            console.log(data.email)
+            const res = await client.post("/login", {
+                username: data.email,
+                password: data.password,
+            });
+            console.log(res)
+            return res.data;
+        }
+
+
     } catch (error) {
         return error;
     }
@@ -122,6 +143,50 @@ export const getUserBanks = async() => {
     } catch (error) {
         console.log(error)
     }
+};
+
+
+export const getSingleUser = async(id) => {
+
+    try {
+
+        const token = localStorage.getItem("token");
+
+
+
+        const response = await client.get(`/userrecords`, {
+
+            headers: { authorization: `Bearer ${token}` },
+
+        });
+
+        return response;
+
+    } catch (error) {
+
+        return error;
+
+    }
+
+};
+export const deleteSingleInfo = async(id) => {
+
+    try {
+
+        const response = await client2.delete(
+
+            `/account/deletebankaccount/${id}`
+
+        );
+
+        return response;
+
+    } catch (error) {
+
+        return error;
+
+    }
+
 };
 
 

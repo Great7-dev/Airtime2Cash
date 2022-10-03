@@ -67,6 +67,10 @@ const handleChange = (selectedOption) => {
     // ERROR MESSAGE
     const renderError = (message) => <p className='is_danger' style={{color:'red'}}>{message}</p>
 
+    const handleSubmit=(e)=> {
+      e.preventDefault();
+    }
+
   return (
     <WithdrawStyle>
       <div className="sellAirtime-header">
@@ -89,7 +93,8 @@ const handleChange = (selectedOption) => {
             onChange={handleChange}
             options={bankOptions}
             placeholder="Select Account"
-ccount            name="Network"
+            name="Network"
+            
           
           />
 
@@ -100,8 +105,9 @@ ccount            name="Network"
             type='text'
             placeholder='BabatundeOla'
             name='account_name'
-            className='withdraw_input_background'
+            
             defaultValue={formData.accName}
+            disabled
             />
           <ErrorMessage name='account_name' render={renderError} />
           
@@ -112,7 +118,7 @@ ccount            name="Network"
           className='withdraw_input_background withdraw_input'
           name='accountNumber'
           defaultValue={formData.accNumber}
-
+          disabled
           />
           <ErrorMessage name='accountNumber' render={renderError} />
           <label htmlFor="">Amount</label>
@@ -135,7 +141,7 @@ ccount            name="Network"
           render={renderError}
           />
           
-          <button type="submit" className="btnnn">
+          <button type="submit" className="btnnn" onClick={handleSubmit}>
             Withdraw
           </button>
         </Form>

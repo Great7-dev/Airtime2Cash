@@ -42,10 +42,23 @@ export const SellAirtimeFormStyle = styled.form `
     padding: 1rem;
     margin: 8px 0px 16px 0px;
     opacity: 0.3;
-    font:14px;
+    font:Inter;
+    font-weight:400;
+    font-style:normal;
+    font-size:14px;
+    line-height:16.94px;
+    font-color:#C4C4C4;
   }
   .special{
     background-color: rgba(0, 0, 0, 0.04);
+    border-style: solid;
+    border-color: #fff;
+    font:Inter;
+    font-weight:400;
+    font-style:normal;
+    font-size:14px;
+    line-height:16.94px;
+    font-color:#C4C4C4;
   }
   label{
     font-family: "Inter";
@@ -74,14 +87,14 @@ export const SellAirtimeFormStyle = styled.form `
   }
   .selections {
     outline: none;
-    max-width: 100%;
-    /* border: 1px solid red;
-    height: 40%; */
-    /* width: 100%; */
-    /* display: flex;
-    justify-content: space-between; */
-    /* padding: 1rem;
-    margin: 8px 0px 16px 0px; */
+    width: 100%;
+    text-align:justify;
+    font:Inter;
+    font-weight:400;
+    font-style:normal;
+    font-size:14px;
+    line-height:16.94px;
+    font-color:#C4C4C4;
   }
   .btnnn {
     cursor: pointer;
@@ -188,6 +201,18 @@ export const SellAirtimeFormStyle = styled.form `
     .viewacctselect{
       margin-top: 0;
     }
+  }
+  @media (max-width: 280px) {
+    
+    // margin: 10px 10px 10px 10px;
+    width: 100%;
+   label{
+    margin-left:15px;
+   }
+   .sel{
+    margin-left:60px;
+   }
+
   }
 `;
 

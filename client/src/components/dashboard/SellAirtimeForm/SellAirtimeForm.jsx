@@ -4,31 +4,46 @@ import Select from "react-select";
 import { networkProvidersOptions } from "../../../utils/networkproviders";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import InputField from "../../utils/Input/Input";
 
 const SellAirtimeForm = ({ ...props }) => {
 
 
 
-  const [network, setNetwork] = useState("");
+  const [network, setNetwork] = useState({});
   const [phoneNumber, setphoneNumber] = useState("");
   const [amountToSell, setamountToSell] = useState("");
   const [amountToReceive, setamountToReceive] = useState("");
   const [ussd, setussd] = useState("");
   const [destinationPhoneNumber, setdestinationPhoneNumber]=useState("");
- 
+  
 
+  
+ 
+  const handleChange = (selectedOption) => {
+        
+    setNetwork({...network, name: selectedOption.network.name, number: selectedOption.network.number})
+
+
+    console.log("handleChange")
+  }
   const sellAirtime = async (network, phoneNumber,amountToSell,amountToReceive,ussd,destinationPhoneNumber) => {
     try {
 
       // eslint-disable-next-line no-useless-escape
       
 
+     
+     
       
-      
-      if (network === "" || phoneNumber === ""||amountToSell===""||amountToReceive===""||ussd===""||destinationPhoneNumber==="") {
+      if ( phoneNumber === ""||amountToSell===""||amountToReceive===""||ussd==="") {
         return toast.error("No field should be left empty, please fill all fields");
       } 
 
+
+toast.success("Airtime successfully sold")
+console.log(phoneNumber,amountToSell,amountToReceive,ussd)
         
   } catch (error) {
       toast.error(error);
@@ -40,6 +55,7 @@ const SellAirtimeForm = ({ ...props }) => {
     e.preventDefault();
 
     sellAirtime(network, phoneNumber,amountToSell,amountToReceive,ussd,destinationPhoneNumber);
+
   };
 
 
@@ -60,59 +76,64 @@ const SellAirtimeForm = ({ ...props }) => {
             options={networkProvidersOptions}
             placeholder="Select Network"
             name="network"
-            change={(e) => setNetwork(e.target.value)}
-            //value={network}
+            change={handleChange}
+            value={network.name}
           
           />
-
-          <label htmlFor="">Phone Number</label>
-          <input
-            type="text"
-            placeholder="Phone Number"
-            name="phoneNumber"
-            //value={phoneNumber}
+          
+                <InputField
+                  type="input"
+                  class="input"
+                  label="Phone Number"
+                  placeholder="Phone Number"
+                  name="phoneNumber"
                   change={(e) => setphoneNumber(e.target.value)}
-            
-          />
-          <label htmlFor="">Amount to Sell</label>
-          <input
-            type="text"
-            placeholder="NGN"
-            name="amountToSell"
-            //value={amountToSell}
+                  value={phoneNumber}
+                />
+
+
+              <InputField
+                  type="input"
+                  class="input"
+                  label="Amount to Sell"
+                  placeholder="NGN"
+                  name="amountToSell"
                   change={(e) => setamountToSell(e.target.value)}
-          
-          />
-          <label htmlFor="">USSD</label>
-          <input
-          class="special"
-            type="text"
-            placeholder="*780*amount*09088756433*5000#"
-            name="ussd"
-            //value={ussd}
+                  value={amountToSell}
+                />
+
+              <InputField
+                  type="input"
+                  class="input"
+                  label="USSD"
+                  placeholder="*780*amount*09088756433*5000#"
+                  name="ussd"
                   change={(e) => setussd(e.target.value)}
-            
-          />
-          <label htmlFor="">Amount to Receive</label>
-          <input
-          class="special"
-            type="text"
-            placeholder="NGN"
-            name="amountToReceive"
-            //value={amountToReceive}
-                  change={(e) => setamountToReceive(e.target.value)}
+                  value={ussd}
+                />
+
           
-          />
-          <label htmlFor="">Destination Phone Number</label>
-          <input
-          class="special"
-            type="text"
-            placeholder="Destination Phone Number"
-            name="destinationPhoneNumber"
-            //value={destinationPhoneNumber}
-                  change={(e) => setdestinationPhoneNumber(e.target.value)}
-            
-          />
+
+                <InputField
+                  type="input"
+                  class="input"
+                  label="Amount to Receive"
+                  placeholder="NGN"
+                  name="amountToReceive"
+                  change={(e) => setamountToReceive(e.target.value)}
+                  value={amountToReceive}
+                />          
+
+                <InputField
+                  type="input"
+                  class="input"
+                  label="Destination Phone Number"
+                  placeholder="Destination Phone Number"
+                  name="destinationPhoneNumber"
+              defaultValue={destinationPhoneNumber}
+              
+                />    
+
           <button type="submit" className="btnnn" onClick={handleSubmit}>
             Sell Airtime
           </button>

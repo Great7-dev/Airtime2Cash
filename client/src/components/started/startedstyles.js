@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Startedstyle = styled.div`
+export const Startedstyle = styled.div `
 width: 100%;
 display: flex;
 justify-content: space-between;
@@ -12,6 +12,7 @@ p{
     padding: 0;
 }
 .test {
+    margin-top:50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,6 +60,7 @@ border: none;
 }
 .navbar_logo{
     margin-right: 40px;
+    margin-top:90px
 }
 
 @media (max-width: 1290px) {
@@ -90,4 +92,3 @@ border: none;
     }
   }
 `;
-

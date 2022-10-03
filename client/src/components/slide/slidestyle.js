@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Slidestyle = styled.div`
+export const Slidestyle = styled.div `
   width: 80%;
   height: 300px;
   margin: 0px auto;

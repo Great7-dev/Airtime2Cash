@@ -39,7 +39,7 @@ export const Signup = ({
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const response = await signupHandler({
+        const res = await signupHandler({
                 firstname: user.firstname,
                 lastname: user.lastname,
                 username: user.username,
@@ -48,8 +48,8 @@ export const Signup = ({
                 password: user.password,
                 confirmpassword: user.confirmpassword
             })
-            console.log("RESPONSE", response);
-            if(response.status === 200){
+            console.log("RESPONSE", res);
+            if(res.status === 200){
                 Navigate("/login")
             }
             toast.success("User created successfully", {
@@ -58,8 +58,8 @@ export const Signup = ({
             setUser(initialValue)
 
           {
-            const E_error = response.data.Error;
-            const M_error = response.data.msg;
+            const E_error = res.data.Error;
+            const M_error = res.data.msg;
             if (E_error) {
                 toast.error(E_error, {
                     position: "bottom-center",
