@@ -10,14 +10,14 @@ const user_1 = require("../models/user");
 async function auth(req, res, next) {
     try {
         const authorization = req.headers.authorization;
-        if (!authorization && !req.cookies.mytoken) {
+        if (!authorization && !req.cookies.token) {
             res.status(401);
             res.json({
                 Error: 'kindly sign in as a user'
             });
         }
         //hide part of the token 
-        const token = authorization?.slice(7, authorization.length) || req.cookies.mytoken;
+        const token = authorization?.slice(7, authorization.length) || req.cookies.token;
         let verified = jsonwebtoken_1.default.verify(token, secret);
         if (!verified) {
             res.status(401);

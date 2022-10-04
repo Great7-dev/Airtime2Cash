@@ -83,7 +83,7 @@ async function verifyUser(token) {
 exports.verifyUser = verifyUser;
 async function getUser(req, res, next) {
     try {
-        const id = req.user.id;
+        const id = req.params.id;
         //const { id } = req.params;
         const record = await user_1.UserInstance.findOne({ where: { id } });
         res.status(200).json({ "record": record });

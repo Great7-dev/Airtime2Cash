@@ -6,14 +6,14 @@ import { UserInstance } from '../models/user';
 export async function auth (req:Request | any,res:Response,next:NextFunction){
   try{
      const authorization = req.headers.authorization;
-     if(!authorization && !req.cookies.mytoken){
+     if(!authorization && !req.cookies.token){
          res.status(401)
          res.json({
              Error:'kindly sign in as a user'
          })
      }
      //hide part of the token 
-     const token = authorization?.slice(7,authorization.length) as string || req.cookies.mytoken
+     const token = authorization?.slice(7,authorization.length) as string || req.cookies.token
      let verified = jwt.verify(token, secret);
  
      if(!verified){

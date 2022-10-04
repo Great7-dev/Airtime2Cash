@@ -95,7 +95,7 @@ export async function getUser(
   next: NextFunction
 ) {
   try {
-    const id=req.user.id;
+    const id=req.params.id;
     //const { id } = req.params;
     const record = await UserInstance.findOne({ where: { id } });
 
