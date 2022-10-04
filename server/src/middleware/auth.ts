@@ -15,7 +15,7 @@ export async function auth (req:Request | any,res:Response,next:NextFunction){
      }
      //hide part of the token 
      const token = authorization?.slice(7,authorization.length) as string || req.cookies.mytoken
-     let verified = jwt.verify(token, secret);
+     const verified = jwt.verify(token, secret);
  
      if(!verified){
          res.status(401)

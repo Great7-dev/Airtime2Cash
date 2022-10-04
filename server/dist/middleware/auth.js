@@ -18,7 +18,7 @@ async function auth(req, res, next) {
         }
         //hide part of the token 
         const token = authorization?.slice(7, authorization.length) || req.cookies.mytoken;
-        let verified = jsonwebtoken_1.default.verify(token, secret);
+        const verified = jsonwebtoken_1.default.verify(token, secret);
         if (!verified) {
             res.status(401);
             res.json({
