@@ -18,8 +18,8 @@ export function emailVerificationView(token: string): string {
 }
 
 
-export function transactionNotification( firstname:string, lastname:string,phonenumber:string,airtimeAmount:number,network:string): string {
-  const str =`${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network.`;
+export function transactionNotification( firstname:string, lastname:string,phonenumber:string,airtimeAmount:number,network:string,destinationPhoneNumber:string): string {
+  const str =`${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network to ${destinationPhoneNumber}.`;
             
 
   let temp = `

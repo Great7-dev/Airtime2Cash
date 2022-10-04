@@ -12,7 +12,8 @@ import userRouter from './routes/user';
 import accountRouter from './routes/account';
 
 
-db.sync({ force: false })
+//db.sync({ alter: true })
+db.sync({force:false})
   .then(() => {
     console.log('Database conneted successfully');
   })

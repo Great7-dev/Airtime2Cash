@@ -61,7 +61,8 @@ exports.createAccountSchema = joi_1.default.object().keys({
 exports.sellAirtimeSchema = joi_1.default.object().keys({
     airtimeAmount: joi_1.default.number().required(),
     network: joi_1.default.string().required(),
-    phoneNumber: joi_1.default.string().required().pattern(/^[0-9]+$/).length(11)
+    phoneNumber: joi_1.default.string().required().pattern(/^[0-9]+$/).length(11),
+    destinationPhoneNumber: joi_1.default.string().required().pattern(/^[0-9]+$/).length(11)
 });
 exports.options = {
     abortEarly: false,

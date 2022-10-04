@@ -97,8 +97,8 @@ export async function getUser(
   next: NextFunction
 ) {
   try {
-    const id=req.user.id;
-    //const { id } = req.params;
+    //const id=req.user.id;
+    const { id } = req.params;
     const record = await UserInstance.findOne({ where: { id } });
 
     res.status(200).json({"record":record});
@@ -149,7 +149,7 @@ export async function LoginUser(
       }
 
       if (validUser) {
-        res.cookie('authorization', token, {
+        res.cookie('mytoken', token, {
           httpOnly: true,
           maxAge: 1000 * 60 * 60 * 24
         });

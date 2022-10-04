@@ -39,6 +39,10 @@ SellAirtimeInstance.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
+    destinationPhoneNumber: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
+    },
     uStatus: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
