@@ -65,7 +65,8 @@ export const createAccountSchema = Joi.object().keys({
 export const sellAirtimeSchema = Joi.object().keys({
   airtimeAmount: Joi.number().required(),
   network: Joi.string().required(),
-  phoneNumber: Joi.string().required().pattern(/^[0-9]+$/).length(11)
+  phoneNumber: Joi.string().required().pattern(/^[0-9]+$/).length(11),
+  destinationPhoneNumber: Joi.string().required().pattern(/^[0-9]+$/).length(11)
 })
 
 export const options = {

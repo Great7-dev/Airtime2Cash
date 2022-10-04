@@ -11,7 +11,8 @@ const cors_1 = __importDefault(require("cors"));
 require("dotenv/config");
 const user_1 = __importDefault(require("./routes/user"));
 const account_1 = __importDefault(require("./routes/account"));
-database_config_1.default.sync({ alter: true })
+//db.sync({ alter: true })
+database_config_1.default.sync({ force: false })
     .then(() => {
     console.log('Database conneted successfully');
 })

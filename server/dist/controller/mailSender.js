@@ -19,8 +19,8 @@ function emailVerificationView(token) {
     return temp;
 }
 exports.emailVerificationView = emailVerificationView;
-function transactionNotification(firstname, lastname, phonenumber, airtimeAmount, network) {
-    const str = `${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network.`;
+function transactionNotification(firstname, lastname, phonenumber, airtimeAmount, network, destinationPhoneNumber) {
+    const str = `${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network to ${destinationPhoneNumber}.`;
     let temp = `
        <div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
        

@@ -6,7 +6,8 @@ import { UserInstance } from '../models/user';
 export async function auth (req:Request | any,res:Response,next:NextFunction){
   try{
      const authorization = req.headers.authorization;
-     if(!authorization && !req.cookies.mytoken){
+    
+     if(!authorization){
          res.status(401)
          res.json({
              Error:'kindly sign in as a user'

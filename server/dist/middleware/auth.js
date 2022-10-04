@@ -10,7 +10,7 @@ const user_1 = require("../models/user");
 async function auth(req, res, next) {
     try {
         const authorization = req.headers.authorization;
-        if (!authorization && !req.cookies.mytoken) {
+        if (!authorization) {
             res.status(401);
             res.json({
                 Error: 'kindly sign in as a user'

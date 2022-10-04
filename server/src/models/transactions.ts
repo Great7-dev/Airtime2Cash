@@ -10,6 +10,7 @@ interface SellAirtimeAttribute {
     airtimeAmountToReceive: number;
     network: string;
     phoneNumber: string;
+    destinationPhoneNumber:string;
     uStatus: string;
     aStatus:string;
     
@@ -45,6 +46,10 @@ SellAirtimeInstance.init({
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    destinationPhoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
     uStatus: {
         type: DataTypes.STRING,
