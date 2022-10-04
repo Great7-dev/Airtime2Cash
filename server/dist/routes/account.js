@@ -9,5 +9,7 @@ const auth_1 = require("../middleware/auth");
 const accounts_1 = require("../controller/accounts");
 router.post('/createbankaccount', auth_1.auth, accounts_1.CreateAccount);
 router.get('/getbankaccount/:id', accounts_1.getBankAccount);
-router.get('/deletebankaccount/:id', accounts_1.deleteBankAccount);
+router.delete('/deletebankaccount/:id', accounts_1.deleteBankAccount);
+router.post('/sellairtime', auth_1.auth, accounts_1.sellAirtime);
+router.post('/withdraw', accounts_1.withdraw);
 exports.default = router;
