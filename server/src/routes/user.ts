@@ -4,5 +4,6 @@ const router = express.Router()
 import { RegisterUser } from '../controller/users'
 
 
-router.post('/create', RegisterUser)    
+router.post('/create', RegisterUser)   
+ 
 export default router;

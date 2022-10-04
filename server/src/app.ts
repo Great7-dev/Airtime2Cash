@@ -6,6 +6,7 @@ import logger from "morgan";
 import db from './config/database.config';
 import cors from 'cors';
 import userRouter from "./routes/user";
+import uuvid from 'uuid'
 
 
 
@@ -25,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
    app.use("/users", userRouter)
-
+  app.use()
 
 
 app.use(function (req, res, next) {
@@ -33,7 +34,7 @@ app.use(function (req, res, next) {
 });
 
 
-const port = 3000;
+const port = 5555;
 
 app.listen(port, () => {
   console.log(`app listening on ${port}`);
