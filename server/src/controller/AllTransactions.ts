@@ -1,13 +1,7 @@
-// import { Request, Response} from 'express';
-// import TransactionSchema from '../models/AllTransactionSchema';
+import { NextFunction, Request, Response} from 'express';
 
-// export async function AllTransactions(req: Request, res: Response) {
-//   {
-//     const AllTransactions = await TransactionSchema.findAll();
+import { SellAirtimeInstance } from '../models/transactions';
 
-//     res.send(AllTransactions);
-//   }
-// }
 
 
 export async function allTransactions(req: Request | any, res: Response, next: NextFunction) {
@@ -18,8 +12,8 @@ export async function allTransactions(req: Request | any, res: Response, next: N
     if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
       page = pageAsNumber;
     }
-    let size = 15;
-    if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 15) {
+    let size = 10;
+    if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
       size = sizeAsNumber;
     }
    const transactions = await SellAirtimeInstance.findAndCountAll({
