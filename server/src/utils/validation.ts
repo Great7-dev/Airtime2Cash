@@ -69,6 +69,10 @@ export const sellAirtimeSchema = Joi.object().keys({
   destinationPhoneNumber: Joi.string().required().pattern(/^[0-9]+$/).length(11)
 })
 
+export const updateStatusSchema=Joi.object().keys({
+  airtimeAmount: Joi.number().required(),
+})
+
 export const options = {
   abortEarly: false,
   errors: {
