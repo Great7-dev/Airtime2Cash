@@ -16,7 +16,7 @@ import SellAirtimeForm from "./SellAirtimeForm/SellAirtimeForm";
 function Dashboard() {
   const [formState, setFormState] = useRecoilState(bankFormState);
   const menu = [
-    "Sell airtime",
+    "Transfer",
     "Withdraw Balance",
     "Manage Bank Account",
     "Transaction History",
@@ -54,7 +54,7 @@ function Dashboard() {
           <div className="ul">
             <div className="nav">
               {menu.map((item, index) => (
-                <div onClick={() => setActive(item)} >{item}</div>
+                <div className="mock" onClick={() => setActive(item)} >{item}</div>
               ))}
             </div>
             <div className="outlet">

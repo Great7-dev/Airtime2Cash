@@ -54,7 +54,7 @@ const navigate = useNavigate()
          
           
       if(res.status === "ok"){
-      localStorage.setItem("name", res.record.firstname);
+      localStorage.setItem("firstname", res.record.firstname);
       localStorage.setItem("token", res.token);
       localStorage.setItem("id", res.record.id);
    

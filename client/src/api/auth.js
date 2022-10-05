@@ -46,8 +46,9 @@ export const getUser = async(id) => {
     id = localStorageId;
     try {
         const { data } = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}getuser/${id}`
-        );
+            `${process.env.REACT_APP_BASE_URL}getuser/${id}`, {
+                headers: { authorization: `Bearer ${token}` },
+            });
         return data;
     } catch (error) {
         return error;
@@ -115,6 +116,18 @@ export const responseHandler = async(id, data) => {
 export const signupHandler = async(data) => {
     try {
         const response = await client.post(`/create`, data);
+        return response;
+    } catch (error) {
+        return error;
+    }
+};
+
+export const postSellAirtime = async(data) => {
+    try {
+        const response = await client2.post(`/account/sellairtime`, data, {
+            headers: { authorization: `Bearer ${token}` },
+        });
+        console.log(response);
         return response;
     } catch (error) {
         return error;

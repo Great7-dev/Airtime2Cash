@@ -29,6 +29,14 @@ export const SellAirtimeFormStyle = styled.form `
     line-height: 17px;
     color: #de3d6d;
   }
+  .clkdecs{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    font-color: #4285F4;
+  }
   .sellairtimeform {
     display: flex;
     margin:auto;
@@ -37,18 +45,18 @@ export const SellAirtimeFormStyle = styled.form `
    
     font-size: 1rem;
   }
-  input {
-    width:100%;
-    padding: 1rem;
-    margin: 8px 0px 16px 0px;
-    opacity: 0.3;
-    font:Inter;
-    font-weight:400;
-    font-style:normal;
-    font-size:14px;
-    line-height:16.94px;
-    font-color:#C4C4C4;
-  }
+  // input {
+  //   width:100%;
+  //   padding: 1rem;
+  //   margin: 8px 0px 16px 0px;
+  //   opacity: 0.3;
+  //   font:Inter;
+  //   font-weight:400;
+  //   font-style:normal;
+  //   font-size:14px;
+  //   line-height:16.94px;
+  //   font-color:#C4C4C4;
+  // }
   .special{
     background-color: rgba(0, 0, 0, 0.04);
     border-style: solid;
@@ -68,6 +76,7 @@ export const SellAirtimeFormStyle = styled.form `
     line-height: 17px;
     color: #012A4A;
     width:100%;
+  
   }
   .btnnn {
     cursor: pointer;
@@ -164,6 +173,7 @@ export const SellAirtimeFormStyle = styled.form `
       margin: 0 1rem;
     }
     input {
+      font-color: #c4c4c4;
       display: flex;
       width: 250px;
       margin: 8px 4rem 16px 4rem;
@@ -212,6 +222,10 @@ export const SellAirtimeFormStyle = styled.form `
    .sel{
     margin-left:60px;
    }
+   input{
+    
+    margin-left:0px;
+   }
 
   }
 `;
@@ -239,3 +253,63 @@ export const CustomStyle = {
         color: "#c4c4c4",
     }),
 };
+
+export const Label = styled.label ` 
+    label {
+        float: left;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #012A4A;
+    }
+    
+`;
+
+
+export const ModalPopupStyle = styled.form `
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
+`;
