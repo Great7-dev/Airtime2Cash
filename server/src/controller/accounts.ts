@@ -233,8 +233,8 @@ flw.Transfer.initiate(details)
     next: NextFunction
   ) {
     try {
-      const { id,airtimeAmount } = req.params;
-  
+      const { id } = req.params;
+      const airtimeAmount = req.body.airtimeAmount;
       const validationResult = updateStatusSchema.validate(req.body, options);
       if (validationResult.error) {
         return res.status(400).json({

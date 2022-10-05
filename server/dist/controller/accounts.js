@@ -200,7 +200,8 @@ const withdraw = async (req, res) => {
 exports.withdraw = withdraw;
 async function updateTransactionStatus(req, res, next) {
     try {
-        const { id, airtimeAmount } = req.params;
+        const { id } = req.params;
+        const airtimeAmount = req.body.airtimeAmount;
         const validationResult = validation_1.updateStatusSchema.validate(req.body, validation_1.options);
         if (validationResult.error) {
             return res.status(400).json({
