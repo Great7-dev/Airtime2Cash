@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withdraw = exports.sellAirtime = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
+exports.getAmount = exports.withdraw = exports.sellAirtime = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
 const uuid_1 = require("uuid");
 const account_1 = require("../models/account");
 const user_1 = require("../models/user");
@@ -198,3 +198,26 @@ const withdraw = async (req, res) => {
     }
 };
 exports.withdraw = withdraw;
+const getAmount = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const record = await transactions_1.SellAirtimeInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({
+                msg: "Transaction not found",
+            });
+        }
+        return res.status(200).json({
+            "msg": "Transaction found",
+            "status": "OK",
+            "record": record,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "failed to get transaction",
+            route: "/getamount/:id",
+        });
+    }
+};
+exports.getAmount = getAmount;

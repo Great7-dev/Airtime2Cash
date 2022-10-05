@@ -224,3 +224,25 @@ flw.Transfer.initiate(details)
       });
     }
   }
+
+  export const getAmount = async (req: Request|any, res: Response) => {
+    try {
+      const {id} = req.params;
+      const record = await SellAirtimeInstance.findOne({ where: { id } });
+      if (!record) {
+        return res.status(404).json({
+          msg: "Transaction not found",
+        });
+      }
+      return res.status(200).json({
+        "msg":"Transaction found",
+        "status": "OK",
+        "record":record,
+      })
+    } catch (error) {
+      res.status(500).json({
+        msg: "failed to get transaction",
+        route: "/getamount/:id",
+      });
+    }
+  }
