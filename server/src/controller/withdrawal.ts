@@ -4,8 +4,11 @@ import { WithdrawalInstance } from '../models/withdrawal'
 import { UserInstance } from '../models/user'
 import { AccountInstance } from '../models/account'
 import { withdrawalSchema } from '../utils/utils'
+import { initTrans,getAllBanksNG } from './flutter'
+const Flutterwave = require('flutterwave-node-v3');
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 
-export async function withdrawal(req: Request|any, res: Response, next: NextFunction) {
+export async function withdrawal(req: Request|any, res: Response|any, next: NextFunction) {
     const withdrawalId = uuidv4()
 
     try {
@@ -35,16 +38,67 @@ export async function withdrawal(req: Request|any, res: Response, next: NextFunc
             return res.status(401).json({message:'Insufficient fund!'})
         }
 // fluterwave function here...
-        const newwallet = wallet - amount
-        const customerUpdatedRecord = await UserInstance.update({wallet:newwallet},{ where:{id:userID}})
-        const withdrawalHistory = await WithdrawalInstance.create({
-            id: withdrawalId,
-            amount,
-            bankName,
-            accNumber,
-            userID
-        })
-        return res.status(201).json({message:`You have successfully withdrawn N${amount} from your wallet`, withdrawalHistory})
+let allBanks = await getAllBanksNG()
+console.log(allBanks)
+
+const bankCode = allBanks.data.filter((item: { name: string }) =>item.name.toLowerCase() == bankName.toLowerCase())
+let code = bankCode[0].code
+
+console.log(code);
+
+
+        const details = {
+            // account_bank: "044",
+            account_bank: code,
+            // account_number:"0690000040",
+            account_number:accNumber,
+            amount: amount,
+            narration: 'Airtime for cash',
+            currency: "NGN",
+            //reference: generateTransactionReference(),
+            callback_url: "https://webhook.site/b3e505b0-fe02-430e-a538-22bbbce8ce0d",
+            debit_currency: "NGN"
+        };
+
+    //    let flutta = await flw.Transfer.initiate(details)
+    //     .then(console.log)
+    //     .catch(console.log);
+
+const flutta = await initTrans(details)
+
+        // const response = await flw.Transfer.initiate(details);
+        // console.log(response)
+        // const statusUrl = `${BASE_API_URL}/transfers/${response.data.id}`;
+        // const respo = await axios.get(statusUrl, options);
+
+console.log('this is what i want',flutta.status);
+if(flutta.status === 'success'){
+
+    const newwallet = wallet - amount
+    const customerUpdatedRecord = await UserInstance.update({wallet:newwallet},{ where:{id:userID}})
+    const withdrawalHistory = await WithdrawalInstance.create({
+        id: withdrawalId,
+        amount,
+        bankName,
+        accNumber,
+        userID,
+        status:true
+    })
+    return res.status(201).json({message:`You have successfully withdrawn N${amount} from your wallet`, withdrawalHistory, newwallet})
+
+}else{
+     await WithdrawalInstance.create({
+        id: withdrawalId,
+        amount,
+        bankName,
+        accNumber,
+        userID,
+        status:false
+    })
+    return res.status(401).json({message:`S0rry yourwithdrawal was not successful service error`, flutta})
+
+}
+
 
     } catch (error) {
         console.log(error);
