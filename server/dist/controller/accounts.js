@@ -241,6 +241,7 @@ async function cancelTransaction(req, res, next) {
             });
         }
         const updatedrecord = await record.update({
+            uStatus: "cancelled",
             aStatus: "cancelled",
         });
         res.status(201).json({
