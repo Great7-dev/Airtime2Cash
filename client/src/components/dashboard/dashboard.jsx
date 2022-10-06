@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import "./dashboard.css";
+//import "./dashboard.css";
 import Tab from "./Tab";
 import Navbar from "../Navbar/NavBar";
 // import TransactionHistory from "../transaction-history/TransactionHistory";
@@ -16,7 +16,7 @@ import SellAirtimeForm from "./SellAirtimeForm/SellAirtimeForm";
 function Dashboard() {
   const [formState, setFormState] = useRecoilState(bankFormState);
   const menu = [
-    "Sell airtime",
+    "Transfer",
     "Withdraw Balance",
     "Manage Bank Account",
     "Transaction History",
@@ -51,10 +51,10 @@ function Dashboard() {
           ) : (
             <h1>{active}</h1>
           )}
-          <div className="l">
+          <div className="ul">
             <div className="nav">
               {menu.map((item, index) => (
-                <div onClick={() => setActive(item)}>{item}</div>
+                <div className="mock" onClick={() => setActive(item)} >{item}</div>
               ))}
             </div>
             <div className="outlet">
