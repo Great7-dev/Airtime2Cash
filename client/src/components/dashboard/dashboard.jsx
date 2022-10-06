@@ -1,19 +1,15 @@
 import { useState } from "react";
-<<<<<<< HEAD
- import "./dashboard.css";
-=======
 //import "./dashboard.css";
 import Tab from "./Tab";
-import Navbar from "../Navbar/NavBar";
+import Navbar from "../NavBar/NavBar";
 // import TransactionHistory from "../transaction-history/TransactionHistory";
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
 import Bankform from "./Bankform/Bankform";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { bankFormState } from "../../atoms/bankFormAtom";
 import { useRecoilState } from "recoil";
 import { HeadingStyle } from "./ViewAccts/Viewacctstyle"
 
-import Navbar from "../NavBar/NavBar";
+// import Navbar from "../NavBar/NavBar";
 import Withdraw from "./WithdrawBalance/Withdraw"
 import WithdrawalHistory from "../../history/WithdrawalHistory";
 import SellAirtimeForm from "./SellAirtimeForm/SellAirtimeForm";
@@ -61,11 +57,7 @@ function Dashboard() {
           <div className="ul">
             <div className="nav">
               {menu.map((item, index) => (
-<<<<<<< HEAD
-                <div key={index} onClick={() => setActive(item)}>{item}</div>
-=======
                 <div className="mock" onClick={() => setActive(item)} >{item}</div>
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
               ))}
             </div>
             <div className="outlet">

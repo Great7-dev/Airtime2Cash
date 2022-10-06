@@ -149,39 +149,6 @@ const calcReceive=`NGN ${(parseFloat(parseInt(airtimeAmount)*0.7))}`;
                 />
 
           
-<<<<<<< HEAD
-          />
-          <label htmlFor="">USSD</label>
-          <input
-          className="special"
-            type="text"
-            placeholder="*780*amount*09088756433*5000#"
-            name="ussd"
-            //value={ussd}
-                  change={(e) => setussd(e.target.value)}
-            
-          />
-          <label htmlFor="">Amount to Receive</label>
-          <input
-          className="special"
-            type="text"
-            placeholder="NGN"
-            name="amountToReceive"
-            //value={amountToReceive}
-                  change={(e) => setamountToReceive(e.target.value)}
-          
-          />
-          <label htmlFor="">Destination Phone Number</label>
-          <input
-          className="special"
-            type="text"
-            placeholder="Destination Phone Number"
-            name="destinationPhoneNumber"
-            //value={destinationPhoneNumber}
-                  change={(e) => setdestinationPhoneNumber(e.target.value)}
-            
-          />
-=======
 
                 <InputField
                   type="input"
@@ -208,7 +175,6 @@ const calcReceive=`NGN ${(parseFloat(parseInt(airtimeAmount)*0.7))}`;
                 <p className="clkdecs">After transferring the airtime, click on the "Send” button below</p>
                 </Label>  
 
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
           <button type="submit" className="btnnn" onClick={handleSubmit}>
             Sent, Notify Admin
           </button>

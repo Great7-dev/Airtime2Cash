@@ -11,10 +11,6 @@ position: absolute;
 bottom: -11em;
 right: 1em;
 ul{
-<<<<<<< HEAD
-
-=======
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
   display:${props => props.display};
   flex-direction:column;
   justify-content: space-between;
@@ -25,11 +21,7 @@ ul{
   width: 10rem;
   border-radius: 10px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
-<<<<<<< HEAD
-  padding: 1em;
-=======
   padding:1em;
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
   align-items: flex-start;
 }
 a{
@@ -38,19 +30,11 @@ a{
   transition: color .5s;
 }
 a:hover{
-<<<<<<< HEAD
-  color:#DE3D6D;
-  cursor: pointer;
-=======
   color:#DE3d6d;
   cursor:pointer;
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
 }
 
 `
-<<<<<<< HEAD
-function CardT({display}) {
-=======
 
 
 function CardT({display}) {
@@ -59,7 +43,6 @@ function CardT({display}) {
     localStorage.clear()
     navigate('/')
   }
->>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
         return (
           <Container display={display}>
             <ul>
