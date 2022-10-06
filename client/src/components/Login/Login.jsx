@@ -52,12 +52,13 @@ const navigate = useNavigate()
      
           const res = await login({email, password})
          
-          
-      if(res.status === "ok"){
+          console.log(res)
+      if(res.status === "success"){
       localStorage.setItem("firstname", res.record.firstname);
       localStorage.setItem("token", res.token);
       localStorage.setItem("id", res.record.id);
-   
+      localStorage.setItem("wallet", res.record.wallet);
+     
         toast.success(res.msg);
          navigate("/dashboard")
       }else{
@@ -65,7 +66,7 @@ const navigate = useNavigate()
       }
   
   } catch (error) {
-console.log(error);
+
       toast.error(error.res.data.message);
     }
   };
