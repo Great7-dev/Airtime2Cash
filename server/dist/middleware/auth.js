@@ -10,9 +10,7 @@ const user_1 = require("../models/user");
 async function auth(req, res, next) {
     try {
         const authorization = req.headers.authorization;
-        //  const authorization = localStorage.getItem("Token");
-        //  console.log(authorization)
-        if (!authorization && !req.cookies.mytoken) {
+        if (!authorization) {
             res.status(401);
             res.json({
                 Error: 'kindly sign in as a user'
@@ -20,8 +18,7 @@ async function auth(req, res, next) {
         }
         //hide part of the token 
         const token = authorization?.slice(7, authorization.length) || req.cookies.mytoken;
-        let verified = jsonwebtoken_1.default.verify(token, secret);
-        console.log(req.headers);
+        const verified = jsonwebtoken_1.default.verify(token, secret);
         if (!verified) {
             res.status(401);
             res.json({

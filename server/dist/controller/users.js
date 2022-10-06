@@ -102,6 +102,7 @@ exports.verifyUser = verifyUser;
 // }
 async function getUser(req, res, next) {
     try {
+        //const id=req.user.id;
         const { id } = req.params;
         const record = await user_1.UserInstance.findOne({ where: { id } });
         res.status(200).json({ "record": record });
@@ -142,7 +143,7 @@ async function LoginUser(req, res, next) {
                 });
             }
             if (validUser) {
-                res.cookie('authorization', token, {
+                res.cookie('mytoken', token, {
                     httpOnly: true,
                     maxAge: 1000 * 60 * 60 * 24
                 });
