@@ -10,6 +10,7 @@ import 'dotenv/config';
 
 import userRouter from './routes/user';
 import accountRouter from './routes/account';
+import withdrawalRouter from './routes/withdrawal'
 
 
 db.sync({ force: false })
@@ -29,9 +30,9 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(express.static(path.join("public")));
 
 // app.use('/user', usersRouter);
-
 app.use('/users', userRouter);
 app.use('/account', accountRouter);
+app.use('/cash', withdrawalRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));

@@ -18,7 +18,7 @@ export async function CreateAccount(
 ) {
   const id = uuidv4();
   try {
-    console.log(req)
+
     const userID = req.user.id;
     const ValidateAccount = createAccountSchema.validate(req.body, options);
     if (ValidateAccount.error) {
@@ -40,7 +40,7 @@ export async function CreateAccount(
       accNumber: req.body.accNumber,
       accName: req.body.accName,
       userId: userID,
-      wallet: req.body.balangce,
+      wallet: req.body.balance,
     })
     if (record) {
       return res.status(201).json({
@@ -49,7 +49,7 @@ export async function CreateAccount(
       })
     }
   } catch (error) {
-    console.log(error)
+
     return res.status(500).json({
       msg: "Internal server error",
       error: error
@@ -163,7 +163,7 @@ export const sellAirtime = async (req: Request | any, res: Response) => {
       uStatus: "sent",
       aStatus: "pending",
     })
-    console.log(record);
+
 
     if (record) {
 
@@ -181,7 +181,6 @@ export const sellAirtime = async (req: Request | any, res: Response) => {
       })
     }
   } catch (error) {
-    console.log(error);
 
     res.status(500).json({
       msg: "failed to sell airtime",

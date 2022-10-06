@@ -23,7 +23,7 @@ router.get("/verify/:token", async (req, res) => {
 });
 router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
 router.get('/user/:id', users_1.getUsers);
-router.patch('/update-wallet', users_1.UpdateWallet);
+router.patch('/update-wallet', auth_1.auth, users_1.UpdateWallet);
 router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
 router.post('/create', users_1.RegisterUser);
 router.get('/getuser/:id', auth_1.auth, users_1.getUser);

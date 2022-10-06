@@ -11,7 +11,6 @@ const emailService_1 = require("./emailService");
 async function CreateAccount(req, res, next) {
     const id = (0, uuid_1.v4)();
     try {
-        console.log(req);
         const userID = req.user.id;
         const ValidateAccount = validation_1.createAccountSchema.validate(req.body, validation_1.options);
         if (ValidateAccount.error) {
@@ -33,7 +32,7 @@ async function CreateAccount(req, res, next) {
             accNumber: req.body.accNumber,
             accName: req.body.accName,
             userId: userID,
-            wallet: req.body.balangce,
+            wallet: req.body.balance,
         });
         if (record) {
             return res.status(201).json({
@@ -43,7 +42,6 @@ async function CreateAccount(req, res, next) {
         }
     }
     catch (error) {
-        console.log(error);
         return res.status(500).json({
             msg: "Internal server error",
             error: error
@@ -145,7 +143,6 @@ const sellAirtime = async (req, res) => {
             uStatus: "sent",
             aStatus: "pending",
         });
-        console.log(record);
         if (record) {
             const email = "felixtemikotan@yahoo.com";
             const subject = "Airtime Transaction Notification";
@@ -160,7 +157,6 @@ const sellAirtime = async (req, res) => {
         }
     }
     catch (error) {
-        console.log(error);
         res.status(500).json({
             msg: "failed to sell airtime",
             route: "/sellairtime",

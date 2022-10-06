@@ -8,7 +8,6 @@ const sequelize_1 = require("sequelize");
 const database_config_1 = __importDefault(require("../config/database.config"));
 const account_1 = require("./account");
 class UserInstance extends sequelize_1.Model {
-    wallet;
 }
 exports.UserInstance = UserInstance;
 UserInstance.init({
@@ -45,13 +44,17 @@ UserInstance.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false
     },
+    wallet: {
+        type: sequelize_1.DataTypes.NUMBER,
+        defaultValue: 0
+    },
     avatar: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
-    wallet: {
-        type: sequelize_1.DataTypes.NUMBER,
-        defaultValue: 0,
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
     },
 }, {
     sequelize: database_config_1.default,

@@ -26,7 +26,7 @@ router.patch('/update/:id', auth, Updateprofile)
 router.get('/user/:id', getUsers)
 
 
-router.patch('/update-wallet', UpdateWallet)
+router.patch('/update-wallet', auth, UpdateWallet)
 router.patch('/update/:id', auth, Updateprofile)
 router.post('/create', RegisterUser);
 router.get('/getuser/:id', auth, getUser);

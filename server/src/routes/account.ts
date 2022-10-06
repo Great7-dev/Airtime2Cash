@@ -6,8 +6,8 @@ import { CreateAccount, deleteBankAccount, getBankAccount, getWithdrawalHistory,
 router.post('/createbankaccount', auth, CreateAccount);
 router.get('/getbankaccount/:id', getBankAccount);
 router.get('/deletebankaccount/:id', deleteBankAccount);
-router.get('/withrawal-history/:id', getWithdrawalHistory);
-router.get('/transaction-history/:id', getTransactionHistory);
+router.get('/withrawal-history/:id', auth, getWithdrawalHistory);
+router.get('/transaction-history/:id', auth, getTransactionHistory);
 // const router= express.Router();
 // import {auth} from '../middleware/auth';
 // import {CreateAccount, deleteBankAccount, getBankAccount, sellAirtime} from '../controller/accounts';
