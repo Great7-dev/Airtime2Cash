@@ -1,4 +1,3 @@
-import Swal from "sweetalert2";
 // import {useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -6,6 +5,7 @@ import axios from "axios";
 const client = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
+console.log(process.env.REACT_APP_BASE_URL);
 
 const localStorageId = localStorage.getItem("id");
 
@@ -19,12 +19,13 @@ export const updateProfile = (data, id) => {
     })
     .then(function (response) {
       if (response.status === 201) {
-        toast.success("You have successfully updated your profile!");
+        console.log(response);
+        return toast.success("You have successfully updated your profile!");
       }
     })
     .catch(function (error) {
       console.log(error);
-      toast.error("Something went wrong!");
+      return toast.error("Something went wrong!");
     });
 };
 
@@ -32,7 +33,10 @@ export const getUser = async (id) => {
   id = localStorageId;
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}getuser/${id}`
+      `${process.env.REACT_APP_BASE_URL}getuser/${id}`,
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
     );
     return data;
   } catch (error) {
@@ -42,7 +46,7 @@ export const getUser = async (id) => {
 
 export const login = async (data) => {
   try {
-    const res = await client.post("/login", {
+    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}login`, {
       email: data.email,
       password: data.password,
     });
@@ -111,5 +115,28 @@ export const getUserBanks = async () => {
     return await response.data.record.accounts;
   } catch (error) {
     console.log(error);
+  }
+};
+export const getThistory = async (id) => {
+  id = localStorageId;
+  try {
+    const { data } = await client2.get(`account/transaction-history/${id}`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getwithdrwalhistory = async (id) => {
+  id = localStorageId;
+  try {
+    const { data } = await client2.get(`cash/getAllUserWithdrawals/${id}`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return data;
+  } catch (error) {
+    return error;
   }
 };

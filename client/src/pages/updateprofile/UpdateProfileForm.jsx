@@ -22,6 +22,7 @@ function Form() {
     const onSubmit = (data) => {
         updateProfile(data)
       };
+    
   return (
     <div>
       <Navbar/>

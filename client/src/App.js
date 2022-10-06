@@ -9,17 +9,19 @@ import CheckMail from "./pages/Checkmail/CheckMail";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Landingpage from "./pages/Landingpage";
-import Dashboard from "./components/dashbard/dashboard";
-
-import TransactionHistory from "./transaction-history/TransactionHistory";
-
+import Dashboard from "./components/dashboard/dashboard";
+import WithdrawalHistory from "./history/WithdrawalHistory";
+import TransactionHistoryCard from "./transaction-history/TransactionHistoryCard";
+import NewTransactionHistory from "./history/NewTransactionHistory";
 function App() {
   return (
     <div>
       <Router>
         <Routes>
+          <Route exact path="/Thistory" element={<NewTransactionHistory />} />
+          <Route exact path="/history" element={<TransactionHistoryCard />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/history" element={<TransactionHistory />} />
+          <Route exact path="/withdrawal" element={<WithdrawalHistory />} />
           <Route exact path="/card" element={<CardT />} />
           <Route path="/" element={<Landingpage />} />
           <Route path="/signup" element={<Signup />} />

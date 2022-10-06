@@ -89,7 +89,7 @@ const handleChange = (selectedOption) => {
             onChange={handleChange}
             options={bankOptions}
             placeholder="Select Account"
-ccount            name="Network"
+            acountname="Network"
           
           />
 

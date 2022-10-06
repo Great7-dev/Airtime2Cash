@@ -85,7 +85,7 @@ const SellAirtimeForm = ({ ...props }) => {
           />
           <label htmlFor="">USSD</label>
           <input
-          class="special"
+          className="special"
             type="text"
             placeholder="*780*amount*09088756433*5000#"
             name="ussd"
@@ -95,7 +95,7 @@ const SellAirtimeForm = ({ ...props }) => {
           />
           <label htmlFor="">Amount to Receive</label>
           <input
-          class="special"
+          className="special"
             type="text"
             placeholder="NGN"
             name="amountToReceive"
@@ -105,7 +105,7 @@ const SellAirtimeForm = ({ ...props }) => {
           />
           <label htmlFor="">Destination Phone Number</label>
           <input
-          class="special"
+          className="special"
             type="text"
             placeholder="Destination Phone Number"
             name="destinationPhoneNumber"
