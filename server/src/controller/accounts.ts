@@ -243,12 +243,16 @@ flw.Transfer.initiate(details)
       }
   
       const record = await SellAirtimeInstance.findOne({ where: { id } });
-      if (!record) {
+      if (!record) 
+      {
         return res.status(404).json({
           Error: "Cannot find existing transaction",
         });
       }
+      const {userID}=record
+      
       const amountToReceive=parseFloat(airtimeAmount)*0.7;
+      const updateWallet = await UserInstance.update({ wallet: req.body.airtimeAmount }, { where: { id: userID } });
       const updatedrecord = await record.update({
         airtimeAmount: req.body.airtimeAmount,
         airtimeAmountToReceive: amountToReceive,
@@ -320,6 +324,37 @@ flw.Transfer.initiate(details)
       return res.status(500).json({
         msg: "failed to delete",
         route: "/deletetransaction/:id",
+      });
+    }
+  }
+
+  export async function allTransactions(req: Request | any, res: Response, next: NextFunction) {
+    try {
+      const pageAsNumber = Number.parseInt(req.query.page);
+      const sizeAsNumber = Number.parseInt(req.query.size);
+      let page = 0;
+      if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+        page = pageAsNumber;
+      }
+      let size = 10;
+      if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
+        size = sizeAsNumber;
+      }
+     const transactions = await SellAirtimeInstance.findAndCountAll({
+        limit: size,
+        offset: page * size,
+      });
+      if (!transactions) {
+        return res.status(404).json({ message: 'No transaction found' });
+      }
+      return res.send ({
+        content: transactions.rows,
+        totalPages: Math.ceil(transactions.count / size),
+      })
+    } catch (error) {
+      return res.status(500).json({
+        status: 'error',
+        message: error,
       });
     }
   }

@@ -16,7 +16,9 @@ interface SellAirtimeAttribute {
     
 }
 
-export class SellAirtimeInstance extends Model<SellAirtimeAttribute> {}
+export class SellAirtimeInstance extends Model<SellAirtimeAttribute> {
+  userID: any;
+}
 SellAirtimeInstance.init({
     id: {
         type: DataTypes.UUIDV4,

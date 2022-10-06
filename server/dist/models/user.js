@@ -51,7 +51,11 @@ UserInstance.init({
     wallet: {
         type: sequelize_1.DataTypes.NUMBER,
         allowNull: false
-    }
+    },
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false
+    },
 }, {
     sequelize: database_config_1.default,
     tableName: 'userTable'

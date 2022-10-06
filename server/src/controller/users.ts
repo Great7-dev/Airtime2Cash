@@ -58,7 +58,8 @@ export async function RegisterUser(
             password: passwordHash,
             isVerified: false,
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
-            wallet: 0
+            wallet: 0,
+            isAdmin: false,
         })
         if (record) {
             const email = req.body.email as string;
