@@ -36,7 +36,7 @@ function Dashboard() {
               <h1>Dashboard</h1>
               <div className="money">
                 <h5 className="walletBalance">Wallet balance</h5>
-                <h1 className="fig">N21,350.00 </h1>
+                <h1 className="fig">{localStorage.getItem('wallet')}</h1>
                 <h5 className="account">Account is active</h5>
               </div>
             </>

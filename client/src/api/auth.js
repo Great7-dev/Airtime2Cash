@@ -5,8 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
 const client = axios.create({
-    baseURL: `${process.env.REACT_APP_BASE_URL}`,
+    baseURL: `${process.env.REACT_APP_BASE_URL}`,    
 });
+
 
 const client2 = axios.create({
     baseURL: `${process.env.REACT_APP_ACCT_BASE_URL}`,
@@ -158,6 +159,17 @@ export const getUserBanks = async() => {
     }
 };
 
+export const withdrawBalance = async(data) => {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await client2.post(`/cash/withdraw/`, data, {
+            headers: { authorization: `Bearer ${token}` },
+        });
+        return await response.data
+    } catch (error) {
+        console.log(error)
+    }
+};
 
 export const getSingleUser = async(id) => {
 

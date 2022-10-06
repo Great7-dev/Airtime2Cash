@@ -11,7 +11,7 @@ export const WithdrawStyle = styled.form `
     margin-bottom: 2rem;
   }
   .sellAirtime-header {
-    width:83%%;
+    width:83%;
     display: flex;
     margin: 0;
     justify-content: space-between;
@@ -60,7 +60,7 @@ export const WithdrawStyle = styled.form `
     width:100%;
   }
   .withdraw_input_background, select{
-        background: rgba(0, 0, 0, 0.04);!important
+        background: rgba(0, 0, 0, 0.04) !important;
         border: none;
        
     }
@@ -100,8 +100,7 @@ text-align:left;
 font-size:0.8rem;
 margin:-0.8rem 0 0.8rem;
   }
-
-`;
+`
 
 export const CustomStyle = {
     control: (base) => ({

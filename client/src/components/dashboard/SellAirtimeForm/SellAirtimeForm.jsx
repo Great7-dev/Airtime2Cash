@@ -27,7 +27,7 @@ const SellAirtimeForm = ({ ...props }) => {
         if ( network === "" || phoneNumber === ""||airtimeAmount===""||ussd===""||destinationPhoneNumber==="") {
         return toast.error("No field should be left empty, please fill all fields");
       } 
-console.log(network, phoneNumber,airtimeAmount,destinationPhoneNumber)
+
       postSellAirtime({network, phoneNumber,airtimeAmount,destinationPhoneNumber});
       toast.success("Airtime successfully sold")
 
