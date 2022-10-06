@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<coverage generated="1663285235053" clover="3.2.0">
+  <project timestamp="1663285235053" name="All files">
+    <metrics statements="1142" coveredstatements="659" conditionals="87" coveredconditionals="45" methods="44" coveredmethods="30" elements="1273" coveredelements="734" complexity="0" loc="1142" ncloc="1142" packages="16" files="22" classes="22"/>
+=======
 <coverage generated="1663315568166" clover="3.2.0">
   <project timestamp="1663315568167" name="All files">
     <metrics statements="1142" coveredstatements="726" conditionals="94" coveredconditionals="49" methods="44" coveredmethods="32" elements="1280" coveredelements="807" complexity="0" loc="1142" ncloc="1142" packages="16" files="22" classes="22"/>
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+<coverage generated="1663315568166" clover="3.2.0">
+  <project timestamp="1663315568167" name="All files">
+    <metrics statements="1142" coveredstatements="726" conditionals="94" coveredconditionals="49" methods="44" coveredmethods="32" elements="1280" coveredelements="807" complexity="0" loc="1142" ncloc="1142" packages="16" files="22" classes="22"/>
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
     <package name="dist">
       <metrics statements="31" coveredstatements="29" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
       <file name="app.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/app.js">
@@ -55,9 +67,21 @@
       </file>
     </package>
     <package name="dist.controller">
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <metrics statements="291" coveredstatements="104" conditionals="24" coveredconditionals="11" methods="13" coveredmethods="8"/>
+      <file name="emailService.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/controller/emailService.js">
+        <metrics statements="42" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="2"/>
+=======
       <metrics statements="291" coveredstatements="171" conditionals="31" coveredconditionals="15" methods="13" coveredmethods="10"/>
       <file name="emailService.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/controller/emailService.js">
         <metrics statements="42" coveredstatements="38" conditionals="9" coveredconditionals="6" methods="3" coveredmethods="3"/>
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+      <metrics statements="291" coveredstatements="171" conditionals="31" coveredconditionals="15" methods="13" coveredmethods="10"/>
+      <file name="emailService.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/controller/emailService.js">
+        <metrics statements="42" coveredstatements="38" conditionals="9" coveredconditionals="6" methods="3" coveredmethods="3"/>
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
         <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="2" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="3" count="1" type="cond" truecount="0" falsecount="1"/>
@@ -66,6 +90,70 @@
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+      </file>
+      <file name="mailSender.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/controller/mailSender.js">
+        <metrics statements="21" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+      <file name="users.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/controller/users.js">
+        <metrics statements="228" coveredstatements="91" conditionals="18" coveredconditionals="6" methods="8" coveredmethods="5"/>
+=======
         <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
@@ -79,6 +167,21 @@
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
+=======
+        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
@@ -127,6 +230,10 @@
       </file>
       <file name="users.js" path="/Users/apple5/Desktop/Projects/Week 10 Live Project/live-project-pod-h/server/dist/controller/users.js">
         <metrics statements="228" coveredstatements="112" conditionals="19" coveredconditionals="6" methods="8" coveredmethods="5"/>
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
         <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="2" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="3" count="2" type="cond" truecount="0" falsecount="1"/>
@@ -155,6 +262,20 @@
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
         <line num="29" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
@@ -164,10 +285,40 @@
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="37" count="1" type="cond" truecount="0" falsecount="1"/>
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
         <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
         <line num="42" count="1" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
@@ -189,6 +340,7 @@
         <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
         <line num="63" count="1" type="stmt"/>
         <line num="64" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="65" count="0" type="stmt"/>

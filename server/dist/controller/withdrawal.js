@@ -88,7 +88,6 @@ async function withdrawal(req, res, next) {
         }
     }
     catch (error) {
-        console.log(error);
     }
 }
 exports.withdrawal = withdrawal;
@@ -105,10 +104,22 @@ async function getAllWithdrawals(req, res, next) {
     }
 }
 exports.getAllWithdrawals = getAllWithdrawals;
+// export async function getAllUserWithdrawals(req: Request | any, res: Response, next: NextFunction) {
+//     try {
+//         const userID = req.user.id
+//         const allWithdrawalHistory = await WithdrawalInstance.findAll({ where: { userID } })
+//         if (!allWithdrawalHistory) {
+//             return res.status(404).json({ message: 'Sorry there is currently no withdrawal history!' })
+//         }
+//         return res.status(200).json(allWithdrawalHistory)
+//     } catch (error) {
+//         return res.status(500).json({ message: 'failed to get all withdrawal history!' })
+//     }
+// }
 async function getAllUserWithdrawals(req, res, next) {
     try {
-        const userID = req.user.id;
-        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID } });
+        const { id } = req.params;
+        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id } });
         if (!allWithdrawalHistory) {
             return res.status(404).json({ message: 'Sorry there is currently no withdrawal history!' });
         }

@@ -26,11 +26,15 @@ export const loginSchema = Joi.object().keys({
 export const updateProfileSchema = Joi.object().keys({
   firstname: Joi.string().trim(),
   lastname: Joi.string().trim(),
-  phonenumber:Joi.string()
-  .length(11)
-  .pattern(/^[0-9]+$/),
-  wallet: Joi.number()
+  phonenumber: Joi.string()
+    .length(11)
+    .pattern(/^[0-9]+$/),
+  email: Joi.string().email()
 })
+
+export const updateWalletSchema = Joi.string().email()
+
+
 
 //Generate Token
 export const generateToken = (user: { [key: string]: unknown }): unknown => {
@@ -64,6 +68,7 @@ export const createAccountSchema = Joi.object().keys({
 });
 
 export const sellAirtimeSchema = Joi.object().keys({
+  userID: Joi.string(),
   airtimeAmount: Joi.number().required(),
   network: Joi.string().required(),
   phoneNumber: Joi.string().required().pattern(/^[0-9]+$/).length(11),

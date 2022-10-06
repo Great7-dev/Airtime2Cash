@@ -12,11 +12,10 @@ interface SellAirtimeAttribute {
     phoneNumber: string;
     destinationPhoneNumber:string;
     uStatus: string;
-    aStatus:string;
-    
+    aStatus: string;
 }
 
-export class SellAirtimeInstance extends Model<SellAirtimeAttribute> {}
+export class SellAirtimeInstance extends Model<SellAirtimeAttribute> { }
 SellAirtimeInstance.init({
     id: {
         type: DataTypes.UUIDV4,
@@ -59,7 +58,7 @@ SellAirtimeInstance.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-},{
+}, {
     sequelize: db,
     tableName: 'transactionsTable'
-  })
+})

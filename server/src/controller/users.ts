@@ -1,12 +1,12 @@
 import dotenv from "dotenv";
 import express, { Request, Response, NextFunction } from "express";
 import { v4 as uuidv4, validate } from "uuid";
-import { UserInstance }  from "../models/user";
-import { validationSchema,options, loginSchema, updateProfileSchema, changePasswordSchema } from '../utils/validation'
+import { UserInstance } from "../models/user";
+import { validationSchema, options, loginSchema, updateProfileSchema, changePasswordSchema, updateWalletSchema } from '../utils/validation'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { emailVerificationView } from "./mailSender";
-import { sendMail } from "./emailService";
+import { emailVerificationView, emailWalletView } from "./mailSender";
+import { sendMail, sendWalletMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
 import { AccountInstance } from "../models/account";
@@ -21,65 +21,65 @@ export async function RegisterUser(
   res: Response,
   next: NextFunction
 ) {
-    const id = uuidv4();
-
-    try {
-        const ValidateUser = validationSchema.validate(req.body,options);
-        if (ValidateUser.error) {
-            return res.status(400).json({
-                Error: ValidateUser.error.details[0].message,
-            });
-        }
-        const duplicatEmail = await UserInstance.findOne({
-            where: { email: req.body.email },
-        });
-        if (duplicatEmail) {
-            return res.status(409).json({
-                msg: "Email is used, please enter another email",
-            });
-        }
-
-        const duplicatePhone = await UserInstance.findOne({
-            where: { phonenumber: req.body.phonenumber },
-        });
-
-        if (duplicatePhone) {
-            return res.status(409).json({
-                msg: "Phone number is used",
-            });
-        }
-        const passwordHash = await bcrypt.hash(req.body.password, 8);
-        const record = await UserInstance.create({
-            id: id,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            username: req.body.username,
-            email: req.body.email,
-            phonenumber: req.body.phonenumber,
-            password: passwordHash,
-            isVerified: false,
-            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
-            wallet: 0
-        })
-        if (record) {
-            const email = req.body.email as string;
-            const subject = "User verification";
-            const username =req.body.username as string
-            const token = jwt.sign({id},secret,{expiresIn:'7d'}) 
-            const html:string = emailVerificationView(token)
-            await sendMail(html,email,subject,username)
-            
-        res.json({msg:"User created successfully",record, token})
-        }  
-    } catch (error) {
-      console.log(error);
-        res.status(500).json({
-            message:'failed to register',
-            route:'/create'
-
-        })
+  const id = uuidv4();
+  try {
+    const ValidateUser = validationSchema.validate(req.body, options);
+    if (ValidateUser.error) {
+      return res.status(400).json({
+        Error: ValidateUser.error.details[0].message,
+      });
     }
+    const duplicatEmail = await UserInstance.findOne({
+      where: { email: req.body.email },
+    });
+    if (duplicatEmail) {
+      return res.status(409).json({
+        msg: "Email is used, please enter another email",
+      });
+    }
+
+    const duplicatePhone = await UserInstance.findOne({
+      where: { phonenumber: req.body.phonenumber },
+    });
+
+    if (duplicatePhone) {
+      return res.status(409).json({
+        msg: "Phone number is used",
+      });
+    }
+    const passwordHash = await bcrypt.hash(req.body.password, 8);
+    const record = await UserInstance.create({
+      id: id,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      username: req.body.username,
+      email: req.body.email,
+      phonenumber: req.body.phonenumber,
+      password: passwordHash,
+      isVerified: false,
+      avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+      wallet: 0,
+      isAdmin: false
+    })
+    if (record) {
+      const email = req.body.email as string;
+      const subject = "User verification";
+      const username = req.body.username as string
+      const token = jwt.sign({ id }, secret, { expiresIn: '7d' })
+      const html: string = emailVerificationView(token)
+      await sendMail(html, email, subject, username)
+
+      res.json({ msg: "User created successfully", record })
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'failed to register',
+      route: '/create'
+
+    })
   }
+}
 
 export async function verifyUser(token: string) {
   const decode = jwt.verify(token, process.env.JWT_SECRET as string);
@@ -89,11 +89,31 @@ export async function verifyUser(token: string) {
   if (!user) throw new Error('user not found');
 
   return await user.update({ isVerified: true });
-} 
+}
+
+
+// export async function getUser(
+//   req: Request | any,
+//   res: Response,
+//   next: NextFunction
+// ) {
+//   try {
+//     const id = req.user.id;
+//     //const { id } = req.params;
+//     const record = await UserInstance.findOne({ where: { id } });
+
+//     res.status(200).json({ "record": record });
+//   } catch (error) {
+//     res.status(500).json({
+//       msg: "Invalid User",
+//       route: "/read/:id",
+//     });
+//   }
+// }
 
 
 export async function getUser(
-  req: Request|any,
+  req: Request,
   res: Response,
   next: NextFunction
 ) {
@@ -101,8 +121,7 @@ export async function getUser(
     //const id=req.user.id;
     const { id } = req.params;
     const record = await UserInstance.findOne({ where: { id } });
-
-    res.status(200).json({"record":record});
+    res.status(200).json({ "record": record });
   } catch (error) {
     res.status(500).json({
       msg: "Invalid User",
@@ -116,45 +135,41 @@ export async function LoginUser(
   res: Response,
   next: NextFunction
 ) {
-  try { 
+  try {
     const validationResult = loginSchema.validate(req.body, options);
-    
+
     if (validationResult.error) {
       return res.status(400).json({
         Error: validationResult.error.details[0].message
       });
     }
-   
+
     const userEmail = req.body.email;
     const userName = req.body.username;
-   
+
     const record = userEmail
       ? ((await UserInstance.findOne({
-          where: [{ email: userEmail }]
-        })) as unknown as { [key: string]: string })
+        where: [{ email: userEmail }]
+      })) as unknown as { [key: string]: string })
       : ((await UserInstance.findOne({
-          where: [{ username: userName }]
-        })) as unknown as { [key: string]: string });
-        //console.log("yayyy")
-        if(record.isVerified){
+        where: [{ username: userName }]
+      })) as unknown as { [key: string]: string });
+
+    if (record.isVerified) {
       const { id } = record;
       const { password } = record;
-
       const token = generateToken({ id });
       const validUser = await bcrypt.compare(req.body.password, password);
-
       if (!validUser) {
         return res.status(401).json({
           msg: 'Password do not match'
         });
       }
-
       if (validUser) {
         res.cookie('mytoken', token, {
           httpOnly: true,
           maxAge: 1000 * 60 * 60 * 24
         });
-        
         res.status(200).json({
           status: 'success',
           msg: 'login successful',
@@ -162,12 +177,12 @@ export async function LoginUser(
           token: token
         });
       }
-    } else{
+    } else {
       return res.status(400).json({
         msg: "Please verify your email address"
       });
     }
-   } catch (err) {
+  } catch (err) {
     res.status(500).json({
       msg: 'Incorrect username or email',
       route: '/login'
@@ -244,61 +259,60 @@ export async function changePassword(req: Request, res: Response) {
   }
 }
 
-export async function Updateprofile(req:Request, res:Response, next:NextFunction){
-    try{
-      const { id } = req.params
-      const {firstname,lastname,phonenumber, wallet} = req.body
-      const validateResult = updateProfileSchema.validate(req.body,options)
-        if(validateResult.error){
-            return res.status(400).json({
-                Error:validateResult.error.details[0].message
-            })
-        }
-      const record = await UserInstance.findByPk(id)
-      if(!record){
-        res.status(404).json({
-                  Error:"cannot find user",
-            })   
+export async function Updateprofile(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { id } = req.params
+    const { firstname, lastname, phonenumber } = req.body
+    const validateResult = updateProfileSchema.validate(req.body, options)
+    if (validateResult.error) {
+      return res.status(400).json({
+        Error: validateResult.error.details[0].message
+      })
+    }
+    const record = await UserInstance.findByPk(id)
+    if (!record) {
+      res.status(404).json({
+        Error: "cannot find user",
+      })
     }
     const updaterecord = await record?.update({
-        firstname,
-        lastname,
-        phonenumber,
-        wallet
-     })
-     res.status(201).json({
-            message: 'you have successfully updated your profile',
-            record: updaterecord 
-         })
-        
-    }catch(error){
-           res.status(500).json({
-            msg:'failed to update profile',
-            route: '/update/:id'
+      firstname,
+      lastname,
+      phonenumber
+    })
+    res.status(201).json({
+      message: 'you have successfully updated your profile',
+      record: updaterecord
+    })
 
-           })
-    }
+  } catch (error) {
+    res.status(500).json({
+      msg: 'failed to update profile',
+      route: '/update/:id'
+
+    })
   }
+}
 
-export async function getUsers(req:Request, res:Response, next:NextFunction){
-    try{
-      const id = req.params.id
-      const record = await UserInstance.findOne({where:{id}})
-      res.status(200).json({
-        record
-      })
-    }catch(error){
-      res.status(500).json({
-        msg:'failed to get user',
-        route: '/user/:id'
+export async function getUsers(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = req.params.id
+    const record = await UserInstance.findOne({ where: { id } })
+    res.status(200).json({
+      record
+    })
+  } catch (error) {
+    res.status(500).json({
+      msg: 'failed to get user',
+      route: '/user/:id'
 
-       })
-    }
+    })
   }
+}
 
 
 export async function getUserRecords(
-  req: Request|any,
+  req: Request | any,
   res: Response,
   next: NextFunction
 ) {
@@ -321,3 +335,70 @@ export async function getUserRecords(
 }
 
 
+export default async function LogoutUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    localStorage.removeItem('token');
+    localStorage.removeItem('Email');
+    localStorage.removeItem('id');
+    const link = `${process.env.FRONTEND_URL}`;
+    res.redirect(`${link}/login`)
+  } catch (err) {
+    res.status(500).json({
+      msg: "failed to logout",
+      route: "/logout",
+    });
+  }
+}
+
+
+
+
+
+export async function UpdateWallet(req: Request, res: Response) {
+  try {
+    const { amount, email } = req.body
+
+    const validateResult = updateWalletSchema.validate(req.body.email, options)
+    if (validateResult.error) {
+      return res.status(400).json({
+        Error: validateResult.error.details[0].message
+      })
+    }
+    const record = await UserInstance.findOne({ where: { email } })
+    const wallet = record?.getDataValue("wallet")
+
+    const updatedWallet = wallet + amount
+    if (!record) {
+      return res.status(404).json({
+        Error: "Cannot Find User",
+      })
+    }
+
+
+    const updaterecord = await record?.update({
+      wallet: updatedWallet
+    })
+    if (updaterecord) {
+      const email = req.body.email as string;
+      const subject = "Wallet Update Notification";
+      const username = req.body.username as string
+      const html: string = emailWalletView()
+      await sendMail(html, email, subject, username)
+    }
+    return res.status(201).json({
+      message: 'The user account has been successfully credited',
+      record: updaterecord
+    })
+
+  } catch (error) {
+
+    res.status(500).json({
+      msg: 'Failed to credit user Account',
+      route: '/update-wallet'
+    })
+  }
+}

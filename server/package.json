@@ -18,7 +18,7 @@
         "@types/validator": "^13.7.6",
         "@typescript-eslint/eslint-plugin": "^5.36.2",
         "@typescript-eslint/parser": "^5.36.2",
-        "axios": "^0.27.2",
+        "axios": "^1.0.0",
         "bcryptjs": "^2.4.3",
         "cloudinary": "^1.32.0",
         "cookie-parser": "^1.4.6",

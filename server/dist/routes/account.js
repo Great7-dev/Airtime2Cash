@@ -8,6 +8,8 @@ const router = express_1.default.Router();
 const auth_1 = require("../middleware/auth");
 const accounts_1 = require("../controller/accounts");
 const AllTransactions_1 = require("../controller/AllTransactions");
+router.get('/withrawal-history/:id', auth_1.auth, accounts_1.getWithdrawalHistory);
+router.get('/transaction-history/:id', auth_1.auth, accounts_1.getTransactionHistory);
 router.post('/createbankaccount', auth_1.auth, accounts_1.CreateAccount);
 router.get('/getbankaccount/:id', accounts_1.getBankAccount);
 router.delete('/deletebankaccount/:id', accounts_1.deleteBankAccount);

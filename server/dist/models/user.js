@@ -51,7 +51,11 @@ UserInstance.init({
     avatar: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
-    }
+    },
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: false
+    },
 }, {
     sequelize: database_config_1.default,
     tableName: 'userTable'

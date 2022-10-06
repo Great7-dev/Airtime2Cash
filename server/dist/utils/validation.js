@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.options = exports.updateStatusSchema = exports.sellAirtimeSchema = exports.createAccountSchema = exports.changePasswordSchema = exports.generateToken = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
+exports.options = exports.updateStatusSchema = exports.sellAirtimeSchema = exports.createAccountSchema = exports.changePasswordSchema = exports.generateToken = exports.updateWalletSchema = exports.updateProfileSchema = exports.loginSchema = exports.validationSchema = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const joi_1 = __importDefault(require("joi"));
@@ -31,8 +31,9 @@ exports.updateProfileSchema = joi_1.default.object().keys({
     phonenumber: joi_1.default.string()
         .length(11)
         .pattern(/^[0-9]+$/),
-    wallet: joi_1.default.number()
+    email: joi_1.default.string().email()
 });
+exports.updateWalletSchema = joi_1.default.string().email();
 //Generate Token
 const generateToken = (user) => {
     const pass = process.env.JWT_SECRET;
@@ -60,6 +61,7 @@ exports.createAccountSchema = joi_1.default.object().keys({
     wallet: joi_1.default.number().min(0)
 });
 exports.sellAirtimeSchema = joi_1.default.object().keys({
+    userID: joi_1.default.string(),
     airtimeAmount: joi_1.default.number().required(),
     network: joi_1.default.string().required(),
     phoneNumber: joi_1.default.string().required().pattern(/^[0-9]+$/).length(11),
