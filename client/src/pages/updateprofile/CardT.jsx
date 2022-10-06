@@ -4,13 +4,17 @@ import layer5 from "./images/Layer5.svg"
 import layer11 from "./images/Layer11.svg"
 import vector from "./images/Vector.svg"
 import vector2 from "./images/Vector2.svg"
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
 position: absolute;
 bottom: -11em;
 right: 1em;
 ul{
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
   display:${props => props.display};
   flex-direction:column;
   justify-content: space-between;
@@ -21,7 +25,11 @@ ul{
   width: 10rem;
   border-radius: 10px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+<<<<<<< HEAD
   padding: 1em;
+=======
+  padding:1em;
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
   align-items: flex-start;
 }
 a{
@@ -30,19 +38,36 @@ a{
   transition: color .5s;
 }
 a:hover{
+<<<<<<< HEAD
   color:#DE3D6D;
   cursor: pointer;
+=======
+  color:#DE3d6d;
+  cursor:pointer;
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
 }
 
 `
+<<<<<<< HEAD
 function CardT({display}) {
+=======
+
+
+function CardT({display}) {
+  const navigate = useNavigate()
+  const logout=()=>{
+    localStorage.clear()
+    navigate('/')
+  }
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
         return (
           <Container display={display}>
             <ul>
                 <a href='/profile'><img src={layer5} alt="icon" />  Account</a>
                 <a href='/#'><img src={layer11} alt="icon" /> Setting</a>
                 <a href='/#'><img src={vector} alt="icon"/> Help center</a>
-                <a href='/#'><img src={vector2} alt="icon"/> Logout</a>
+      
+                <a href="/"><img src={vector2} alt="icon"/> Logout</a> 
             </ul>
           </Container>
         )

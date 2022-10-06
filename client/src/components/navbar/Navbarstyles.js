@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+<<<<<<< HEAD
 export const Navbarstyle = styled.div`
 <<<<<<< HEAD
   width: 100%;
@@ -15,19 +16,36 @@ export const Navbarstyle = styled.div`
     padding: 0;
   }
 =======
+=======
+export const Navbarstyle = styled.div `
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
 width :100%;
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 10px 190px 10px 150px;
 box-sizing: border-box;
-/* position:fixed;
-background-color: white;  */
+position:fixed;
+background-color: #ffffff; 
+z-index: 50;
+top: 0;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
 
 ul {
 list-style-type: none;
 margin: 0;
 padding: 0;
+}
+.currentUser {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #012A4A;
+}
+.currentUSer:onHover{
+  background-color:red;
 }
 
 .navbar__links{

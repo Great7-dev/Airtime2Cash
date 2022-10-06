@@ -8,27 +8,44 @@ import Viewaccts from "../ViewAccts/Viewaccts";
 import { handleAddBank } from "../../../api/auth";
 import Mymodal from "../Modal/Modal";
 import { successModalState } from "../../../atoms/successModalAtom";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const Bankform = () => {
+  const [accName, setaccName] = useState("");
+  const [accNumber, setaccNumber] = useState("");
   const [bankInfo, setBankInfo] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBankInfo({ ...bankInfo, [name]: value });
   };
+  
   const handleBankChange = (selectedOption) => {
     setBankInfo({ ...bankInfo, bankName: selectedOption.value });
   };
   const [formState, setFormState] = useRecoilState(bankFormState);
   const [modal, setModal] = useRecoilState(successModalState);
+  const myBankForm = async (accName,accNumber) => {
+    try {
+      if (bankInfo.accName === "" || bankInfo.accNumber === "") {
+        return toast.error("No field should be left empty, please fill all fields");
+      } 
+  } catch (error) {
+      toast.error(error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      myBankForm(accName,accNumber);
+      if(!toast.error)
       e.stopPropagation();
       const response = await handleAddBank(bankInfo);
       setModal(true);
+      console.log(bankInfo)
+      
     } catch (error) {
       console.log(error);
     }
@@ -79,6 +96,7 @@ const Bankform = () => {
       )}
 
       {modal && <Mymodal />}
+      <ToastContainer />
     </BankForm>
   );
 };

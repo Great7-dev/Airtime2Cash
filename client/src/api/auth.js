@@ -1,10 +1,15 @@
 // import {useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import axios from "axios";
 const client = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
+
+// const client2 = axios.create({
+//     baseURL: `${process.env.REACT_APP_ACCT_BASE_URL}`,
+// });
 console.log(process.env.REACT_APP_BASE_URL);
 
 const localStorageId = localStorage.getItem("id");
@@ -46,11 +51,31 @@ export const getUser = async (id) => {
 
 export const login = async (data) => {
   try {
-    const res = await axios.post(`${process.env.REACT_APP_BASE_URL}login`, {
-      email: data.email,
-      password: data.password,
-    });
-    return res.data;
+    // eslint-disable-next-line no-useless-escape
+    const emailRegex = new RegExp(
+      /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
+      "gm"
+    );
+    const isValidEmail = emailRegex.test(data.email);
+
+    if (data.email === "" || data.password === "") {
+      return toast.error("Email or password cannot be empty");
+    }
+    if (isValidEmail) {
+      const res = await client.post("/login", {
+        email: data.email,
+        password: data.password,
+      });
+      return res.data;
+    } else {
+      console.log(data.email);
+      const res = await client.post("/login", {
+        username: data.email,
+        password: data.password,
+      });
+      console.log(res);
+      return res.data;
+    }
   } catch (error) {
     return error;
   }
@@ -94,6 +119,18 @@ export const signupHandler = async (data) => {
   }
 };
 
+export const postSellAirtime = async (data) => {
+  try {
+    const response = await client2.post(`/account/sellairtime`, data, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const handleAddBank = async (data) => {
   try {
     const token = localStorage.getItem("token");
@@ -117,6 +154,7 @@ export const getUserBanks = async () => {
     console.log(error);
   }
 };
+
 export const getThistory = async (id) => {
   id = localStorageId;
   try {
@@ -140,3 +178,41 @@ export const getwithdrwalhistory = async (id) => {
     return error;
   }
 };
+export const withdrawBalance = async (data) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await client2.post(`/cash/withdraw/`, data, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    return await response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSingleUser = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await client.get(`/userrecords`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+export const deleteSingleInfo = async (id) => {
+  try {
+    const response = await client2.delete(`/account/deletebankaccount/${id}`);
+
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+//  export const client = axios.create({
+//   baseURL: `${process.env.REACT_APP_BASE_URL}`,
+// });

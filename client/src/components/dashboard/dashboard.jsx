@@ -1,5 +1,12 @@
 import { useState } from "react";
+<<<<<<< HEAD
  import "./dashboard.css";
+=======
+//import "./dashboard.css";
+import Tab from "./Tab";
+import Navbar from "../Navbar/NavBar";
+// import TransactionHistory from "../transaction-history/TransactionHistory";
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
 import Bankform from "./Bankform/Bankform";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { bankFormState } from "../../atoms/bankFormAtom";
@@ -15,7 +22,7 @@ import NewTransactionHistory from "../../history/NewTransactionHistory";
 function Dashboard() {
   const [formState, setFormState] = useRecoilState(bankFormState);
   const menu = [
-    "Sell airtime",
+    "Transfer",
     "Withdraw Balance",
     "Manage Bank Account",
     "Withdrawals",
@@ -36,7 +43,7 @@ function Dashboard() {
               <h1>Dashboard</h1>
               <div className="money">
                 <h5 className="walletBalance">Wallet balance</h5>
-                <h1 className="fig">N21,350.00 </h1>
+                <h1 className="fig">{localStorage.getItem('wallet')}</h1>
                 <h5 className="account">Account is active</h5>
               </div>
             </>
@@ -51,10 +58,14 @@ function Dashboard() {
           ) : (
             <h1>{active}</h1>
           )}
-          <div className="l">
+          <div className="ul">
             <div className="nav">
               {menu.map((item, index) => (
+<<<<<<< HEAD
                 <div key={index} onClick={() => setActive(item)}>{item}</div>
+=======
+                <div className="mock" onClick={() => setActive(item)} >{item}</div>
+>>>>>>> 3e3d281b1ec1af2e2daddfab99e9ec7d2ad7bffe
               ))}
             </div>
             <div className="outlet">

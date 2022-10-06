@@ -42,6 +42,12 @@ export const WithdrawStyle = styled.form`
     padding: 1rem;
     margin: 8px 0px 16px 0px;
     opacity: 0.3;
+    font: Inter;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-color: #c4c4c4;
   }
 
   label {
@@ -56,6 +62,11 @@ export const WithdrawStyle = styled.form`
   .withdraw_input_background,
   select {
     background: rgba(0, 0, 0, 0.04);
+    border: none;
+  }
+  .withdraw_input_background,
+  select {
+    background: rgba(0, 0, 0, 0.04) !important;
     border: none;
   }
   input .input {
@@ -81,13 +92,18 @@ export const WithdrawStyle = styled.form`
   }
   .selections {
     outline: none;
-    /* border: 1px solid red;
-    height: 40%; */
-    /* width: 100%; */
-    /* display: flex;
-    justify-content: space-between; */
-    /* padding: 1rem;
-    margin: 8px 0px 16px 0px; */
+    text-align: justify;
+    font: Inter;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-color: #c4c4c4;
+  }
+  .is_danger {
+    text-align: left;
+    font-size: 0.8rem;
+    margin: -0.8rem 0 0.8rem;
   }
 `;
 
@@ -99,6 +115,7 @@ export const CustomStyle = {
     marginBottom: 15,
     marginTop: 10,
     fontSize: 13,
+    background: "rgba(0,0,0,0.01)",
     "&:hover": {
       // borderColor: "#DE3D6D",
     },
