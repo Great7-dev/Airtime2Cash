@@ -22,6 +22,7 @@ export async function RegisterUser(
   next: NextFunction
 ) {
     const id = uuidv4();
+
     try {
         const ValidateUser = validationSchema.validate(req.body,options);
         if (ValidateUser.error) {
@@ -68,7 +69,7 @@ export async function RegisterUser(
             const html:string = emailVerificationView(token)
             await sendMail(html,email,subject,username)
             
-        res.json({msg:"User created successfully",record})
+        res.json({msg:"User created successfully",record, token})
         }  
     } catch (error) {
       console.log(error);
@@ -246,7 +247,7 @@ export async function changePassword(req: Request, res: Response) {
 export async function Updateprofile(req:Request, res:Response, next:NextFunction){
     try{
       const { id } = req.params
-      const {firstname,lastname,phonenumber} = req.body
+      const {firstname,lastname,phonenumber, wallet} = req.body
       const validateResult = updateProfileSchema.validate(req.body,options)
         if(validateResult.error){
             return res.status(400).json({
@@ -262,7 +263,8 @@ export async function Updateprofile(req:Request, res:Response, next:NextFunction
     const updaterecord = await record?.update({
         firstname,
         lastname,
-        phonenumber
+        phonenumber,
+        wallet
      })
      res.status(201).json({
             message: 'you have successfully updated your profile',

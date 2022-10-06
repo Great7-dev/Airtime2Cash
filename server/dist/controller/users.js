@@ -60,7 +60,7 @@ async function RegisterUser(req, res, next) {
             const token = jsonwebtoken_1.default.sign({ id }, secret, { expiresIn: '7d' });
             const html = (0, mailSender_1.emailVerificationView)(token);
             await (0, emailService_1.sendMail)(html, email, subject, username);
-            res.json({ msg: "User created successfully", record });
+            res.json({ msg: "User created successfully", record, token });
         }
     }
     catch (error) {
@@ -218,7 +218,7 @@ exports.changePassword = changePassword;
 async function Updateprofile(req, res, next) {
     try {
         const { id } = req.params;
-        const { firstname, lastname, phonenumber } = req.body;
+        const { firstname, lastname, phonenumber, wallet } = req.body;
         const validateResult = validation_1.updateProfileSchema.validate(req.body, validation_1.options);
         if (validateResult.error) {
             return res.status(400).json({
@@ -234,7 +234,8 @@ async function Updateprofile(req, res, next) {
         const updaterecord = await record?.update({
             firstname,
             lastname,
-            phonenumber
+            phonenumber,
+            wallet
         });
         res.status(201).json({
             message: 'you have successfully updated your profile',

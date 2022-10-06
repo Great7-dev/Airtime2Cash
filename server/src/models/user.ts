@@ -52,13 +52,13 @@ UserInstance.init(
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
+    wallet:{
+      type:DataTypes.NUMBER, 
+      defaultValue:0
+    },
     avatar: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    wallet:{
-      type:DataTypes.NUMBER,
-      allowNull:false
     }
   },
   

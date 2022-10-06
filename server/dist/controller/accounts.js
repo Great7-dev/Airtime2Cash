@@ -34,7 +34,7 @@ async function CreateAccount(req, res, next) {
             accNumber: req.body.accNumber,
             accName: req.body.accName,
             userId: userID,
-            wallet: req.body.balangce,
+            wallet: req.body.wallet,
         });
         if (record) {
             return res.status(201).json({
