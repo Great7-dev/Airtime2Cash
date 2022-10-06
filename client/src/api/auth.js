@@ -10,7 +10,10 @@ const client = axios.create({
 // const client2 = axios.create({
 //     baseURL: `${process.env.REACT_APP_ACCT_BASE_URL}`,
 // });
-console.log(process.env.REACT_APP_BASE_URL);
+
+const client2 = axios.create({
+  baseURL: `${process.env.REACT_APP_ACCT_BASE_URL}`,
+});
 
 const localStorageId = localStorage.getItem("id");
 
@@ -106,9 +109,6 @@ export const responseHandler = async (id, data) => {
     return error;
   }
 };
-const client2 = axios.create({
-  baseURL: `${process.env.REACT_APP_ACCT_BASE_URL}`,
-});
 
 export const signupHandler = async (data) => {
   try {
@@ -203,6 +203,7 @@ export const getSingleUser = async (id) => {
     return error;
   }
 };
+
 export const deleteSingleInfo = async (id) => {
   try {
     const response = await client2.delete(`/account/deletebankaccount/${id}`);
@@ -212,7 +213,61 @@ export const deleteSingleInfo = async (id) => {
     return error;
   }
 };
+// export const Mydata = async() => {
+//     try {
+//         const response = await client2.get(`/account/allTransactions?page=0&size=10`);
+//         console.log(response);
+//         return response.data;
+//     } catch (error) {
+//         console.log(error)
+//     }
+// };
+
+// export const result = async () => {
+//     try {
+//         const response = await axios.get(
+//             `http://localhost:4000/account/allTransactions`
+//             );
+
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+export const confirmAmount = async (data, id) => {
+  //   console.log({ airtime: data });
+  try {
+    const response = await client2.patch(
+      `/account/updatetransactionstatus/${id}`,
+      { airtimeAmount: data },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const cancelTransactions = async (id) => {
+  try {
+    const response = await client2.patch(
+      `/account/canceltransaction/${id}`,
+      {
+        headers: { authorization: `Bearer ${token}` },
+      },
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
 
 //  export const client = axios.create({
 //   baseURL: `${process.env.REACT_APP_BASE_URL}`,
-// });
+// })

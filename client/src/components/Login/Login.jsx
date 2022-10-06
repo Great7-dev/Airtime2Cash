@@ -6,7 +6,7 @@ import SubmitButton from "../utils/SubmitButton/SubmitButton";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
 
 const DivPara = styled.div`
@@ -37,8 +37,6 @@ const BtnContainer = styled.div`
     font-weight: bold;
   }
 `;
-
-
 
  const Login = ({ ...props }) => {
   
@@ -86,7 +84,7 @@ const navigate = useNavigate()
         <div className="login-card-padding">
           <div className="login-box">
             <div className="login-heading">
-              <Logo/>
+              <Logo />
             </div>
             <DivLogin>
               <h2>Login</h2>
@@ -139,4 +137,4 @@ const navigate = useNavigate()
   );
 };
 
-export default Login
+export default Login;

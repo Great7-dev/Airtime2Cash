@@ -23,7 +23,7 @@ const CheckMail = () => {
           <img src={Vector} alt="mail" />
         </div>
 
-        <h1>Check your mail</h1>
+        <h1 className="urmail">Check your mail</h1>
 
         <div className="parent-paragraph">
           <p className="paragraph">
