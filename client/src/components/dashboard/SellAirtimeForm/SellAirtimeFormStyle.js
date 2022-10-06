@@ -17,6 +17,9 @@ export const SellAirtimeFormStyle = styled.form `
     
     justify-content: space-between;
   }
+  #btnCopy{
+  margin-bottom: 1rem;
+  }
   .viewacctselect {
     cursor: pointer;
     display: flex;
@@ -40,6 +43,7 @@ export const SellAirtimeFormStyle = styled.form `
   .sellairtimeform {
     display: flex;
     margin:auto;
+   
     width:100%;
     flex-direction: column;
    
