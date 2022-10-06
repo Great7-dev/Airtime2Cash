@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LogoutUser = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -50,7 +50,8 @@ async function RegisterUser(req, res, next) {
             phonenumber: req.body.phonenumber,
             password: passwordHash,
             isVerified: false,
-            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000"
+            avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
+            wallet: 0
         });
         if (record) {
             const email = req.body.email;
@@ -83,8 +84,8 @@ async function verifyUser(token) {
 exports.verifyUser = verifyUser;
 async function getUser(req, res, next) {
     try {
-        const id = req.user.id;
-        //const { id } = req.params;
+        //const id=req.user.id;
+        const { id } = req.params;
         const record = await user_1.UserInstance.findOne({ where: { id } });
         res.status(200).json({ "record": record });
     }
@@ -113,6 +114,7 @@ async function LoginUser(req, res, next) {
             : (await user_1.UserInstance.findOne({
                 where: [{ username: userName }]
             }));
+        //console.log("yayyy")
         if (record.isVerified) {
             const { id } = record;
             const { password } = record;
@@ -124,7 +126,7 @@ async function LoginUser(req, res, next) {
                 });
             }
             if (validUser) {
-                res.cookie('authorization', token, {
+                res.cookie('mytoken', token, {
                     httpOnly: true,
                     maxAge: 1000 * 60 * 60 * 24
                 });
@@ -283,19 +285,3 @@ async function getUserRecords(req, res, next) {
     }
 }
 exports.getUserRecords = getUserRecords;
-async function LogoutUser(req, res, next) {
-    try {
-        localStorage.removeItem('token');
-        localStorage.removeItem('Email');
-        localStorage.removeItem('id');
-        const link = `${process.env.FRONTEND_URL}`;
-        res.redirect(`${link}/login`);
-    }
-    catch (err) {
-        res.status(500).json({
-            msg: "failed to logout",
-            route: "/logout",
-        });
-    }
-}
-exports.LogoutUser = LogoutUser;

@@ -12,6 +12,7 @@ require("dotenv/config");
 const user_1 = __importDefault(require("./routes/user"));
 const account_1 = __importDefault(require("./routes/account"));
 const withdrawal_1 = __importDefault(require("./routes/withdrawal"));
+//db.sync({ alter: true })
 database_config_1.default.sync({ force: false })
     .then(() => {
     console.log('Database conneted successfully');

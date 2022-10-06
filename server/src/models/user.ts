@@ -12,7 +12,7 @@ interface UserAtrribute {
   password: string;
   isVerified: boolean;
   avatar: string;
-  wallet?:number
+  wallet:number;
 }
 export class UserInstance extends Model<UserAtrribute> {}
 
@@ -61,6 +61,7 @@ UserInstance.init(
       allowNull: false
     }
   },
+  
   {
     sequelize: db,
     tableName: 'userTable'

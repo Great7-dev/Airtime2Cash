@@ -13,7 +13,8 @@ import accountRouter from './routes/account';
 import withdrawalRouter from './routes/withdrawal'
 
 
-db.sync({ force: false })
+//db.sync({ alter: true })
+db.sync({force:false})
   .then(() => {
     console.log('Database conneted successfully');
   })
