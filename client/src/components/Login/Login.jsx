@@ -6,7 +6,7 @@ import SubmitButton from "../utils/SubmitButton/SubmitButton";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
 
 const DivPara = styled.div`
@@ -38,38 +38,37 @@ const BtnContainer = styled.div`
   }
 `;
 
-
-
- const Login = ({ ...props }) => {
+const Login = ({ ...props }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const loginUser = async (email, password) => {
     try {
-
       // eslint-disable-next-line no-useless-escape
-      const emailRegex = new RegExp( /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,"gm");
+      const emailRegex = new RegExp(
+        /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
+        "gm"
+      );
 
       const isValidEmail = emailRegex.test(email);
       let res;
       if (email === "" || password === "") {
         return toast.error("Email or password cannot be empty");
-      } 
+      }
 
-        if (isValidEmail) {
-          res = await login({email, password})
-          console.log(res)
-     
-      localStorage.setItem("Email", res.record.email);
-      localStorage.setItem("token", res.token);
-      localStorage.setItem("id", res.record.id);
+      if (isValidEmail) {
+        res = await login({ email, password });
+        console.log(res.token);
+        localStorage.setItem("firstname", res.record.firstname);
+        localStorage.setItem("Email", res.record.email);
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("id", res.record.id);
 
-      toast.success(res.msg);
-   
-        navigate("/dashboard")
-  
-    }
-  } catch (error) {
+        toast.success(res.msg);
+
+        navigate("/dashboard");
+      }
+    } catch (error) {
       toast.error(error);
     }
   };
@@ -88,7 +87,7 @@ const navigate = useNavigate()
         <div className="login-card-padding">
           <div className="login-box">
             <div className="login-heading">
-              <Logo/>
+              <Logo />
             </div>
             <DivLogin>
               <h2>Login</h2>
@@ -141,4 +140,4 @@ const navigate = useNavigate()
   );
 };
 
-export default Login
+export default Login;

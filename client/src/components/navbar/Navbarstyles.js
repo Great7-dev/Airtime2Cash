@@ -7,8 +7,12 @@ justify-content: space-between;
 align-items: center;
 padding: 10px 190px 10px 150px;
 box-sizing: border-box;
-/* position:fixed;
-background-color: white;  */
+position:fixed;
+overflow: hidden;
+background-color: #ffffff;
+z-index: 50;
+top: 0;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
 
 ul {
 list-style-type: none;

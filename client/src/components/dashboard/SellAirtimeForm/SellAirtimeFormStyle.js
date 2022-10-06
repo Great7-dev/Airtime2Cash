@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SellAirtimeFormStyle = styled.form `
+export const SellAirtimeFormStyle = styled.form`
   margin-top: 2rem;
   .sel {
     display: flex;
@@ -11,10 +11,10 @@ export const SellAirtimeFormStyle = styled.form `
     margin-bottom: 2rem;
   }
   .sellAirtime-header {
-    width:83%%;
+    width: 83%;
     display: flex;
     margin: 0;
-    
+
     justify-content: space-between;
   }
   .viewacctselect {
@@ -31,30 +31,30 @@ export const SellAirtimeFormStyle = styled.form `
   }
   .sellairtimeform {
     display: flex;
-    margin:auto;
-    width:100%;
+    margin: auto;
+    width: 100%;
     flex-direction: column;
-   
+
     font-size: 1rem;
   }
   input {
-    width:100%;
+    width: 100%;
     padding: 1rem;
     margin: 8px 0px 16px 0px;
     opacity: 0.3;
-    font:14px;
+    font: 14px;
   }
-  .special{
+  .special {
     background-color: rgba(0, 0, 0, 0.04);
   }
-  label{
+  label {
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #012A4A;
-    width:100%;
+    color: #012a4a;
+    width: 100%;
   }
   .btnnn {
     cursor: pointer;
@@ -177,40 +177,40 @@ export const SellAirtimeFormStyle = styled.form `
       margin: 1rem 4rem;
       /* margin-bottom: 5rem; */
     }
-    .bank-header{
+    .bank-header {
       flex-direction: column;
       justify-items: center;
       align-items: center;
     }
-    .Acct{
+    .Acct {
       margin-bottom: 1rem;
     }
-    .viewacctselect{
+    .viewacctselect {
       margin-top: 0;
     }
   }
 `;
 
 export const CustomStyle = {
-    control: (base) => ({
-        ...base,
-        // border: "1px solid #DE3D6D",
-        minHeight: 48,
-        marginBottom: 15,
-        marginTop: 10,
-        fontSize: 13,
-        "&:hover": {
-            // borderColor: "#DE3D6D",
-        },
-    }),
-    valueContainer: (base) => ({
-        ...base,
-        padding: "0 6px",
-    }),
-    input: (base) => ({
-        ...base,
-        margin: 0,
-        padding: 0,
-        color: "#c4c4c4",
-    }),
+  control: (base) => ({
+    ...base,
+    // border: "1px solid #DE3D6D",
+    minHeight: 48,
+    marginBottom: 15,
+    marginTop: 10,
+    fontSize: 13,
+    "&:hover": {
+      // borderColor: "#DE3D6D",
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: "0 6px",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+    color: "#c4c4c4",
+  }),
 };

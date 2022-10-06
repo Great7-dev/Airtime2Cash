@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import "./dashboard.css";
 import Tab from "./Tab";
-import Navbar from "../Navbar/NavBar";
+import Navbar from "../NavBar/NavBar";
 // import TransactionHistory from "../transaction-history/TransactionHistory";
 import Bankform from "./Bankform/Bankform";
 import { IoArrowBackSharp } from "react-icons/io5";
