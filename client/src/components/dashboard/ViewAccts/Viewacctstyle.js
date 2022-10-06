@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Viewacct = styled.div`
+export const Viewacct = styled.div `
 width:100%;
   display: flex;
   flex-direction: column;
@@ -21,6 +21,20 @@ width:100%;
     border: none;
   }
 
+  .info-bank {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+    max-height: 250px;
+
+    overflow-y: scroll;
+
+  }
+
   @media (max-width: 599px) {
     .btnnnn {
       margin: 40px 32px 0 32px;
@@ -35,12 +49,12 @@ width:100%;
   }
 `;
 
-export const HeadingStyle = styled.div`
+export const HeadingStyle = styled.div `
   display: flex;
   align-items: center;
   align-self: flex-start;
   margin-left: 15%;
-  gap: 140px;
+  gap: 50px;
   margin-bottom: 2rem;
   margin-top: 60px;
   h1 {

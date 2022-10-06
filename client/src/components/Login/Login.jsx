@@ -38,46 +38,43 @@ const BtnContainer = styled.div`
   }
 `;
 
-const Login = ({ ...props }) => {
+ const Login = ({ ...props }) => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+const navigate = useNavigate()
+
   const loginUser = async (email, password) => {
     try {
-      // eslint-disable-next-line no-useless-escape
-      const emailRegex = new RegExp(
-        /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,
-        "gm"
-      );
 
-      const isValidEmail = emailRegex.test(email);
-      let res;
-      if (email === "" || password === "") {
-        return toast.error("Email or password cannot be empty");
-      }
-
-      if (isValidEmail) {
-        res = await login({ email, password });
-        console.log(res.token);
-        localStorage.setItem("firstname", res.record.firstname);
-        localStorage.setItem("Email", res.record.email);
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("id", res.record.id);
-
+     
+          const res = await login({email, password})
+         
+          console.log(res)
+      if(res.status === "success"){
+      localStorage.setItem("firstname", res.record.firstname);
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("id", res.record.id);
+      localStorage.setItem("wallet", res.record.wallet);
+     
         toast.success(res.msg);
-
-        navigate("/dashboard");
+         navigate("/dashboard")
+      }else{
+        toast.error(res.response.data.msg);
       }
-    } catch (error) {
-      toast.error(error);
+  
+  } catch (error) {
+
+      toast.error(error.res.data.message);
     }
   };
-  // const navigate = useNavigate()
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     loginUser(email, password);
+    
   };
 
   return (
@@ -136,7 +133,7 @@ const Login = ({ ...props }) => {
       </div>
       <ToastContainer />
     </div>
-    // </ToastContainer>
+    
   );
 };
 

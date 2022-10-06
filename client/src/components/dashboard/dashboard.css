@@ -6,6 +6,10 @@
     background-color: #f5f5f5;
 }
 
+.myAcctText {
+    margin-right: 100px;
+}
+
 .rectangle2 {
     width: 100vw;
     height: 271px;
@@ -28,12 +32,12 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 60%;
+    width: 45%;
     height: 1106px;
-    margin-left: 300px;
+    margin-left: 27.5%;
     margin-top: 10%;
     background: #FFFFFF;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 .dashboard {
@@ -118,10 +122,12 @@ background-color: #DE3D6D;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 0px;
-    gap: 26px;
+    padding-top: 25px;
+    padding-bottom: 0px;
+    gap: 15px;
+    font-size: 15px;
     width: 100%;
-    height: 21px;
+    height: 10px;
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -140,7 +146,7 @@ background-color: #DE3D6D;
     color: #e8f0f2;
 }
 
-ul.nav {
+.ul .nav {
     width: 100%;
     margin: -0.5rem auto 2rem;
     display: flex;
@@ -150,9 +156,16 @@ ul.nav {
     padding-left: 0px;
 }
 
+.mock:hover {
+    text-decoration: underline#DE3D6D 2px;
+}
+
+.test:active {
+    text-decoration: underline#DE3D6D 1px;
+}
+
 ul.nav li {
     width: 50%;
-    /* padding: 1rem; */
     list-style: none;
     text-align: center;
     cursor: pointer;
@@ -160,7 +173,6 @@ ul.nav li {
     height: 17px;
     font-family: "Inter";
     font-style: normal;
-    /* font-weight: 400; */
     font-size: 5px;
     line-height: 17px;
     color: #012a4a;
@@ -177,9 +189,10 @@ ul.nav li:last-child {
     border-top-right-radius: 2rem;
 }
 
-ul.nav li.active {
+
+/* ul.nav li.active:hover {
     text-decoration: underline red 2px;
-}
+} */
 
 .TabContent {
     font-size: 2rem;
@@ -248,9 +261,36 @@ ul.nav li.active {
         max-width: 107%;
     }
     .nav {
-        font-size: 10px;
+        display: flex;
     }
     h1 {
         font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .nav {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 37px;
+        /* margin: 2px 2px 2px 49px; */
+        font-size: 10px;
+        gap: 10px;
+    }
+    .rectangle2 {
+        max-width: 107%;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    .money {
+        width: 100%;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        margin: 2px 2px 15px 70px;
+    }
+    .frame1 {
+        margin-top: 60px;
     }
 }

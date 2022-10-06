@@ -7,8 +7,16 @@ import { set } from "react-hook-form";
 
 const Navbar = ({Name}) => {
   let dashboard;
+const currentUser=localStorage.getItem("name")
 localStorage.getItem("token") ? (dashboard = true) : (dashboard = false);
-
+const [display, setDisplay] = useState("none");
+const handleClick = () => {
+  if (display === "none") {
+    setDisplay("flex");
+  } else {
+    setDisplay("none");
+  }
+}
 
 // const handleClick = () => {
 
@@ -30,8 +38,10 @@ localStorage.getItem("token") ? (dashboard = true) : (dashboard = false);
           </Link>
         </ul>
       ) : (
-        <ul className="navbar__links">
+        <ul className="navbar__links" onClick={handleClick}>
       <img src="https://i.pinimg.com/564x/e9/39/f7/e939f772951d80f1811a5b6c2b16089c.jpg" alt="Airtime2cash" style={{borderRadius:'80px', width:'30px'}}/>
+        <p class="currentUser">{currentUser}</p>
+      <CardT display={display}/>
         </ul>
       )}
 

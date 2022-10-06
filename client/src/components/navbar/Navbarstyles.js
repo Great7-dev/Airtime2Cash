@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Navbarstyle = styled.div`
+export const Navbarstyle = styled.div `
 width :100%;
 display: flex;
 justify-content: space-between;
@@ -8,8 +8,7 @@ align-items: center;
 padding: 10px 190px 10px 150px;
 box-sizing: border-box;
 position:fixed;
-overflow: hidden;
-background-color: #ffffff;
+background-color: #ffffff; 
 z-index: 50;
 top: 0;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
@@ -18,6 +17,17 @@ ul {
 list-style-type: none;
 margin: 0;
 padding: 0;
+}
+.currentUser {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #012A4A;
+}
+.currentUSer:onHover{
+  background-color:red;
 }
 
 .navbar__links{

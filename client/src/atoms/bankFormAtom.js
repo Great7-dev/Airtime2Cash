@@ -22,3 +22,11 @@ export const id = atom({
 //   key: 'bankID', // unique ID (with respect to other atoms/selectors)
 //   default: '', // default value (aka initial value)
 // });
+
+export const userBanks = atom({
+
+    key: "userBanks", // unique ID (with respect to other atoms/selectors)
+
+    default: [], // default value (aka initial value)
+
+});
