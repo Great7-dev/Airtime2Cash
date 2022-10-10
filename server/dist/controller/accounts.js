@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.allTransactions = exports.deleteTransaction = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.getTransactionHistory = exports.getWithdrawalHistory = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
+exports.allPendingTransactions = exports.allTransactions = exports.deleteTransaction = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.getTransactionHistory = exports.getWithdrawalHistory = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
 const uuid_1 = require("uuid");
 const account_1 = require("../models/account");
 const user_1 = require("../models/user");
@@ -374,6 +374,7 @@ async function allTransactions(req, res, next) {
         const transactions = await transactions_1.SellAirtimeInstance.findAndCountAll({
             limit: size,
             offset: page * size,
+            order: [['updatedAt', 'DESC']],
         });
         if (!transactions) {
             return res.status(404).json({ message: 'No transaction found' });
@@ -391,3 +392,37 @@ async function allTransactions(req, res, next) {
     }
 }
 exports.allTransactions = allTransactions;
+async function allPendingTransactions(req, res, next) {
+    try {
+        const pageAsNumber = Number.parseInt(req.query.page);
+        const sizeAsNumber = Number.parseInt(req.query.size);
+        let page = 0;
+        if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+            page = pageAsNumber;
+        }
+        let size = 10;
+        if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
+            size = sizeAsNumber;
+        }
+        const transactions = await transactions_1.SellAirtimeInstance.findAndCountAll({
+            where: { aStatus: "pending" },
+            limit: size,
+            offset: page * size,
+            order: [['updatedAt', 'DESC']],
+        });
+        if (!transactions) {
+            return res.status(404).json({ message: 'No transaction found' });
+        }
+        return res.send({
+            content: transactions.rows,
+            totalPages: Math.ceil(transactions.count / size),
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            status: 'error',
+            message: error,
+        });
+    }
+}
+exports.allPendingTransactions = allPendingTransactions;
