@@ -12,8 +12,8 @@ export async function allTransactions(req: Request | any, res: Response, next: N
     if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
       page = pageAsNumber;
     }
-    let size = 10;
-    if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
+    let size = 2;
+    if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 2) {
       size = sizeAsNumber;
     }
    const transactions = await SellAirtimeInstance.findAndCountAll({

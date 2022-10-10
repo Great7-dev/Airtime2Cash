@@ -4,7 +4,7 @@ import { v4 as uuidv4, validate } from "uuid";
 import { AccountInstance }  from "../models/account";
 import {UserInstance} from "../models/user";
 import {SellAirtimeInstance} from "../models/transactions"
-import { createAccountSchema,sellAirtimeSchema,options } from '../utils/validation'
+import { createAccountSchema,sellAirtimeSchema,updateStatusSchema,options } from '../utils/validation'
 import { UUIDV1 } from "sequelize";
 import { idText } from "typescript";
 const Flutterwave = require('flutterwave-node-v3');
@@ -20,7 +20,6 @@ export async function CreateAccount(
 ) {
     const id = uuidv4();
     try {
-      console.log(req)
         const userID=req.user.id;
         const ValidateAccount = createAccountSchema.validate(req.body,options);
         if (ValidateAccount.error) {
@@ -225,6 +224,105 @@ flw.Transfer.initiate(details)
     }
   }
 
+ 
+
+
+  export async function updateTransactionStatus(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { id } = req.params;
+      const airtimeAmount=req.body.airtimeAmount
+  
+      const validationResult = updateStatusSchema.validate(req.body, options);
+      if (validationResult.error) {
+        return res.status(400).json({
+          Error: validationResult.error.details[0].message,
+        });
+      }
+  
+      const record = await SellAirtimeInstance.findOne({ where: { id } });
+      if (!record) {
+        return res.status(404).json({
+          Error: "Cannot find existing transaction",
+        });
+      }
+      const amountToReceive=parseFloat(airtimeAmount)*0.7;
+      const updatedrecord = await record.update({
+        airtimeAmount: req.body.airtimeAmount,
+        airtimeAmountToReceive: amountToReceive,
+        aStatus: "sent",
+      });
+      res.status(201).json({
+        message: "Your transaction has been updated successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      
+      res.status(500).json({
+        msg: "failed to update",
+        route: "/updatetransactionstatus/:id",
+      });
+    }
+  }
+
+
+
+  export async function cancelTransaction(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { id } = req.params;
+  
+  
+      const record = await SellAirtimeInstance.findOne({ where: { id } });
+      if (!record) {
+        return res.status(404).json({
+          Error: "Cannot find existing transaction",
+        });
+      }
+      
+      const updatedrecord = await record.update({
+        uStatus: "cancelled",
+        aStatus: "cancelled",
+      });
+      res.status(201).json({
+        message: "Your transaction has been cancelled successfully",
+      });
+    } catch (error) {
+      res.status(500).json({
+        msg: "failed to update",
+        route: "/canceltransaction/:id",
+      });
+    }
+  }
+
+
+  // export async function deleteTransaction(
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction
+
+  // ) {
+    
+  //   try {
+  //     const { id } = req.params;
+  //     const deletedRecord = await record.destroy();
+  //    return  res.status(200).json({
+  //       msg: "Transaction deleted successfully",
+  //     });
+  //   } catch (error) {
+  //     return res.status(500).json({
+  //       msg: "failed to delete",
+  //       route: "/deletetransaction/:id",
+  //     });
+  //   }
+  // }
+
   export const getAmount = async (req: Request|any, res: Response) => {
     try {
       const {id} = req.params;
@@ -239,7 +337,8 @@ flw.Transfer.initiate(details)
         "status": "OK",
         "record":record,
       })
-    } catch (error) {
+    }
+    catch (error) {
       res.status(500).json({
         msg: "failed to get transaction",
         route: "/getamount/:id",

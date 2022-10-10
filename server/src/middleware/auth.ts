@@ -8,8 +8,7 @@ export async function auth (req:Request | any,res:Response,next:NextFunction){
      const authorization = req.headers.authorization;
     
      if(!authorization){
-         res.status(401)
-         res.json({
+         res.status(401).json({
              Error:'kindly sign in as a user'
          })
      }
@@ -18,8 +17,7 @@ export async function auth (req:Request | any,res:Response,next:NextFunction){
      const verified = jwt.verify(token, secret);
  
      if(!verified){
-         res.status(401)
-         res.json({
+         res.status(401).json({
              Error: 'User not verified, you cant access this route'
          })
          return
@@ -28,8 +26,7 @@ export async function auth (req:Request | any,res:Response,next:NextFunction){
  
      const user = await UserInstance.findOne({where:{id}})
      if(!user){
-         res.status(404)
-         res.json({
+         res.status(404).json({
              Error:'user not verified'
          })
          return
@@ -38,8 +35,7 @@ export async function auth (req:Request | any,res:Response,next:NextFunction){
      
      next()
   }catch (error){
-     res.status(500)
-     res.json({
+     res.status(500).json({
          Error:"user not logged in"
      })
      return

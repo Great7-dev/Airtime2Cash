@@ -11,8 +11,7 @@ async function auth(req, res, next) {
     try {
         const authorization = req.headers.authorization;
         if (!authorization) {
-            res.status(401);
-            res.json({
+            res.status(401).json({
                 Error: 'kindly sign in as a user'
             });
         }
@@ -20,8 +19,7 @@ async function auth(req, res, next) {
         const token = authorization?.slice(7, authorization.length) || req.cookies.mytoken;
         const verified = jsonwebtoken_1.default.verify(token, secret);
         if (!verified) {
-            res.status(401);
-            res.json({
+            res.status(401).json({
                 Error: 'User not verified, you cant access this route'
             });
             return;
@@ -29,8 +27,7 @@ async function auth(req, res, next) {
         const { id } = verified;
         const user = await user_1.UserInstance.findOne({ where: { id } });
         if (!user) {
-            res.status(404);
-            res.json({
+            res.status(404).json({
                 Error: 'user not verified'
             });
             return;
@@ -39,8 +36,7 @@ async function auth(req, res, next) {
         next();
     }
     catch (error) {
-        res.status(500);
-        res.json({
+        res.status(500).json({
             Error: "user not logged in"
         });
         return;

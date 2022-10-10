@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAmount = exports.withdraw = exports.sellAirtime = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
+exports.getAmount = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
 const uuid_1 = require("uuid");
 const account_1 = require("../models/account");
 const user_1 = require("../models/user");
@@ -12,7 +12,6 @@ const emailService_1 = require("./emailService");
 async function CreateAccount(req, res, next) {
     const id = (0, uuid_1.v4)();
     try {
-        console.log(req);
         const userID = req.user.id;
         const ValidateAccount = validation_1.createAccountSchema.validate(req.body, validation_1.options);
         if (ValidateAccount.error) {
@@ -198,6 +197,84 @@ const withdraw = async (req, res) => {
     }
 };
 exports.withdraw = withdraw;
+async function updateTransactionStatus(req, res, next) {
+    try {
+        const { id } = req.params;
+        const airtimeAmount = req.body.airtimeAmount;
+        const validationResult = validation_1.updateStatusSchema.validate(req.body, validation_1.options);
+        if (validationResult.error) {
+            return res.status(400).json({
+                Error: validationResult.error.details[0].message,
+            });
+        }
+        const record = await transactions_1.SellAirtimeInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({
+                Error: "Cannot find existing transaction",
+            });
+        }
+        const amountToReceive = parseFloat(airtimeAmount) * 0.7;
+        const updatedrecord = await record.update({
+            airtimeAmount: req.body.airtimeAmount,
+            airtimeAmountToReceive: amountToReceive,
+            aStatus: "sent",
+        });
+        res.status(201).json({
+            message: "Your transaction has been updated successfully",
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: "failed to update",
+            route: "/updatetransactionstatus/:id",
+        });
+    }
+}
+exports.updateTransactionStatus = updateTransactionStatus;
+async function cancelTransaction(req, res, next) {
+    try {
+        const { id } = req.params;
+        const record = await transactions_1.SellAirtimeInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({
+                Error: "Cannot find existing transaction",
+            });
+        }
+        const updatedrecord = await record.update({
+            uStatus: "cancelled",
+            aStatus: "cancelled",
+        });
+        res.status(201).json({
+            message: "Your transaction has been cancelled successfully",
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "failed to update",
+            route: "/canceltransaction/:id",
+        });
+    }
+}
+exports.cancelTransaction = cancelTransaction;
+// export async function deleteTransaction(
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) {
+//   try {
+//     const { id } = req.params;
+//     const deletedRecord = await record.destroy();
+//    return  res.status(200).json({
+//       msg: "Transaction deleted successfully",
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       msg: "failed to delete",
+//       route: "/deletetransaction/:id",
+//     });
+//   }
+// }
 const getAmount = async (req, res) => {
     try {
         const { id } = req.params;

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/routes/user.ts</title>
+    <title>Code coverage report for src/routes/account.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/routes</a> user.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/routes</a> account.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.14% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/28</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.14% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/28</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -81,29 +81,7 @@
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -119,35 +97,27 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
-const router = express.Router()
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express';
+const router= express.Router();
+import {auth} from '../middleware/auth';
+import {CreateAccount, deleteBankAccount, getBankAccount, sellAirtime,withdraw,updateTransactionStatus, cancelTransaction, getAmount} from '../controller/accounts';
+import { allTransactions } from '../controller/AllTransactions';
+// import {CreateAccount, deleteBankAccount, getAmount, getBankAccount, sellAirtime,withdraw} from '../controller/accounts';
 &nbsp;
-import { auth } from '../middleware/auth';
-import { isNamedExports } from 'typescript';
-import { changePassword, forgotPassword, LoginUser, RegisterUser, Updateprofile, verifyUser, getUser, getUserRecords, getUsers } from '../controller/users'
+router.post('/createbankaccount', auth,CreateAccount);
+router.get('/getbankaccount/:id', getBankAccount); 
+router.delete('/deletebankaccount/:id', deleteBankAccount); 
+router.post('/sellairtime', auth, sellAirtime);
+router.get('/allTransactions', allTransactions)
+router.post('/withdraw', withdraw);
+router.get('/getamount/:id',getAmount)
+router.patch('/updatetransactionstatus/:id', auth, updateTransactionStatus);
+router.patch('/canceltransaction/:id', auth, cancelTransaction);
+// router.delete('/deletetransaction/:id', auth, deleteTransaction);
 &nbsp;
-router.get("/verify/:token", async(req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >const token = req.params.token;</span>
-<span class="cstat-no" title="statement not covered" >const response = await verifyUser(token);</span>
-<span class="cstat-no" title="statement not covered" >const link = `${process.env.FRONTEND_URL}`;</span>
-<span class="cstat-no" title="statement not covered" >res.redirect(`${link}/login`);</span>
-<span class="cstat-no" title="statement not covered" >})</span>
-&nbsp;
-&nbsp;
-router.patch('/update/:id',auth, Updateprofile)
-router.get('/user/:id',  getUsers)
-&nbsp;
-&nbsp;
-router.post('/create', RegisterUser);
-router.get('/getuser/:id',auth, getUser);
-router.post('/login', LoginUser);
-router.post('/forgotpassword', forgotPassword )
-router.patch('/change-password/:id', changePassword);
-router.get('/userrecords', auth,getUserRecords);
-&nbsp;
-&nbsp;
-export default router;
-&nbsp;</pre></td></tr></table></pre>
+export default router;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
