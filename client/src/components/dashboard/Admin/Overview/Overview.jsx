@@ -10,11 +10,12 @@ import {
   minModalState,
 } from "../../../../atoms/successModalAtom";
 import { useRecoilState } from "recoil";
-import { OverviewContainer } from "./Overviewstyle.js";
+import { OverviewContainer, StyledPaginateContainer } from "./Overviewstyle.js";
 import Pagination from "../Pagination/pagination";
 import axios from "axios";
 import { amount } from "../../../../atoms/bankFormAtom";
 import { currentTransactionState } from "../../../../atoms/currentTransactionAtom";
+import { result } from "../../../../api/auth";
 
 const Overview = () => {
   const [ShowModal, setShowModal] = useRecoilState(minModalState);
@@ -22,36 +23,29 @@ const Overview = () => {
   const [currentTransaction, setCurrentTransaction] = useRecoilState(
     currentTransactionState
   );
-
-  // console.log(currentTransaction);
-  // const [airtimeAmount, setAirtimeAmount]=useRecoilState(amount)
   const [overview, setOverview] = useState([]);
   const [openModal, setOpenModal] = useState(true);
   const [alldetails, setAllDetails] = useState({});
-
+  
+ 
   const handleClick = (row) => {
-    // e.preventDefault();
     setAllDetails(row);
     setOpenModal(false);
     setShowModal(true);
     setEditModal(false);
-    // setAllDetails(e);
+    
   };
+  
+  const getresult = async () => {
+    const getResultData = await result(pageIndex)
+    setOverview(getResultData)
+  }
 
-  const result = async () => {
-    const response = await axios.get(
-      `http://localhost:4000/account/allTransactions`
-    );
-    console.log(response);
-    if (response.status === 200) {
-      return setOverview(response.data.content);
-    }
-  };
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => overview, []);
-
+ 
   useEffect(() => {
-    result();
+    getresult();
   }, []);
 
   const {
@@ -73,13 +67,16 @@ const Overview = () => {
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: 0},
     },
     usePagination
   );
 
   const { pageIndex, pageSize } = state;
-
+useEffect(() => {
+  getresult(pageIndex);
+}, [pageIndex])
+// console.log(pageIndex);
   return (
     <OverviewContainer>
       <h1 className="ad-dash">Admin Dashboard</h1>
@@ -95,7 +92,7 @@ const Overview = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {overview.map((row) => {
+          {overview?.content?.map((row) => {
             return (
               <tr key={row.id}>
                 <td>{row.userEmail}</td>
@@ -129,27 +126,26 @@ const Overview = () => {
           })}
         </tbody>
       </table>
-      <div>
-        <button onClick={() => gotoPage(1)} disabled={!canPreviousPage}>
+        <StyledPaginateContainer>
+        <button onClick={() => gotoPage(pageIndex)} disabled={!canPreviousPage} className="bt">
           {"<<"}
         </button>{" "}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage} className="bt">
           Previous
         </button>{" "}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        <button onClick={() => nextPage()} disabled={!canNextPage} className="bt">
           Next
         </button>{" "}
-        <button onClick={() => gotoPage(pageCount - 2)} disabled={!canNextPage}>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} className="bt">
           {">>"}
         </button>{" "}
         <span>
           Page{" "}
           <strong>
-            {pageIndex + 1} of {pageOptions.length}
+            {pageIndex + 1} of {overview.totalPages}
           </strong>{" "}
         </span>
-      </div>
-
+        </StyledPaginateContainer>
       {ShowModal && <Editcancel alldetails={alldetails} />}
     </OverviewContainer>
   );

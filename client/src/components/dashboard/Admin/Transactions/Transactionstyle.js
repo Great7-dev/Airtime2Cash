@@ -68,3 +68,34 @@ table {
   }
 
   `;
+   export const StyledPaginateContainer = styled.div`
+   align-items: center;
+   gap: 5px;
+   justify-content: center;
+   margin-top:1.5rem;
+   margin-bottom:1.5rem;
+   display: flex;
+    .bt:hover {
+      color: white;
+      background-color: #DE3D6D;
+    }
+  
+    .bt{
+      margin: 3px;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      padding: 10px;
+      color:#03435F;
+      /* background-color:#fff; */
+      /* color:#fff; */
+      border:none;
+      cursor: pointer;
+       :active{
+        background-color: #DE3D6D;
+        color: white;
+       }
+      :disabled{
+        color: grey;
+      }
+    }
+  `;

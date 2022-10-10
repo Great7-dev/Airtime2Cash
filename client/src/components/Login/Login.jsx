@@ -93,7 +93,7 @@ const navigate = useNavigate()
               <div className="">
                 <InputField
                   type="input"
-                  class="input"
+                  className="input"
                   label="Email"
                   placeholder="Enter your email or username"
                   name="email"
@@ -104,7 +104,7 @@ const navigate = useNavigate()
               <div className="">
                 <InputField
                   type="password"
-                  class="input"
+                  className="input"
                   label="Password"
                   placeholder="Enter your password"
                   name="password"

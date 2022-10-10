@@ -40,7 +40,7 @@ const handleClick = () => {
       ) : (
         <ul className="navbar__links" onClick={handleClick}>
       <img src="https://i.pinimg.com/564x/e9/39/f7/e939f772951d80f1811a5b6c2b16089c.jpg" alt="Airtime2cash" style={{borderRadius:'80px', width:'30px'}}/>
-        <p class="currentUser">{currentUser}</p>
+        <p className="currentUser">{currentUser}</p>
       <CardT display={display}/>
         </ul>
       )}

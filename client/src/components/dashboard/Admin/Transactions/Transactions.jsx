@@ -2,29 +2,28 @@ import axios from "axios";
 import React, { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { useTable, usePagination } from "react-table";
+import { resultTrans } from "../../../../api/auth";
 // import { Mydata } from "../../../../api/auth";
 import ColumnsTranc from "../columnsTranc";
 // import mockdata from "../mockdata";
 import "./Transactionstyle.js";
-import { TransactionContainer } from "./Transactionstyle.js";
+import { StyledPaginateContainer, TransactionContainer } from "./Transactionstyle.js";
 
 const Transactions = () => {
   const [allTransactions, setAllTransactions] = useState([]);
+  const [alldetails, setAllDetails] = useState({});
   
-  
-
-  const result = async () => {
-    const response = await axios.get(
-      `http://localhost:4000/account/allTransactions`
-    );
-    setAllTransactions(response.data.content);
-  };
+  const getTrans = async () => {
+    const getResultData = await resultTrans(pageIndex)
+    setAllTransactions(getResultData);
+   
+  }
 
   const columns = useMemo(() => ColumnsTranc, []);
   const data = useMemo(() => allTransactions, []);
 
   useEffect(() => {
-    result();
+    getTrans();
   }, []);
 
   const {
@@ -53,6 +52,9 @@ const Transactions = () => {
 
   const { pageIndex, pageSize } = state;
 
+  useEffect(() => {
+    getTrans(pageIndex);
+  }, [pageIndex])
   return (
     <TransactionContainer>
       <h1 className="ad-tran">Transactions</h1>
@@ -67,7 +69,7 @@ const Transactions = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {allTransactions.map((row) => {
+          {allTransactions?.content?.map((row) => {
             return (
               <tr>
                 <td>{row.phoneNumber}</td>
@@ -95,26 +97,28 @@ const Transactions = () => {
           })}
         </tbody>
       </table>
-      <div>
-        <button onClick={() => gotoPage(1)} disabled={!canPreviousPage}>
+      {/* <div> */}
+        <StyledPaginateContainer>
+        <button onClick={() => gotoPage(pageIndex)} disabled={!canPreviousPage} className="bt">
           {"<<"}
         </button>{" "}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage} className="bt">
           Previous
         </button>{" "}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
+        <button onClick={() => nextPage()} disabled={!canNextPage} className="bt">
           Next
         </button>{" "}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} className="bt">
           {">>"}
         </button>{" "}
         <span>
           Page{" "}
           <strong>
-            {pageIndex + 1} of {pageOptions.length}
+            {pageIndex + 1} of {allTransactions.totalPages}
           </strong>{" "}
         </span>
-      </div>
+        </StyledPaginateContainer>
+      {/* </div> */}
       {/* <usePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"

@@ -6,9 +6,9 @@ export const EditcancelStyle = styled.div`
     border-radius: 8px; 
     padding: 8px 10px;
     width: 12rem;
-    position: relative;
-    left: 57rem;
-    bottom: 19rem;
+    position: fixed;
+    left: 77.5rem;
+    bottom: 35rem;
     z-index: 100; 
 ul{
     cursor: pointer;

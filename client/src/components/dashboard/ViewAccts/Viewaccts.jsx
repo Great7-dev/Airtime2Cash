@@ -13,7 +13,7 @@ const Viewaccts = () => {
     const response = await getSingleUser(id);
     setUserBankState(response.data.record.accounts);
   };
-  // console.log(userBankState);
+  
   useEffect(() => {
     fetcher();
   }, []);

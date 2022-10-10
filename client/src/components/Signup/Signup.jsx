@@ -7,7 +7,8 @@ import { IoIosArrowRoundBack } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import {  SignupWrapper, StyledButton, StyledForm, StyleInput } from './signUpStyle';
-import {signupHandler} from "../../api/auth"; 
+import { signupHandler } from '../../api/auth';
+// import {signupHandler} from "../../api/auth"; 
 
 const initialValue = {
     firstname: "",

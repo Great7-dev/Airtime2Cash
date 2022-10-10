@@ -56,6 +56,16 @@ export const getUser = async(id) => {
     }
 };
 
+export const signupHandler = async(data) => {
+    try {
+        const response = await client.post('/create', data);
+        return response;
+    } catch (error) {
+        return error;
+    }
+};
+
+
 export const login = async(data) => {
     try {
         // eslint-disable-next-line no-useless-escape
@@ -263,6 +273,27 @@ export const cancelTransactions = async (id) => {
   }
 };
 
-//  export const client = axios.create({
-//   baseURL: `${process.env.REACT_APP_BASE_URL}`,
-// });
+export const result = async (pageIndex) => {
+  try {
+  const response = await axios.get(
+    `http://localhost:4000/account/allTransactions?page=${pageIndex}&size=10`
+  );
+  return response.data;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export const resultTrans = async (pageIndex) => {
+ try{
+   const response = await axios.get(
+    `http://localhost:4000/account/allTransactions?page=${pageIndex}&size=10`
+  );
+ return response.data
+   } catch (error){
+    console.log(error)
+   }
+};
+
+
+// setAllTransactions(response.data.content);
