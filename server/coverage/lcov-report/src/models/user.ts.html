@@ -25,11 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-<<<<<<< HEAD
-                <span class='fraction'>62/62</span>
-=======
-                <span class='fraction'>66/66</span>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+                <span class='fraction'>76/76</span>
             </div>
         
             
@@ -50,11 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-<<<<<<< HEAD
-                <span class='fraction'>62/62</span>
-=======
-                <span class='fraction'>66/66</span>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+                <span class='fraction'>76/76</span>
             </div>
         
             
@@ -133,14 +125,21 @@
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
-<<<<<<< HEAD
-<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-=======
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -202,9 +201,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<<<<<<< HEAD
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { DataTypes, Model } from 'sequelize';
 import db from '../config/database.config';
+import { AccountInstance } from './account';
 &nbsp;
 interface UserAtrribute {
   id: string;
@@ -216,8 +229,10 @@ interface UserAtrribute {
   password: string;
   isVerified: boolean;
   avatar: string;
+  wallet:number;
+  isAdmin:boolean;
 }
-export class UserInstance extends Model&lt;UserAtrribute&gt; {}
+export class UserInstance extends Model&lt;UserAtrribute&gt; { }
 &nbsp;
 UserInstance.init(
   {
@@ -255,119 +270,35 @@ UserInstance.init(
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
+    wallet: {
+      type: DataTypes.NUMBER,
+      defaultValue: 0
+    },
     avatar: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+   
+    isAdmin:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false
+    },
   },
   {
     sequelize: db,
     tableName: 'userTable'
   }
-);
+)
+UserInstance.hasMany(AccountInstance, { foreignKey: "userId", as: "accounts" });
+AccountInstance.belongsTo(UserInstance, { foreignKey: "userId", as: "user" });
 &nbsp;</pre></td></tr></table></pre>
-=======
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { DataTypes , Model} from "sequelize";
-import db from "../config/database.config";
-&nbsp;
-    
-interface UserAtrribute {
-    id:string
-    firstname: string;
-    lastname: string;
-    username: string;
-    email: string;
-    phonenumber: number;
-    password: string;
-    isVerified: boolean;
-    avatar: string;
-}  
-export class UserInstance extends Model&lt;UserAtrribute&gt; {}
-&nbsp;
-&nbsp;
-UserInstance.init({
-    id: {
-        type: DataTypes.UUIDV4,
-        primaryKey: true,
-        allowNull:false
-    },
-&nbsp;
-    firstname: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    lastname: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    phonenumber: {
-        type: DataTypes.TEXT,
-        allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    isVerified: {
-        type: DataTypes.BOOLEAN,
-        allowNull:false
-        
-    },
-    avatar: {
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-},
-    {
-        sequelize: db,
-        tableName:"userTable",
-    }
-&nbsp;
-    
-    )</pre></td></tr></table></pre>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                at 2022-09-16T08:06:07.904Z
-=======
-<<<<<<< HEAD
->>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
-=======
-                at 2022-09-16T08:06:07.904Z
-=======
-<<<<<<< HEAD
->>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
-                at 2022-09-16T08:39:43.892Z
-=======
-                at 2022-09-15T23:40:34.861Z
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ee52ed6f8a9f81b28537b0dd26e996f0872e8f41
->>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
-=======
->>>>>>> ee52ed6f8a9f81b28537b0dd26e996f0872e8f41
->>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
+                at 2022-10-10T15:26:38.875Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

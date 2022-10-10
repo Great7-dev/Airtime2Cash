@@ -49,7 +49,7 @@ async function RegisterUser(req, res, next) {
             email: req.body.email,
             phonenumber: req.body.phonenumber,
             password: passwordHash,
-            isVerified: false,
+            isVerified: true,
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
             wallet: 0,
             isAdmin: false,
@@ -61,7 +61,11 @@ async function RegisterUser(req, res, next) {
             const token = jsonwebtoken_1.default.sign({ id }, secret, { expiresIn: '7d' });
             const html = (0, mailSender_1.emailVerificationView)(token);
             await (0, emailService_1.sendMail)(html, email, subject, username);
-            res.json({ msg: "User created successfully", record });
+            return res.status(201).json({
+                status: "Success",
+                msg: "User created successfully",
+                record
+            });
         }
     }
     catch (error) {

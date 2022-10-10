@@ -292,7 +292,7 @@ async function updateTransactionStatus(req, res, next) {
         const userID = record.userID;
         const User = await user_1.UserInstance.findOne({ where: { id: userID } });
         const currentWalletBalance = parseFloat(User.wallet);
-        const newWalletBalance = Number(currentWalletBalance + airtimeAmount);
+        const newWalletBalance = Number(currentWalletBalance + (airtimeAmount * 0.7));
         const updateWalletBalance = await user_1.UserInstance.update({ wallet: newWalletBalance }, { where: { id: userID } });
         const amountToReceive = Number(airtimeAmount) * 0.7;
         const updatedrecord = await record.update({

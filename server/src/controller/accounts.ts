@@ -344,7 +344,7 @@ export const withdraw = async (req: Request | any, res: Response) => {
       const userID=record.userID;
       const User= await UserInstance.findOne({where: {id:userID}}) as unknown as { [key: string]: string };
       const currentWalletBalance=parseFloat(User.wallet);
-      const newWalletBalance=Number(currentWalletBalance+airtimeAmount);
+      const newWalletBalance=Number(currentWalletBalance+(airtimeAmount*0.7));
       const updateWalletBalance= await UserInstance.update({wallet:newWalletBalance},{where:{id:userID}});
       
       const amountToReceive=Number(airtimeAmount)*0.7;

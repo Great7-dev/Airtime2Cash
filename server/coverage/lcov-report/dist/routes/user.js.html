@@ -23,15 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-<<<<<<< HEAD
-                <span class="strong">85% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/20</span>
-=======
-                <span class="strong">85.71% </span>
-                <span class="quiet">Statements</span>
-                <span class='fraction'>18/21</span>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+                <span class='fraction'>26/34</span>
             </div>
         
             
@@ -50,15 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-<<<<<<< HEAD
-                <span class="strong">85% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/20</span>
-=======
-                <span class="strong">85.71% </span>
-                <span class="quiet">Lines</span>
-                <span class='fraction'>18/21</span>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+                <span class='fraction'>26/34</span>
             </div>
         
             
@@ -73,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,13 +83,21 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<<<<<<< HEAD
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-=======
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -114,6 +110,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -128,28 +138,32 @@ var __importDefault = (this &amp;&amp; this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
-<<<<<<< HEAD
-const users_1 = require("../controller/users");
-//router.post('/confirmemail',sendMail);
-=======
-// import { LoginUser, RegisterUser, Updateprofile, verifyUser } from '../controller/users'
 const auth_1 = require("../middleware/auth");
 const users_1 = require("../controller/users");
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
 router.get("/verify/:token", async (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    const token = req.params.token;</span>
 <span class="cstat-no" title="statement not covered" >    const response = await (0, users_1.verifyUser)(token);</span>
-<span class="cstat-no" title="statement not covered" >    res.json(response);</span>
+<span class="cstat-no" title="statement not covered" >    const link = `${process.env.FRONTEND_URL}`;</span>
+<span class="cstat-no" title="statement not covered" >    res.redirect(`${link}/login`);</span>
 });
-<<<<<<< HEAD
-router.patch('/update/:id', users_1.Updateprofile);
-=======
+router.get('/user/:id', users_1.getUsers);
+//
+router.get("/verify/:token", async (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >    const token = req.params.token;</span>
+<span class="cstat-no" title="statement not covered" >    const response = await (0, users_1.verifyUser)(token);</span>
+<span class="cstat-no" title="statement not covered" >    const link = `${process.env.FRONTEND_URL}`;</span>
+<span class="cstat-no" title="statement not covered" >    res.redirect(`${link}/login`);</span>
+});
 router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
+router.get('/user/:id', users_1.getUsers);
+router.patch('/update-wallet', auth_1.auth, users_1.UpdateWallet);
+router.patch('/update/:id', auth_1.auth, users_1.Updateprofile);
 router.post('/create', users_1.RegisterUser);
+router.get('/getuser/:id', auth_1.auth, users_1.getUser);
 router.post('/login', users_1.LoginUser);
 router.post('/forgotpassword', users_1.forgotPassword);
 router.patch('/change-password/:id', users_1.changePassword);
+router.get('/userrecords', auth_1.auth, users_1.getUserRecords);
 exports.default = router;
 &nbsp;</pre></td></tr></table></pre>
 
@@ -158,31 +172,7 @@ exports.default = router;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-                at 2022-09-16T08:06:07.904Z
-=======
-<<<<<<< HEAD
->>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
-=======
-                at 2022-09-16T08:06:07.904Z
-=======
-<<<<<<< HEAD
->>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
-                at 2022-09-16T08:39:43.892Z
-=======
-                at 2022-09-15T23:40:34.861Z
->>>>>>> 37a5294d0f730e62ecee5fb8364bf12e97baf96f
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> ee52ed6f8a9f81b28537b0dd26e996f0872e8f41
->>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
-=======
->>>>>>> ee52ed6f8a9f81b28537b0dd26e996f0872e8f41
->>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
+                at 2022-10-10T15:26:38.875Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

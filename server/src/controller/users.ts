@@ -56,7 +56,7 @@ export async function RegisterUser(
             email: req.body.email,
             phonenumber: req.body.phonenumber,
             password: passwordHash,
-            isVerified: false,
+            isVerified: true,
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
             wallet: 0,
             isAdmin: false,
@@ -69,7 +69,10 @@ export async function RegisterUser(
             const html:string = emailVerificationView(token)
             await sendMail(html,email,subject,username)
             
-        res.json({msg:"User created successfully",record})
+       return res.status(201).json({
+        status:"Success",
+        msg:"User created successfully",
+        record})
         }  
     } catch (error) {
       console.log(error);
