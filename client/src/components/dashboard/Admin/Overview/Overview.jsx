@@ -40,7 +40,7 @@ const Overview = () => {
 
   const result = async () => {
     const response = await axios.get(
-      `http://localhost:4000/account/allTransactions`
+      `http://localhost:4000/account/pendingtransactions`
     );
     console.log(response);
     if (response.status === 200) {
