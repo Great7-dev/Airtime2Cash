@@ -76,10 +76,23 @@ FN:1,Object.<anonymous>
 FN:2,Object.<anonymous>.__importDefault
 FN:9,sendMail
 FNF:3
+<<<<<<< HEAD
+<<<<<<< HEAD
+FNH:2
+FNDA:1,Object.<anonymous>
+FNDA:1,Object.<anonymous>.__importDefault
+FNDA:0,sendMail
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 FNH:3
 FNDA:1,Object.<anonymous>
 FNDA:1,Object.<anonymous>.__importDefault
 FNDA:1,sendMail
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 DA:1,1
 DA:2,1
 DA:3,1
@@ -88,6 +101,47 @@ DA:5,1
 DA:6,1
 DA:7,1
 DA:8,1
+<<<<<<< HEAD
+<<<<<<< HEAD
+DA:9,0
+DA:10,0
+DA:11,0
+DA:12,0
+DA:13,0
+DA:14,0
+DA:15,0
+DA:16,0
+DA:17,0
+DA:18,0
+DA:19,0
+DA:20,0
+DA:21,0
+DA:22,0
+DA:23,0
+DA:24,0
+DA:25,0
+DA:26,0
+DA:27,0
+DA:28,0
+DA:29,0
+DA:30,0
+DA:31,0
+DA:32,0
+DA:33,0
+DA:34,0
+DA:35,0
+DA:36,0
+DA:37,0
+DA:38,0
+DA:39,0
+DA:40,0
+DA:41,0
+DA:42,1
+LF:42
+LH:9
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 DA:9,1
 DA:10,1
 DA:11,1
@@ -124,10 +178,21 @@ DA:41,1
 DA:42,1
 LF:42
 LH:38
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 BRDA:1,0,0,1
 BRDA:1,1,0,1
 BRDA:2,2,0,1
 BRDA:3,3,0,0
+<<<<<<< HEAD
+<<<<<<< HEAD
+BRF:4
+BRH:3
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 BRDA:9,4,0,1
 BRDA:38,5,0,0
 BRDA:27,6,0,1
@@ -135,12 +200,51 @@ BRDA:28,7,0,1
 BRDA:29,8,0,0
 BRF:9
 BRH:6
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 end_of_record
 TN:
 SF:dist/controller/mailSender.js
 FN:1,Object.<anonymous>
 FN:4,emailVerificationView
 FNF:2
+<<<<<<< HEAD
+<<<<<<< HEAD
+FNH:1
+FNDA:1,Object.<anonymous>
+FNDA:0,emailVerificationView
+DA:1,1
+DA:2,1
+DA:3,1
+DA:4,0
+DA:5,0
+DA:6,0
+DA:7,0
+DA:8,0
+DA:9,0
+DA:10,0
+DA:11,0
+DA:12,0
+DA:13,0
+DA:14,0
+DA:15,0
+DA:16,0
+DA:17,0
+DA:18,0
+DA:19,0
+DA:20,0
+DA:21,1
+LF:21
+LH:4
+BRDA:1,0,0,1
+BRDA:1,1,0,1
+BRF:2
+BRH:2
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 FNH:2
 FNDA:1,Object.<anonymous>
 FNDA:1,emailVerificationView
@@ -172,6 +276,10 @@ BRDA:1,1,0,1
 BRDA:4,2,0,1
 BRF:3
 BRH:3
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 end_of_record
 TN:
 SF:dist/controller/users.js
@@ -222,6 +330,19 @@ DA:26,1
 DA:27,1
 DA:28,1
 DA:29,1
+<<<<<<< HEAD
+<<<<<<< HEAD
+DA:30,1
+DA:31,1
+DA:32,1
+DA:33,1
+DA:34,0
+DA:35,0
+DA:36,0
+DA:37,0
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 DA:30,0
 DA:31,0
 DA:32,0
@@ -230,10 +351,40 @@ DA:34,1
 DA:35,1
 DA:36,1
 DA:37,1
+<<<<<<< HEAD
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 DA:38,0
 DA:39,0
 DA:40,0
 DA:41,0
+<<<<<<< HEAD
+<<<<<<< HEAD
+DA:42,0
+DA:43,0
+DA:44,0
+DA:45,0
+DA:46,0
+DA:47,0
+DA:48,0
+DA:49,0
+DA:50,0
+DA:51,0
+DA:52,0
+DA:53,0
+DA:54,0
+DA:55,0
+DA:56,0
+DA:57,0
+DA:58,0
+DA:59,0
+DA:60,0
+DA:61,0
+DA:62,0
+=======
+=======
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 DA:42,1
 DA:43,1
 DA:44,1
@@ -255,6 +406,7 @@ DA:59,1
 DA:60,1
 DA:61,1
 DA:62,1
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
 DA:63,1
 DA:64,1
 DA:65,0
@@ -422,7 +574,15 @@ DA:226,0
 DA:227,1
 DA:228,1
 LF:228
+<<<<<<< HEAD
+<<<<<<< HEAD
+LH:91
+=======
 LH:112
+>>>>>>> be3c5ac16d531ce5d98c04db08e468d034b4651d
+=======
+LH:112
+>>>>>>> aa0286a7b6519c2ad6f45919200ed46da1714c62
 BRDA:1,0,0,1
 BRDA:1,1,0,1
 BRDA:2,2,0,2

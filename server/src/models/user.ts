@@ -15,7 +15,7 @@ interface UserAtrribute {
   wallet:number;
   isAdmin:boolean;
 }
-export class UserInstance extends Model<UserAtrribute> {}
+export class UserInstance extends Model<UserAtrribute> { }
 
 UserInstance.init(
   {
@@ -53,26 +53,24 @@ UserInstance.init(
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
+    wallet: {
+      type: DataTypes.NUMBER,
+      defaultValue: 0
+    },
     avatar: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    wallet:{
-      type:DataTypes.NUMBER,
-      allowNull:false
-    },
+   
     isAdmin:{
       type:DataTypes.BOOLEAN,
       allowNull:false
     },
   },
-  
   {
     sequelize: db,
     tableName: 'userTable'
   }
-);
-
+)
 UserInstance.hasMany(AccountInstance, { foreignKey: "userId", as: "accounts" });
-
 AccountInstance.belongsTo(UserInstance, { foreignKey: "userId", as: "user" });

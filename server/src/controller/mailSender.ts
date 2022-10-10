@@ -18,9 +18,29 @@ export function emailVerificationView(token: string): string {
 }
 
 
-export function transactionNotification( firstname:string, lastname:string,phonenumber:string,airtimeAmount:number,network:string,destinationPhoneNumber:string): string {
-  const str =`${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network to ${destinationPhoneNumber}.`;
-            
+export function emailWalletView(): string {
+  const link = `${process.env.BACKEND_URL}`;
+
+  let temp = `
+       <div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
+       
+       <h2 style="text-align: center; text-transform: uppercase;color: teal;">Dear customer your wallet has be credited.</h2>
+
+        <p>Hi there,Your wallet has been credited
+        </p>
+
+         <a href=${link}
+
+         style="background: crimson; text-decoration: none; color: white;padding: 10px 20px; margin: 10px 0;display: inline-block;">Click Here</a>
+         </div>
+  `;
+  return temp;
+}
+
+
+export function transactionNotification(firstname: string, lastname: string, phonenumber: string, airtimeAmount: number, network: string, destinationPhoneNumber:string): string {
+  const str = `${firstname}  ${lastname} with phone number ${phonenumber} has just sent an airtime transaction of ${airtimeAmount} on ${network} network to ${destinationPhoneNumber}.`;
+
 
   let temp = `
        <div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">

@@ -7,7 +7,6 @@ exports.SellAirtimeInstance = void 0;
 const sequelize_1 = require("sequelize");
 const database_config_1 = __importDefault(require("../config/database.config"));
 class SellAirtimeInstance extends sequelize_1.Model {
-    userID;
 }
 exports.SellAirtimeInstance = SellAirtimeInstance;
 SellAirtimeInstance.init({

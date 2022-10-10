@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 export function forgotPasswordVerification(id: string): string {
-    const link = `${process.env.FRONTEND_URL}/forgot-password/${id}`;
+    const link = `http://localhost:3000/forgetpassword/${id}`;
     let temp = `
        <div style="max-width: 700px;
        margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
