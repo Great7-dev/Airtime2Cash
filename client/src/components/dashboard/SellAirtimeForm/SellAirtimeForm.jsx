@@ -186,7 +186,7 @@ const handleChange2 = (e) => {
                   value={destinationPhoneNumber}
                   readOnly
               
-                />  <button onClick={copyTextToClipboard1} ><span>Copy Phone Number to clipboard</span></button>
+                  /> 
                 <p className="clkdecs">After transferring the airtime, click on the "Send” button below</p>
                 </Label>  
 

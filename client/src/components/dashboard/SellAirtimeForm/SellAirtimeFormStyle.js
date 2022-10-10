@@ -11,10 +11,10 @@ export const SellAirtimeFormStyle = styled.form `
     margin-bottom: 2rem;
   }
   .sellAirtime-header {
-    width:83%%;
+    width: 83%;
     display: flex;
     margin: 0;
-    
+
     justify-content: space-between;
   }
   #btnCopy{
@@ -32,13 +32,13 @@ export const SellAirtimeFormStyle = styled.form `
     line-height: 17px;
     color: #de3d6d;
   }
-  .clkdecs{
-    font-family: 'Inter';
+  .clkdecs {
+    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    font-color: #4285F4;
+    font-color: #4285f4;
   }
   .sellairtimeform {
     display: flex;
@@ -46,7 +46,7 @@ export const SellAirtimeFormStyle = styled.form `
    
     width:100%;
     flex-direction: column;
-   
+
     font-size: 1rem;
   }
   // input {
@@ -61,26 +61,25 @@ export const SellAirtimeFormStyle = styled.form `
   //   line-height:16.94px;
   //   font-color:#C4C4C4;
   // }
-  .special{
+  .special {
     background-color: rgba(0, 0, 0, 0.04);
     border-style: solid;
     border-color: #fff;
-    font:Inter;
-    font-weight:400;
-    font-style:normal;
-    font-size:14px;
-    line-height:16.94px;
-    font-color:#C4C4C4;
+    font: Inter;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-color: #c4c4c4;
   }
-  label{
+  label {
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #012A4A;
-    width:100%;
-  
+    color: #012a4a;
+    width: 100%;
   }
   .btnnn {
     cursor: pointer;
@@ -101,13 +100,13 @@ export const SellAirtimeFormStyle = styled.form `
   .selections {
     outline: none;
     width: 100%;
-    text-align:justify;
-    font:Inter;
-    font-weight:400;
-    font-style:normal;
-    font-size:14px;
-    line-height:16.94px;
-    font-color:#C4C4C4;
+    text-align: justify;
+    font: Inter;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-color: #c4c4c4;
   }
   .btnnn {
     cursor: pointer;
@@ -204,33 +203,30 @@ export const SellAirtimeFormStyle = styled.form `
       margin: 1rem 4rem;
       /* margin-bottom: 5rem; */
     }
-    .bank-header{
+    .bank-header {
       flex-direction: column;
       justify-items: center;
       align-items: center;
     }
-    .Acct{
+    .Acct {
       margin-bottom: 1rem;
     }
-    .viewacctselect{
+    .viewacctselect {
       margin-top: 0;
     }
   }
   @media (max-width: 280px) {
-    
     // margin: 10px 10px 10px 10px;
     width: 100%;
-   label{
-    margin-left:15px;
-   }
-   .sel{
-    margin-left:60px;
-   }
-   input{
-    
-    margin-left:0px;
-   }
-
+    label {
+      margin-left: 15px;
+    }
+    .sel {
+      margin-left: 60px;
+    }
+    input {
+      margin-left: 0px;
+    }
   }
 `;
 
@@ -258,33 +254,32 @@ export const CustomStyle = {
     }),
 };
 
-export const Label = styled.label ` 
-    label {
-        float: left;
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        color: #012A4A;
-    }
-    
+export const Label = styled.label `
+  label {
+    float: left;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #012a4a;
+  }
 `;
 
-
 export const ModalPopupStyle = styled.form `
-body.active-modal {
+  body.active-modal {
     overflow-y: hidden;
-}
+  }
 
-.btn-modal {
+  .btn-modal {
     padding: 10px 20px;
     display: block;
     margin: 100px auto 0;
     font-size: 18px;
-}
+  }
 
-.modal, .overlay {
+  .modal,
+  .overlay {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -292,12 +287,12 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
-}
+  }
 
-.overlay {
-    background: rgba(49,49,49,0.8);
-}
-.modal-content {
+  .overlay {
+    background: rgba(49, 49, 49, 0.8);
+  }
+  .modal-content {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -308,12 +303,12 @@ body.active-modal {
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
-}
+  }
 
-.close-modal {
+  .close-modal {
     position: absolute;
     top: 10px;
     right: 10px;
     padding: 5px 7px;
-}
+  }
 `;

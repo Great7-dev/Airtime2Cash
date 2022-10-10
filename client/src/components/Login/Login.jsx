@@ -6,7 +6,7 @@ import SubmitButton from "../utils/SubmitButton/SubmitButton";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
 
 const DivPara = styled.div`
@@ -38,8 +38,6 @@ const BtnContainer = styled.div`
   }
 `;
 
-
-
  const Login = ({ ...props }) => {
   
   const [email, setEmail] = useState("");
@@ -57,20 +55,22 @@ const navigate = useNavigate()
       localStorage.setItem("firstname", res.record.firstname);
       localStorage.setItem("token", res.token);
       localStorage.setItem("id", res.record.id);
-   
+      localStorage.setItem("wallet", res.record.wallet);
+     
         toast.success(res.msg);
          navigate("/admin")
       }else{
         localStorage.setItem("firstname", res.record.firstname);
       localStorage.setItem("token", res.token);
       localStorage.setItem("id", res.record.id);
+      localStorage.setItem("wallet", res.record.wallet);
    
         toast.success(res.msg);
          navigate("/dashboard")
       }
   
   } catch (error) {
-console.log(error);
+
       toast.error(error.res.data.message);
     }
   };
@@ -90,7 +90,7 @@ console.log(error);
         <div className="login-card-padding">
           <div className="login-box">
             <div className="login-heading">
-              <Logo/>
+              <Logo />
             </div>
             <DivLogin>
               <h2>Login</h2>
@@ -143,4 +143,4 @@ console.log(error);
   );
 };
 
-export default Login
+export default Login;

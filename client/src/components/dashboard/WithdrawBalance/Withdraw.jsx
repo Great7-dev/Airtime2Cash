@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import { WithdrawStyle, CustomStyle } from "./WithdrawStyle";
-import * as Yup from 'yup'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+//import * as Yup from 'yup'
+//import { Formik, Form, Field, ErrorMessage } from 'formik';
+import InputField from '../../utils/Input/Input';
+import {Label} from '../SellAirtimeForm/SellAirtimeFormStyle'
 import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
-import { getUserBanks } from "../../../api/auth";
+import { getUserBanks ,withdrawBalance} from "../../../api/auth";
+import { Navigate } from "react-router-dom";
+//import axios from "axios";
+
 
 
 const Withdraw = () => {
   const [banks, setBanks] = useState([])
   const [formData, setFormData]= useState({})
+  const [data, setData]= useState({})
+
 
   const caller = async () => {
-    const res = await getUserBanks();
-    setBanks(res)
+  const res = await getUserBanks();
+  setBanks(res)
   }
-
 const bankOptions = banks.map((bank) => {
   return {
     value: bank.bankName,
@@ -24,133 +32,120 @@ const bankOptions = banks.map((bank) => {
   }
 })
 
+
 const handleChange = (selectedOption) => {
-  // console.log(selectedOption)
-  setFormData({...formData, accName: selectedOption.bank.accName, accNumber: selectedOption.bank.accNumber})
+   
+  setFormData({...formData, accName: selectedOption.bank.accName, accNumber: selectedOption.bank.accNumber, bankName:selectedOption.bank.bankName,})
 }
 
-  console.log(formData)
+const bankName = formData.bankName
+const accNumber = formData.accNumber
+  
   useEffect(()=> {
     caller();
   }, [])
 
-  const accounts = ['Current', 'Savings', 'Fixed Deposit', 'Joint', 'Domiciliary', 'Corporate', 'Non-resident Nigerian']
-
-    const validationSchema = Yup.object({
-      account: Yup.string().required('please select an account').oneOf(accounts),
-      account_name: Yup.string().required('please enter an account name'),
-      accountNumber: Yup.number().min(11).max(11).required(),
-      amount: Yup.number().required(),
-      password: Yup.string().required(),
-    })
-  // INITIAL VALUES
-
-  const initialValues = {
-    account: '',
-    account_name: '',
-    accountNumber: '',
-    amount: '',
-    password: '',
+  const handleChange2 = (e) => {
+    const {name,value} = e.target
+    setData({...data, [name]:value})
   }
-  //SUBMIT
-
-  const onSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2))
-  }
-  // MAPPING NETWORK ARRAY
-  const accountOpts = accounts.map((account, key) => (
-    <option value={account} key={key}>
-      {account}
-    </option>
-  ))
+  let amount=data.amount;
   
-    // ERROR MESSAGE
-    const renderError = (message) => <p className='is_danger' style={{color:'red'}}>{message}</p>
-
-    const handleSubmit=(e)=> {
+    
+      const handleSubmit= async (e)=> {
       e.preventDefault();
+     
+      if (amount === "" || bankName === "" || accNumber === "") {
+        console.log("yayyy")
+        return toast.error("No field should be left empty, please fill all fields");
+      }
+      console.log(bankName,accNumber,amount)
+      const res = await withdrawBalance({accNumber,bankName,amount}) 
+      console.log(res)
+      //setFormData(res)
+      localStorage.setItem('wallet',res.newwallet)
+
+
     }
 
   return (
+    <>
     <WithdrawStyle>
       <div className="sellAirtime-header">
         <h1 className="Acct">Withdraw</h1>
-        
       </div>
-      <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={async (values, { resetForm }) => {
-      await onSubmit(values)
-      resetForm()
-      }}
-      >
-        <Form action="" className="bankform">
-          <label htmlFor="">Select Account</label>
-          <Select
-            className="selections"
-            styles={CustomStyle}
-            onChange={handleChange}
-            options={bankOptions}
-            placeholder="Select Account"
-            name="Network"
-            
-          
-          />
 
-          <ErrorMessage name='account' render={renderError} />
+      <form className="bankform">
+      <label htmlFor="Network">Select Account</label>
+      <Select
+        className="selections"
+        styles={CustomStyle}
+        onChange={handleChange}
+        options={bankOptions}
+        placeholder="Select Account"
+        name="bankName"
+        value={formData.label}
+       />
 
-          <label htmlFor="">Account Name</label>
-          <input
-            type='text'
-            placeholder='BabatundeOla'
-            name='account_name'
-            
-            defaultValue={formData.accName}
-            disabled
-            />
-          <ErrorMessage name='account_name' render={renderError} />
-          
-          <label htmlFor="">Account Number</label>
-          <input
-          type='text'
-          placeholder='1234567890'
-          className='withdraw_input_background withdraw_input'
-          name='accountNumber'
-          defaultValue={formData.accNumber}
-          disabled
-          />
-          <ErrorMessage name='accountNumber' render={renderError} />
-          <label htmlFor="">Amount</label>
-          <Field
-          type='text'
-          placeholder='NGN'
-          className='withdraw_input'
-          name='amount'
-          />
-          <ErrorMessage name='amount' render={renderError} />
-          <label htmlFor="">Password</label>
-          <Field
-          type='password'
-          placeholder='Password'
-          className='withdraw_input'
-          name='password'
-          />
-          <ErrorMessage
-          name='password'
-          render={renderError}
-          />
-          
-          <button type="submit" className="btnnn" onClick={handleSubmit}>
-            Withdraw
-          </button>
-        </Form>
-      </Formik>
-        
+              <Label>
+              <InputField
+                  type="input"
+                  className="input"
+                  label="Account Name"
+                  placeholder="BabatundeOla"
+                  name="account_name"
+                  //change={(e) => setphoneNumber(e.target.value)}
+                  value={formData.accName}
+                />
+
+                <InputField
+                  type="input"
+                  className="input"
+                  label="Account Number"
+                  placeholder="1234567890"
+                  name="accNumber"
+                  //change={(e) => setphoneNumber(e.target.value)}
+                  value={formData.accNumber}
+                />
+
+                <InputField
+                  type="input"
+                  className="input"
+                  label="Amount"
+                  placeholder="NGN"
+                  name="amount"
+                  change={handleChange2}
+                  value={amount}
+                />
       
+                <InputField
+                  type="password"
+                  className="input"
+                  label="Password"
+                  name="password"
+                  change={handleChange2}
+                  //value={formData.accNumber}
+                />
+              </Label>
+      <button type="submit" className="btnnn" onClick={handleSubmit}>
+               Withdraw
+      </button>
 
-      
+
+       
+      </form> 
+      <ToastContainer />
     </WithdrawStyle>
-  );
-};
+    </>
+  )
+}
+
 export default Withdraw;
+
+
+
+
+
+
+
+

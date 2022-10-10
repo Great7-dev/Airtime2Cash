@@ -6,27 +6,30 @@ import Navbar from "../Navbar/NavBar";
 import Bankform from "./Bankform/Bankform";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { bankFormState } from "../../atoms/bankFormAtom";
-import { successModalState } from "../../atoms/successModalAtom";
 import { useRecoilState } from "recoil";
-import { HeadingStyle } from "./ViewAccts/Viewacctstyle";
-import Withdraw from "./WithdrawBalance/Withdraw";
-import TransactionHistory from "../../transaction-history/TransactionHistory";
+import { HeadingStyle } from "./ViewAccts/Viewacctstyle"
+
+// import Navbar from "../NavBar/NavBar";
+import Withdraw from "./WithdrawBalance/Withdraw"
+import WithdrawalHistory from "../../history/WithdrawalHistory";
 import SellAirtimeForm from "./SellAirtimeForm/SellAirtimeForm";
 
+import NewTransactionHistory from "../../history/NewTransactionHistory";
 function Dashboard() {
   const [formState, setFormState] = useRecoilState(bankFormState);
   const menu = [
     "Transfer",
     "Withdraw Balance",
     "Manage Bank Account",
-    "Transaction History",
+    "Withdrawals",
+    "Transactions"
   ];
 
   const [active, setActive] = useState(menu[0]);
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar/>
       <div className="rectangle2">
        
        
@@ -36,7 +39,7 @@ function Dashboard() {
               <h1>Dashboard</h1>
               <div className="money">
                 <h5 className="walletBalance">Wallet balance</h5>
-                <h1 className="fig">N21,350.00 </h1>
+                <h1 className="fig">{localStorage.getItem('wallet')}</h1>
                 <h5 className="account">Account is active</h5>
               </div>
             </>
@@ -61,12 +64,16 @@ function Dashboard() {
               {active === menu[0] ? (
                 <SellAirtimeForm/>
               ) : active === menu[1] ? (
-                <Withdraw />
+                <Withdraw/>
               ) : active === menu[2] ? (
                 <Bankform />
               ) : (
-                <TransactionHistory/>
-              )}
+                 active === menu[3]?(
+                  <WithdrawalHistory/>
+              ):(
+                <NewTransactionHistory/>
+              )
+           ) }
             </div>
           </div>
         </div>

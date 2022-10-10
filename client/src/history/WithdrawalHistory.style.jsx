@@ -7,15 +7,20 @@ justify-content: space-between;
 box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
 margin: 10px 10px 10px 10px;
 margin-top: 20px;
-
+padding: 1em 1em;
 span{
     color: #21334F;
-    font-size: 20px;
+    font-size: 14px;
 }
 p{
     margin-top: 4px;
     margin-left: 5px;
     margin-right: 10px;
+    font-size: 12px;
+
+}
+.box{
+    text-align: left;
 }
 .left-side-p{
     margin-top: 2p;
