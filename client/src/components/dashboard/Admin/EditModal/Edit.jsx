@@ -8,13 +8,14 @@ import { Editstyle } from "./Editstyle";
 import { MdOutlineCancel } from "react-icons/md";
 import axios from "axios";
 import { useEffect } from "react";
-import { confirmAmount } from "../../../../api/auth";
+import { confirmAmount,getAdmin } from "../../../../api/auth";
 import { currentTransactionState } from "../../../../atoms/currentTransactionAtom";
 
 const Edit = ({ alldetails }) => {
   const [EditformState, setEditFormState] = useRecoilState(MaxEditFormState);
   const [ShowModal, setShowModal] = useRecoilState(minModalState);
   const [airtimeAmount, setAirtimeAmount] = useRecoilState(amount);
+  const [token, setToken] = useState("");
   const [myId, setMyId] = useRecoilState(id);
   const navigate = useNavigate();
   const [currentTransaction, setCurrentTransaction] = useRecoilState(
@@ -25,13 +26,27 @@ const Edit = ({ alldetails }) => {
     try {
       e.preventDefault();
       e.stopPropagation();
-      const response = await confirmAmount(
-        airtimeAmount,
-        currentTransaction.id
-      );
-      navigate('/admin/transactions')
-      setEditFormState(false);
-      setShowModal(false);
+      const adminToken = await getAdmin();
+      console.log(adminToken.record.twoFactorAuth
+        ,"adminToken");
+        if(adminToken.record.twoFactorAuth===token){
+          const response = await confirmAmount(
+            airtimeAmount,
+            currentTransaction.id
+          );
+          navigate('/admin/transactions')
+          setEditFormState(false);
+          setShowModal(false);
+        }else{
+          alert("wrong token")
+        }
+      // const response = await confirmAmount(
+      //   airtimeAmount,
+      //   currentTransaction.id
+      // );
+      // navigate('/admin/transactions')
+      // setEditFormState(false);
+      // setShowModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +61,10 @@ const Edit = ({ alldetails }) => {
   const handleEdit = (e) => {
     setAirtimeAmount(e.target.value);
   };
+  console.log(token);
+  // const handleToken = (e) => {
+  //   setToken(e.target.value);
+  // };
 
 
 
@@ -78,6 +97,18 @@ const Edit = ({ alldetails }) => {
             value={airtimeAmount * 0.7}
             name="AmountRecieve"
             disabled
+          />
+
+<label htmlFor="" className="texts">
+            Enter the token just sent to your email
+          </label>
+          <input
+            type="text"
+            id="token"
+            placeholder=""
+            value={token}
+            name="token"
+            onChange={(e) => setToken(e.target.value)}
           />
 
           <button type="submit" className="btnnn" onClick={handleSubmit}>

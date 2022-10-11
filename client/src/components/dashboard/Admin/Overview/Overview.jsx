@@ -15,6 +15,7 @@ import Pagination from "../Pagination/pagination";
 import axios from "axios";
 import { amount } from "../../../../atoms/bankFormAtom";
 import { currentTransactionState } from "../../../../atoms/currentTransactionAtom";
+import {notifyAdmin} from "../../../../api/auth";
 
 const Overview = () => {
   const [ShowModal, setShowModal] = useRecoilState(minModalState);
@@ -29,12 +30,15 @@ const Overview = () => {
   const [openModal, setOpenModal] = useState(true);
   const [alldetails, setAllDetails] = useState({});
 
-  const handleClick = (row) => {
+  const handleClick = async (row) => {
     // e.preventDefault();
+   
     setAllDetails(row);
     setOpenModal(false);
     setShowModal(true);
     setEditModal(false);
+    const res=await notifyAdmin();
+   
     // setAllDetails(e);
   };
 

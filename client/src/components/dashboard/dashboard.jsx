@@ -35,7 +35,7 @@ function Dashboard() {
     "Transactions"
   ];
  
-console.log(user.wallet)
+
   const [active, setActive] = useState(menu[0]);
 
   return (
