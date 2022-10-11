@@ -89,7 +89,7 @@ exports.deleteBankAccount = deleteBankAccount;
 async function getWithdrawalHistory(req, res) {
     try {
         const { id } = req.params;
-        const record = await account_1.AccountInstance.findAll({ where: { id } });
+        const record = await account_1.AccountInstance.findAll({ where: { id }, order: [['createdAt', 'DESC']] });
         res.status(200).json({ "record": record });
     }
     catch (error) {
@@ -103,7 +103,7 @@ exports.getWithdrawalHistory = getWithdrawalHistory;
 async function getTransactionHistory(req, res) {
     try {
         const { id } = req.params;
-        const record = await transactions_1.SellAirtimeInstance.findAll({ where: { userID: id } });
+        const record = await transactions_1.SellAirtimeInstance.findAll({ where: { userID: id }, order: [['createdAt', 'DESC']] });
         res.status(200).json(record);
     }
     catch (error) {

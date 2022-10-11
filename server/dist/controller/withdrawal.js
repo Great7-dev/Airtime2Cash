@@ -119,7 +119,7 @@ exports.getAllWithdrawals = getAllWithdrawals;
 async function getAllUserWithdrawals(req, res, next) {
     try {
         const { id } = req.params;
-        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id } });
+        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id }, order: [['createdAt', 'DESC']] });
         if (!allWithdrawalHistory) {
             return res.status(404).json({ message: 'Sorry there is currently no withdrawal history!' });
         }
