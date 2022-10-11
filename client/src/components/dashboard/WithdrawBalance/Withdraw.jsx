@@ -5,8 +5,11 @@ import { WithdrawStyle, CustomStyle } from "./WithdrawStyle";
 import InputField from '../../utils/Input/Input';
 import {Label} from '../SellAirtimeForm/SellAirtimeFormStyle'
 import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { getUserBanks ,withdrawBalance} from "../../../api/auth";
+import { Navigate } from "react-router-dom";
 //import axios from "axios";
 
 
@@ -48,14 +51,20 @@ const accNumber = formData.accNumber
   }
   let amount=data.amount;
   
-    console.log(bankName,accNumber,amount)
+    
       const handleSubmit= async (e)=> {
       e.preventDefault();
+     
+      if (amount === "" || bankName === "" || accNumber === "") {
+        console.log("yayyy")
+        return toast.error("No field should be left empty, please fill all fields");
+      }
       console.log(bankName,accNumber,amount)
       const res = await withdrawBalance({accNumber,bankName,amount}) 
       console.log(res)
       //setFormData(res)
       localStorage.setItem('wallet',res.newwallet)
+
 
     }
 
@@ -125,7 +134,7 @@ const accNumber = formData.accNumber
 
        
       </form> 
-
+      <ToastContainer />
     </WithdrawStyle>
     </>
   )

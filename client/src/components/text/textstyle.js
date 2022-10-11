@@ -45,4 +45,15 @@ color: #03435F;
         font-size: 12px;
     }
   }
+  @media(max-width: 310px){
+      .text{
+          
+          font-size: 10px;
+        }
+    .text1{
+        font-size: 10px;
+        flex-direction: column;
+        
+    }
+  }
 `

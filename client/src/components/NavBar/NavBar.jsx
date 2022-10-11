@@ -3,27 +3,27 @@ import { Navbarstyle } from "./Navbarstyles";
 import Logo from "../../assets/Airtime2cash.svg";
 import { Link } from "react-router-dom";
 import CardT from "../../pages/updateprofile/CardT";
-import { set } from "react-hook-form";
+
 
 const Navbar = ({Name}) => {
   let dashboard;
 const currentUser=localStorage.getItem("name")
 localStorage.getItem("token") ? (dashboard = true) : (dashboard = false);
 const [display, setDisplay] = useState("none");
+
 const handleClick = () => {
-  if (display === "none") {
-    setDisplay("flex");
-  } else {
-    setDisplay("none");
-  }
+if (display === "none"){
+  setDisplay("flex");
+ 
+
+}else{
+  setDisplay("none");
+}
 }
 
-// const handleClick = () => {
 
-// }
   return (
     <Navbarstyle>
-
       <div>
         <a href="/"><img src={Logo} alt="Airtime2cash" className="navbar__logo"/></a>
       </div>

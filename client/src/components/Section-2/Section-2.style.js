@@ -121,8 +121,11 @@ export const Section2style = styled.div`
         text-align: center;
     }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 437px) {
     width: 275px;
+  }
+  @media(max-width: 310px) {
+    width: 200px;
   }
   
 

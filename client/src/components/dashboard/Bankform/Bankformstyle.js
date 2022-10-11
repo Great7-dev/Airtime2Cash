@@ -1,24 +1,32 @@
 import styled from "styled-components";
 
 export const BankForm = styled.form`
-  margin-top: 2rem;
+  margin-top: 4rem;
+ 
   .Acct {
     display: flex;
     font-family: "Inter";
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
+    color: #012A4A;
+    margin-bottom: 2rem;
+  
+
+
   }
   .bank-header {
     display: flex;
     margin: 0;
+    padding: 0;
     justify-content: space-between;
   }
   .viewacctselect {
     cursor: pointer;
     display: flex;
+    align-self:center;
     justify-content: space-between;
-    margin: 20px 0px 0px 0px;
+    margin: 5px 0px 0px 0px;
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;

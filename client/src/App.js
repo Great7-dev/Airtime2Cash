@@ -9,29 +9,25 @@ import CheckMail from "./pages/Checkmail/CheckMail";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Landingpage from "./pages/Landingpage";
-// import Dashboard from './components/dashbard1/dashboard';
 import Dashboard from "./components/dashboard/dashboard";
-// import Mymodal  from './components/dashbard/Modal/Modal';
-
-import TransactionHistory from "./transaction-history/TransactionHistory";
+// import TransactionHistory from "./transaction-history/TransactionHistory";
 import Layout from "./components/dashboard/Admin/Layout/Layout";
 import Overview from "./components/dashboard/Admin/Overview/Overview";
 import Transactions from "./components/dashboard/Admin/Transactions/Transactions";
 import Navbar from "./components/NavBar/NavBar";
 
-
 function App() {
-        const handleIMGcLICK = (e) => {
-            e.preventDefault()
-            alert("Hello")
-            }
+  const handleIMGcLICK = (e) => {
+    e.preventDefault();
+    alert("Hello");
+  };
   return (
     <div>
-
       <Router>
-            <Navbar onClick={handleIMGcLICK}/>
+        <Navbar onClick={handleIMGcLICK} />{" "}
         <Routes>
-          <Route exact path="/history" element={<TransactionHistory />} />{" "}
+          {" "}
+          {/* <Route exact path="/history" element={<TransactionHistory />} />{" "} */}{" "}
           <Route exact path="/card" element={<CardT />} />{" "}
           <Route path="/dashboard" element={<Dashboard />} />{" "}
           <Route path="/" element={<Landingpage />} />{" "}
@@ -55,12 +51,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Layout>
-                    <Routes>
+                  <Routes>
                     <Route exact path="/" element={<Overview />} />{" "}
-                    <Route exact path="/transactions" element={<Transactions />} />{" "}
-
-                    </Routes>
-                </Layout>
+                    <Route
+                      exact
+                      path="/transactions"
+                      element={<Transactions />}
+                    />{" "}
+                  </Routes>{" "}
+                </Layout>{" "}
               </ProtectedRoute>
             }
           />{" "}

@@ -19,10 +19,8 @@ export const Bank = styled.div`
     outline: inherit;
   }
 
-  .acctinfo {
-    /* font-family: 'Inter'; */
-
-    font-style: normal;
+  .acctinfo { 
+   font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -30,7 +28,7 @@ export const Bank = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding-left: 1rem;
+    /* padding-left: 1rem; */
   }
   .acctinfo p {
     text-align: left;

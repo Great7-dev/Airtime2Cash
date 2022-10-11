@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Viewacct = styled.div `
-width:100%;
+export const Viewacct = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -22,42 +22,39 @@ width:100%;
   }
 
   .info-bank {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 24px;
-
     max-height: 250px;
-
     overflow-y: scroll;
-
   }
 
   @media (max-width: 599px) {
     .btnnnn {
       margin: 40px 32px 0 32px;
     }
-  
   }
   @media (max-width: 360px) {
     .btnnnn {
       margin: 50px 40px 0 45px;
     }
-  
   }
 `;
 
-export const HeadingStyle = styled.div `
+export const HeadingStyle = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-start;
   margin-left: 15%;
-  gap: 50px;
+  gap: 55px;
   margin-bottom: 2rem;
   margin-top: 60px;
   h1 {
     margin: 0;
+    /* color: #012A4A;
+ font-style: normal;
+font-weight: 600;
+font-size: 32px;
+margin: 35px 0px 55px 0px; */
   }
 `;

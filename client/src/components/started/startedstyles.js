@@ -16,7 +16,7 @@ p{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     margin-left: 150px;
 }
 .left-container {
@@ -89,6 +89,15 @@ border: none;
     .btn{
         align-self: center;
         margin-bottom: 2rem;
+        /* align-items: center; */
     }
   }
+  @media(max-width: 280px){
+    .test{
+     
+   align-items: center;
+  
+   
+    }
+}
 `;
