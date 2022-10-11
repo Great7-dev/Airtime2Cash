@@ -121,6 +121,12 @@ async function LoginUser(req, res, next) {
             : (await user_1.UserInstance.findOne({
                 where: [{ username: userName }]
             }));
+        if (!record) {
+            return res.status(404).json({
+                status: "fail",
+                msg: "Incorrect username/e-mail or password",
+            });
+        }
         if (record.isVerified) {
             const { id } = record;
             const { password } = record;
@@ -132,10 +138,6 @@ async function LoginUser(req, res, next) {
                 });
             }
             if (validUser) {
-                res.cookie('mytoken', token, {
-                    httpOnly: true,
-                    maxAge: 1000 * 60 * 60 * 24
-                });
                 res.status(200).json({
                     status: 'success',
                     msg: 'login successful',

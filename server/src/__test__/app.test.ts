@@ -78,7 +78,7 @@ describe('it should test all apis', () => {
   });
   it('it should not login unregestered user', async () => {
     const response = await request.post('/users/login').send({
-      username: '4444444',
+      username: 'felixalok',
 
       password: '12345678'
     });

@@ -142,6 +142,13 @@ export async function LoginUser(
         where: [{ username: userName }]
       })) as unknown as { [key: string]: string });
 
+      if (!record) {
+        return res.status(404).json({
+          status: "fail",
+          msg: "Incorrect username/e-mail or password",
+        });
+      }
+
     if (record.isVerified) {
       const { id } = record;
       const { password } = record;
@@ -153,10 +160,6 @@ export async function LoginUser(
         });
       }
       if (validUser) {
-        res.cookie('mytoken', token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60 * 24
-        });
         res.status(200).json({
           status: 'success',
           msg: 'login successful',

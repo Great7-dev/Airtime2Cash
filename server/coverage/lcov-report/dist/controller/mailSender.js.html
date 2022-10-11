@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.39% </span>
+                <span class="strong">35.82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/53</span>
+                <span class='fraction'>24/67</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.39% </span>
+                <span class="strong">35.82% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/53</span>
+                <span class='fraction'>24/67</span>
             </div>
         
             
@@ -116,7 +116,21 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -141,6 +155,20 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -171,7 +199,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.transactionNotification = exports.emailWalletView = exports.emailVerificationView = void 0;
+exports.tokenNotification = exports.transactionNotification = exports.emailWalletView = exports.emailVerificationView = void 0;
 function emailVerificationView(token) {
     const link = `${process.env.BACKEND_URL}/users/verify/${token}`;
     let temp = `
@@ -222,6 +250,20 @@ exports.emailWalletView = emailWalletView;
 <span class="cstat-no" title="statement not covered" >    return temp;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 exports.transactionNotification = transactionNotification;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function tokenNotification(firstname, lastname, token) {</span></span>
+<span class="cstat-no" title="statement not covered" >    const str = `Hello ${firstname} ${lastname}, someone attempt to credit a wallet from your dashboard. &lt;b&gt;&lt;i&gt;Kindly enter this token: ${token} &lt;/i&gt;&lt;/b&gt;to confirm that it is you and to verify the transaction. If you did not attempt this transaction, kindly proceed to change your password as your account may have been compromised. This time, I recommend you use a very strong password. consider trying something similar to but not exactly as: 1a2b3c4d53!4@5#6$7%8^9&amp;0*1(2)3_4+5-6=7{8};4'5,6.7/8?9`;</span>
+<span class="cstat-no" title="statement not covered" >    let temp = `</span>
+<span class="cstat-no" title="statement not covered" >       &lt;div style="max-width: 700px;margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;"&gt;</span>
+<span class="cstat-no" title="statement not covered" >       </span>
+<span class="cstat-no" title="statement not covered" >       &lt;h2 style="text-align: center; text-transform: uppercase;color: teal;"&gt;Airtime to Cash Admin Transaction Notification&lt;/h2&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;${str}</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >         &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >  `;</span>
+<span class="cstat-no" title="statement not covered" >    return temp;</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+exports.tokenNotification = tokenNotification;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -229,7 +271,7 @@ exports.transactionNotification = transactionNotification;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-10T15:26:38.875Z
+                at 2022-10-11T16:03:01.553Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

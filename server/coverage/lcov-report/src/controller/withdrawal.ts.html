@@ -393,7 +393,7 @@ export <span class="fstat-no" title="function not covered" >async function withd
 <span class="cstat-no" title="statement not covered" >        const userID = req.user.id</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        const { amount, bankName, accNumber } = req.body</span>
-<span class="cstat-no" title="statement not covered" >        const validateInput = await withdrawalSchema.validate(req.body);</span>
+<span class="cstat-no" title="statement not covered" >        const validateInput = withdrawalSchema.validate(req.body);</span>
 <span class="cstat-no" title="statement not covered" >        if (validateInput.error) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(400).json(validateInput.error.details[0].message)</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
@@ -409,19 +409,19 @@ export <span class="fstat-no" title="function not covered" >async function withd
 <span class="cstat-no" title="statement not covered" >        if (validateAccount.userId !== userID) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: ' Sorry this account is not registered by this customer!' })</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        wallet = customer.wallet</span>
+<span class="cstat-no" title="statement not covered" >        wallet = Number(customer.wallet)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        if (amount &gt; wallet) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: 'Insufficient fund!' })</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >        // fluterwave function here...</span>
 <span class="cstat-no" title="statement not covered" >        let allBanks = await getAllBanksNG()</span>
-<span class="cstat-no" title="statement not covered" >        console.log(allBanks)</span>
+<span class="cstat-no" title="statement not covered" >        // console.log(allBanks)</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        const bankCode = allBanks.data.filter((item: { name: string }) =&gt; item.name.toLowerCase() == bankName.toLowerCase())</span>
 <span class="cstat-no" title="statement not covered" >        let code = bankCode[0].code</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        console.log(code);</span>
+<span class="cstat-no" title="statement not covered" >        //console.log(code);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        const details = {</span>
@@ -451,7 +451,7 @@ export <span class="fstat-no" title="function not covered" >async function withd
 <span class="cstat-no" title="statement not covered" >        console.log('this is what i want', flutta.status);</span>
 <span class="cstat-no" title="statement not covered" >        if (flutta.status === 'success') {</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            const newwallet = wallet - amount</span>
+<span class="cstat-no" title="statement not covered" >            const newwallet = wallet - Number(amount)</span>
 <span class="cstat-no" title="statement not covered" >            const customerUpdatedRecord = await UserInstance.update({ wallet: newwallet }, { where: { id: userID } })</span>
 <span class="cstat-no" title="statement not covered" >            const withdrawalHistory = await WithdrawalInstance.create({</span>
 <span class="cstat-no" title="statement not covered" >                id: withdrawalId,</span>
@@ -472,7 +472,7 @@ export <span class="fstat-no" title="function not covered" >async function withd
 <span class="cstat-no" title="statement not covered" >                userID,</span>
 <span class="cstat-no" title="statement not covered" >                status: false</span>
 <span class="cstat-no" title="statement not covered" >            })</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: `S0rry yourwithdrawal was not successful service error`, flutta })</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: `S0rry your withdrawal was not successful service error`, flutta })</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -520,7 +520,7 @@ export <span class="fstat-no" title="function not covered" >async function getAl
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >        const { id } = req.params</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const allWithdrawalHistory = await WithdrawalInstance.findAll({ where: { userID: id } })</span>
+<span class="cstat-no" title="statement not covered" >        const allWithdrawalHistory = await WithdrawalInstance.findAll({ where: { userID: id },order: [['createdAt', 'DESC']] })</span>
 <span class="cstat-no" title="statement not covered" >        if (!allWithdrawalHistory) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Sorry there is currently no withdrawal history!' })</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
@@ -538,7 +538,7 @@ export <span class="fstat-no" title="function not covered" >async function getAl
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-10T15:26:38.875Z
+                at 2022-10-11T16:03:01.553Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
