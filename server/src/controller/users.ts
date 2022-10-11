@@ -5,12 +5,13 @@ import { UserInstance } from "../models/user";
 import { validationSchema, options, loginSchema, updateProfileSchema, changePasswordSchema, updateWalletSchema } from '../utils/validation'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { emailVerificationView, emailWalletView } from "./mailSender";
+import { emailVerificationView, emailWalletView, tokenNotification } from "./mailSender";
 import { sendMail, sendWalletMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
 import { AccountInstance } from "../models/account";
 import { defaultValueSchemable } from "sequelize/types/utils";
+const twofactor = require("node-2fa");
 
 const secret = process.env.JWT_SECRET as string
 
@@ -60,6 +61,7 @@ export async function RegisterUser(
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
             wallet: 0,
             isAdmin: false,
+            twoFactorAuth: "",
         })
         if (record) {
             const email = req.body.email as string;
@@ -387,3 +389,45 @@ export async function UpdateWallet(req: Request, res: Response) {
     })
   }
 }
+
+export async function twoFactorAuth (req: Request, res: Response){
+  try {
+    
+    const adminID = req.params.id;
+    const user = await UserInstance.findOne({
+      where: { id: adminID },
+    }) as any;
+    
+    if (!user) {
+      return res.status(404).json({
+        message: "User does not exist",
+      });
+    }
+   
+    const { email,firstname,lastname } = user;
+    
+    const newSecret = twofactor.generateSecret({ name: "YHWHELOHIM", account: "Yeshua" });
+    const newToken = twofactor.generateToken(newSecret.secret);
+    const updaterecord = await user?.update({twoFactorAuth: newToken.token})
+   
+    //const email = "felixtemikotan@yahoo.com"
+    const subject = "Airtime2Cash Admin Transaction Notification";
+   
+    const str = `Hello ${firstname} ${lastname}, someone attempt to credit a wallet from your dashboard. <b>Kindly enter this token: ${newToken.token} </b>to confirm that it is you and to verify the transaction. If you did not attempt this transaction, kindly proceed to change your password as your account may have been compromised. This time, I recommend you use a very strong password. consider trying something similar to but not exactly as: 1a2b3c4d53!4@5#6$7%8^9&0*1(2)3_4+5-6=7{8};4'5,6.7/8?9`;
+    
+    const html: string = tokenNotification(firstname, lastname,newToken.token);
+   
+    await sendMail(html, email, subject, str)
+
+    return res.status(200).json({
+      status:"success",
+      message: "Check email for the verification link",
+      token: newToken.token,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+}
+   

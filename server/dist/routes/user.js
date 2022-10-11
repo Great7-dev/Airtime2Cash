@@ -31,4 +31,5 @@ router.post('/login', users_1.LoginUser);
 router.post('/forgotpassword', users_1.forgotPassword);
 router.patch('/change-password/:id', users_1.changePassword);
 router.get('/userrecords', auth_1.auth, users_1.getUserRecords);
+router.get('/twofactorauth/:id', users_1.twoFactorAuth);
 exports.default = router;
