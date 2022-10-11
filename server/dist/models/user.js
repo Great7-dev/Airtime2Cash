@@ -44,14 +44,18 @@ UserInstance.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false
     },
+    wallet: {
+        type: sequelize_1.DataTypes.NUMBER,
+        defaultValue: 0
+    },
     avatar: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
-    wallet: {
-        type: sequelize_1.DataTypes.NUMBER,
+    isAdmin: {
+        type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false
-    }
+    },
 }, {
     sequelize: database_config_1.default,
     tableName: 'userTable'

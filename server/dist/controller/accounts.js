@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAmount = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
+exports.allTransactions = exports.deleteTransaction = exports.getAmount = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.getTransactionHistory = exports.getWithdrawalHistory = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
 const uuid_1 = require("uuid");
 const account_1 = require("../models/account");
 const user_1 = require("../models/user");
@@ -87,6 +87,34 @@ async function deleteBankAccount(req, res, next) {
     }
 }
 exports.deleteBankAccount = deleteBankAccount;
+async function getWithdrawalHistory(req, res) {
+    try {
+        const { id } = req.params;
+        const record = await account_1.AccountInstance.findAll({ where: { id } });
+        res.status(200).json({ "record": record });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "Invalid User",
+            route: "/read/:id",
+        });
+    }
+}
+exports.getWithdrawalHistory = getWithdrawalHistory;
+async function getTransactionHistory(req, res) {
+    try {
+        const { id } = req.params;
+        const record = await transactions_1.SellAirtimeInstance.findAll({ where: { userID: id } });
+        res.status(200).json(record);
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "Invalid User",
+            route: "/read/:id",
+        });
+    }
+}
+exports.getTransactionHistory = getTransactionHistory;
 const sellAirtime = async (req, res) => {
     try {
         const id = (0, uuid_1.v4)();
@@ -140,7 +168,6 @@ const sellAirtime = async (req, res) => {
     }
 };
 exports.sellAirtime = sellAirtime;
-// Install with: npm i flutterwave-node-v3
 const withdraw = async (req, res) => {
     try {
         const { account_bank, account_number, amount, naration, currency } = req.body;
@@ -160,32 +187,6 @@ const withdraw = async (req, res) => {
             if (response.status === "success") {
                 console.log(response.data);
             }
-            // const {id, status, message} = response.data;
-            // if(status==="success"){
-            //   const record = await WithdrawInstance.create({
-            //     id:id,
-            //     userID:req.user.id,
-            //     account_bank: account_bank,
-            //     account_number:account_number,
-            //     amount: amount,
-            //     narration: naration,
-            //     currency: currency,
-            //     status:status,
-            //     message:message,
-            //   })
-            //   if(record){
-            //     return res.status(200).json({
-            //       "msg":"Withdrawal created successfully",
-            //       "status": "OK",
-            //       "record":record,
-            //     })
-            //   }
-            // }
-            // return res.status(400).json({
-            //   "msg":"Withdrawal failed",
-            //   "status": "failed",
-            //   "record":response.data,
-            // })
         })
             .catch(console.log);
     }
@@ -213,7 +214,12 @@ async function updateTransactionStatus(req, res, next) {
                 Error: "Cannot find existing transaction",
             });
         }
-        const amountToReceive = parseFloat(airtimeAmount) * 0.7;
+        const userID = record.userID;
+        const User = await user_1.UserInstance.findOne({ where: { id: userID } });
+        const currentWalletBalance = parseFloat(User.wallet);
+        const newWalletBalance = Number(currentWalletBalance + airtimeAmount);
+        const updateWalletBalance = await user_1.UserInstance.update({ wallet: newWalletBalance }, { where: { id: userID } });
+        const amountToReceive = Number(airtimeAmount) * 0.7;
         const updatedrecord = await record.update({
             airtimeAmount: req.body.airtimeAmount,
             airtimeAmountToReceive: amountToReceive,
@@ -257,24 +263,6 @@ async function cancelTransaction(req, res, next) {
     }
 }
 exports.cancelTransaction = cancelTransaction;
-// export async function deleteTransaction(
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) {
-//   try {
-//     const { id } = req.params;
-//     const deletedRecord = await record.destroy();
-//    return  res.status(200).json({
-//       msg: "Transaction deleted successfully",
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       msg: "failed to delete",
-//       route: "/deletetransaction/:id",
-//     });
-//   }
-// }
 const getAmount = async (req, res) => {
     try {
         const { id } = req.params;
@@ -298,3 +286,57 @@ const getAmount = async (req, res) => {
     }
 };
 exports.getAmount = getAmount;
+async function deleteTransaction(req, res, next) {
+    try {
+        const { id } = req.params;
+        const record = await transactions_1.SellAirtimeInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({
+                msg: "Transaction not found",
+            });
+        }
+        const deletedRecord = await record.destroy();
+        return res.status(200).json({
+            msg: "Transaction deleted successfully",
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            msg: "failed to delete",
+            route: "/deletetransaction/:id",
+        });
+    }
+}
+exports.deleteTransaction = deleteTransaction;
+async function allTransactions(req, res, next) {
+    try {
+        const pageAsNumber = Number.parseInt(req.query.page);
+        const sizeAsNumber = Number.parseInt(req.query.size);
+        let page = 0;
+        if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+            page = pageAsNumber;
+        }
+        let size = 10;
+        if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
+            size = sizeAsNumber;
+        }
+        const transactions = await transactions_1.SellAirtimeInstance.findAndCountAll({
+            limit: size,
+            offset: page * size,
+        });
+        if (!transactions) {
+            return res.status(404).json({ message: 'No transaction found' });
+        }
+        return res.send({
+            content: transactions.rows,
+            totalPages: Math.ceil(transactions.count / size),
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            status: 'error',
+            message: error,
+        });
+    }
+}
+exports.allTransactions = allTransactions;
