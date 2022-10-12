@@ -250,8 +250,8 @@ export const cancelTransactions = async (id) => {
 
 export const result = async (pageIndex) => {
   try {
-  const response = await axios.get(
-    `http://localhost:4000/account/pendingtransactions?page=${pageIndex}&size=10`
+  const response = await client2.get(
+    `/account/pendingtransactions?page=${pageIndex}&size=10`
   );
   return response.data;
   } catch (error) {
@@ -261,9 +261,8 @@ export const result = async (pageIndex) => {
 
 export const resultTrans = async (pageIndex) => {
  try{
-   const response = await axios.get(
-    // `http://localhost:4000/account/allTransactions`
-    `http://localhost:4000/account/allTransactions?page=${pageIndex}&size=10`
+   const response = await client2.get(
+    `/account/allTransactions?page=${pageIndex}&size=10`
   );
  return response.data
    } catch (error){
