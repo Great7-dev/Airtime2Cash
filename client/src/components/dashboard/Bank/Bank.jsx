@@ -18,7 +18,6 @@ const BankInfo = ({ bank }) => {
   }, [removed]);
   return (
     <Bank>
-      {/* <div className='views'> */}
       <div className="acctinfo">
         <p>{bank.bankName}</p>
         <p>{bank.accNumber}</p>
@@ -34,7 +33,6 @@ const BankInfo = ({ bank }) => {
       >
         Remove
       </button>
-      {/* </div> */}
     </Bank>
   );
 };

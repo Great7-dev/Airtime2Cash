@@ -9,7 +9,7 @@ export const SideBarStyle = styled.div`
     padding-top: 7rem;
 }
 & .sidebar{
-    height: 100vh;
+    height: 110vh;
     width: 402px;
     transition: all 0.5s;
     padding-top: 7rem;

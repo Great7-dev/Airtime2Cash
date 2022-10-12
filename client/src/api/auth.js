@@ -184,7 +184,7 @@ export const withdrawBalance = async (data) => {
     const response = await client2.post(`/cash/withdraw/`, data, {
       headers: { authorization: `Bearer ${token}` },
     });
-    return await response.data;
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -251,7 +251,7 @@ export const cancelTransactions = async (id) => {
 export const result = async (pageIndex) => {
   try {
   const response = await axios.get(
-    `http://localhost:4000/account/allTransactions?page=${pageIndex}&size=10`
+    `http://localhost:4000/account/pendingtransactions?page=${pageIndex}&size=10`
   );
   return response.data;
   } catch (error) {

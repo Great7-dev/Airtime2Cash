@@ -62,7 +62,6 @@ const Bankform = () => {
       {formState ? (
         <form action="" className="bankform">
           <label htmlFor="" className="texts">Bank Name</label>
-          {/* <input type="text" placeholder="Bank Name" name="Bankname"  onChange={handleChange}  /> */}
 
           <Select
             className="selections"

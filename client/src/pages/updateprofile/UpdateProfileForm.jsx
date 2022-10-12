@@ -14,7 +14,7 @@ function Form() {
     const loadUser = async ()=> {
       const record =await getUser()
       setUser(record.record)
-      console.log(record)
+      //console.log(record)
     }
     loadUser()
   },[])

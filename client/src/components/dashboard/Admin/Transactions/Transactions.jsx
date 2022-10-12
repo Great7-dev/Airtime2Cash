@@ -3,9 +3,7 @@ import React, { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import { resultTrans } from "../../../../api/auth";
-// import { Mydata } from "../../../../api/auth";
 import ColumnsTranc from "../columnsTranc";
-// import mockdata from "../mockdata";
 import "./Transactionstyle.js";
 import { StyledPaginateContainer, TransactionContainer } from "./Transactionstyle.js";
 
@@ -97,7 +95,6 @@ const Transactions = () => {
           })}
         </tbody>
       </table>
-      {/* <div> */}
         <StyledPaginateContainer>
         <button onClick={() => gotoPage(pageIndex)} disabled={!canPreviousPage} className="bt">
           {"<<"}
@@ -118,16 +115,6 @@ const Transactions = () => {
           </strong>{" "}
         </span>
         </StyledPaginateContainer>
-      {/* </div> */}
-      {/* <usePagination
-        rowsPerPageOptions={[5, 10, 15]}
-        component="div"
-        count={allTransactions.length}
-        rowsPerPage={pageSize}
-        page={pageIndex}
-        onChangePage={gotoPage}
-        onChangeRowsPerPage={(e) => setPageSize(Number(e.target.value))}
-      /> */}
     </TransactionContainer>
   );
 };

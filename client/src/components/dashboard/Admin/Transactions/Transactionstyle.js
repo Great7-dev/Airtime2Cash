@@ -9,6 +9,7 @@ table {
     margin-left: 140px;
     width: 70%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.09);
+    /* min-height: 400px; */
   }
   .ad-tran{
     color: #03435F;

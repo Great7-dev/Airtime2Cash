@@ -76,7 +76,6 @@ const Overview = () => {
 useEffect(() => {
   getresult(pageIndex);
 }, [pageIndex])
-// console.log(pageIndex);
   return (
     <OverviewContainer>
       <h1 className="ad-dash">Admin Dashboard</h1>

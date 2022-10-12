@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, CSSProperties } from "react";
 import { WithdrawStyle, CustomStyle } from "./WithdrawStyle";
 //import * as Yup from 'yup'
 //import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -11,13 +11,21 @@ import { useEffect } from "react";
 import { getUserBanks ,withdrawBalance} from "../../../api/auth";
 import { Navigate } from "react-router-dom";
 //import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
+const override = {
+  display: "block",
+  margin: "0 -20px 0 30px",
+  borderColor: "white",
+};
 
 const Withdraw = () => {
   const [banks, setBanks] = useState([])
-  const [formData, setFormData]= useState({})
-  const [data, setData]= useState({})
+  const [formData, setFormData]= useState({ accName: "", accNumber: ""})
+  const [data, setData]= useState({ amount: ''})
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffffff");
 
 
   const caller = async () => {
@@ -54,15 +62,26 @@ const accNumber = formData.accNumber
     
       const handleSubmit= async (e)=> {
       e.preventDefault();
+      setLoading(true)
      
       if (amount === "" || bankName === "" || accNumber === "") {
         console.log("yayyy")
         return toast.error("No field should be left empty, please fill all fields");
       }
       console.log(bankName,accNumber,amount)
+      
       const res = await withdrawBalance({accNumber,bankName,amount}) 
-      console.log(res)
-      //setFormData(res)
+      console.log('response==>', res)
+      if(res && res.status === 201){
+        setLoading(false)
+        formData.accName = ""
+        formData.accNumber = ""
+        data.amount = ""
+        toast.success("Withdrawal successful")
+      } else {
+        setLoading(false)
+        toast.error(res.response.data.message)
+      }
       localStorage.setItem('wallet',res.newwallet)
 
 
@@ -95,7 +114,7 @@ const accNumber = formData.accNumber
                   placeholder="BabatundeOla"
                   name="account_name"
                   //change={(e) => setphoneNumber(e.target.value)}
-                  value={formData.accName}
+                  value={formData.accName || ""}
                 />
 
                 <InputField
@@ -105,7 +124,7 @@ const accNumber = formData.accNumber
                   placeholder="1234567890"
                   name="accNumber"
                   //change={(e) => setphoneNumber(e.target.value)}
-                  value={formData.accNumber}
+                  value={formData.accNumber || ""}
                 />
 
                 <InputField
@@ -115,7 +134,7 @@ const accNumber = formData.accNumber
                   placeholder="NGN"
                   name="amount"
                   change={handleChange2}
-                  value={amount}
+                  value={amount || ""}
                 />
       
                 <InputField
@@ -129,6 +148,14 @@ const accNumber = formData.accNumber
               </Label>
       <button type="submit" className="btnnn" onClick={handleSubmit}>
                Withdraw
+               <ClipLoader
+              color={color}
+              loading={loading}
+              cssOverride={override}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+              />
       </button>
 
 

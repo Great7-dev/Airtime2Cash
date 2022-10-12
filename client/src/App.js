@@ -15,6 +15,7 @@ import Layout from "./components/dashboard/Admin/Layout/Layout";
 import Overview from "./components/dashboard/Admin/Overview/Overview";
 import Transactions from "./components/dashboard/Admin/Transactions/Transactions";
 import Navbar from "./components/NavBar/NavBar";
+import Tester from "./components/dashboard/WithdrawBalance/Tester";
 
 function App() {
   const handleIMGcLICK = (e) => {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/checkmail" element={<CheckMail />} />{" "}
           <Route path="/forgetpassword" element={<ForgetPassword />} />{" "}
           <Route path="/forgetpassword/:id" element={<ResetPassword />} />{" "}
+          <Route path="/test" element={<Tester />} />{" "}
           <Route
             exact
             path="/profile"
