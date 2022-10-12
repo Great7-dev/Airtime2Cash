@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const SellAirtimeFormStyle = styled.form `
+export const SellAirtimeFormStyle = styled.form`
   margin-top: 2rem;
+  
   .sel {
-    color:#012A4A;
+    color: #012a4a;
     display: flex;
     font-family: "Inter";
     font-style: normal;
@@ -18,8 +19,8 @@ export const SellAirtimeFormStyle = styled.form `
 
     justify-content: space-between;
   }
-  #btnCopy{
-  margin-bottom: 1rem;
+  #btnCopy {
+    margin-bottom: 1rem;
   }
   .viewacctselect {
     cursor: pointer;
@@ -43,9 +44,9 @@ export const SellAirtimeFormStyle = styled.form `
   }
   .sellairtimeform {
     display: flex;
-    margin:auto;
-   
-    width:100%;
+    margin: auto;
+
+    width: 100%;
     flex-direction: column;
 
     font-size: 1rem;
@@ -219,6 +220,10 @@ export const SellAirtimeFormStyle = styled.form `
   @media (max-width: 280px) {
     // margin: 10px 10px 10px 10px;
     width: 100%;
+    .clkdecs{
+      /* font-weight: 300; */
+    font-size: 9px;
+    }
     label {
       margin-left: 15px;
     }
@@ -226,36 +231,38 @@ export const SellAirtimeFormStyle = styled.form `
       margin-left: 60px;
     }
     input {
-      margin-left: 0px;
+      /* width:100%; */
+      margin-left: 0px ;
+      /* border: 1px solid red; */
     }
   }
 `;
 
 export const CustomStyle = {
-    control: (base) => ({
-        ...base,
-        // border: "1px solid #DE3D6D",
-        minHeight: 48,
-        marginBottom: 15,
-        marginTop: 10,
-        fontSize: 13,
-        "&:hover": {
-            // borderColor: "#DE3D6D",
-        },
-    }),
-    valueContainer: (base) => ({
-        ...base,
-        padding: "0 6px",
-    }),
-    input: (base) => ({
-        ...base,
-        margin: 0,
-        padding: 0,
-        color: "#c4c4c4",
-    }),
+  control: (base) => ({
+    ...base,
+    // border: "1px solid #DE3D6D",
+    minHeight: 48,
+    marginBottom: 15,
+    marginTop: 10,
+    fontSize: 13,
+    "&:hover": {
+      // borderColor: "#DE3D6D",
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: "0 6px",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+    color: "#c4c4c4",
+  }),
 };
 
-export const Label = styled.label `
+export const Label = styled.label`
   label {
     float: left;
     font-family: "Inter";
@@ -267,7 +274,7 @@ export const Label = styled.label `
   }
 `;
 
-export const ModalPopupStyle = styled.form `
+export const ModalPopupStyle = styled.form`
   body.active-modal {
     overflow-y: hidden;
   }

@@ -71,6 +71,7 @@ table {
   `;
    export const StyledPaginateContainer = styled.div`
    align-items: center;
+   /* border: 1px solid red; */
    gap: 5px;
    justify-content: center;
    margin-top:1.5rem;
@@ -98,5 +99,10 @@ table {
       :disabled{
         color: grey;
       }
+    }
+    @media(max-width:280px){
+   margin-left: 200px
+
+   
     }
   `;

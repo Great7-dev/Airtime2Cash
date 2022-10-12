@@ -111,4 +111,8 @@ export const Navbarstyle = styled.div`
   @media (max-width: 400px) {
     padding: 13px 50px;
   }
+  /* @media(max-width:280px ){
+    width: 69%
+
+  } */
 `;

@@ -19,6 +19,7 @@ import { result } from "../../../../api/auth";
 
 const Overview = () => {
   const [ShowModal, setShowModal] = useRecoilState(minModalState);
+  // const [allTransactions, setAllTransactions] = useState([]);
   const [EditModal, setEditModal] = useRecoilState(editModalState);
   const [currentTransaction, setCurrentTransaction] = useRecoilState(
     currentTransactionState
@@ -26,6 +27,7 @@ const Overview = () => {
   const [overview, setOverview] = useState([]);
   const [openModal, setOpenModal] = useState(true);
   const [alldetails, setAllDetails] = useState({});
+  const [controlledPageCount, setControlledPageCount] = useState(1);
   
  
   const handleClick = (row) => {
@@ -39,6 +41,7 @@ const Overview = () => {
   const getresult = async () => {
     const getResultData = await result(pageIndex)
     setOverview(getResultData)
+    setControlledPageCount(getResultData.totalPages)
   }
 
   const columns = useMemo(() => COLUMNS, []);
@@ -58,7 +61,7 @@ const Overview = () => {
     canPreviousPage,
     canNextPage,
     pageOptions,
-    state,
+    state: { pageIndex, pageSize },
     gotoPage,
     pageCount,
     setPageSize,
@@ -67,12 +70,13 @@ const Overview = () => {
     {
       columns,
       data,
-      initialState: { pageIndex: 0},
+      initialState: { pageIndex: 0, pageSize: 10 },
+      manualPagination: true,
+      pageCount: controlledPageCount,
     },
     usePagination
   );
 
-  const { pageIndex, pageSize } = state;
 useEffect(() => {
   getresult(pageIndex);
 }, [pageIndex])
@@ -126,7 +130,7 @@ useEffect(() => {
         </tbody>
       </table>
         <StyledPaginateContainer>
-        <button onClick={() => gotoPage(pageIndex)} disabled={!canPreviousPage} className="bt">
+        <button onClick={() => gotoPage(pageIndex -1)} disabled={!canPreviousPage} className="bt">
           {"<<"}
         </button>{" "}
         <button onClick={() => previousPage()} disabled={!canPreviousPage} className="bt">
@@ -135,7 +139,7 @@ useEffect(() => {
         <button onClick={() => nextPage()} disabled={!canNextPage} className="bt">
           Next
         </button>{" "}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} className="bt">
+        <button onClick={() => gotoPage(overview?.totalPages - 1)} disabled={!canNextPage} className="bt">
           {">>"}
         </button>{" "}
         <span>

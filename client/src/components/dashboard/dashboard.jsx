@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 //import "./dashboard.css";
 import Tab from "./Tab";
-import Navbar from "../NavBar/NavBar";
+// import Navbar from "../NavBar/NavBar";
 // import TransactionHistory from "../transaction-history/TransactionHistory";
 import Bankform from "./Bankform/Bankform";
 import { IoArrowBackSharp } from "react-icons/io5";
@@ -41,7 +41,7 @@ function Dashboard() {
 
   return (
     <div className="App">
-      <Navbar/>
+      {/* <Navbar/> */}
       <div className="rectangle2">
        
        
@@ -67,7 +67,7 @@ function Dashboard() {
             <h1>{active}</h1>
           )}
           <div className="ul">
-            <div className="nav">
+            <div className="na">
               {menu.map((item, index) => (
                 <div className="mock" onClick={() => setActive(item)} >{item}</div>
               ))}

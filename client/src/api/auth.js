@@ -262,6 +262,7 @@ export const result = async (pageIndex) => {
 export const resultTrans = async (pageIndex) => {
  try{
    const response = await axios.get(
+    // `http://localhost:4000/account/allTransactions`
     `http://localhost:4000/account/allTransactions?page=${pageIndex}&size=10`
   );
  return response.data
