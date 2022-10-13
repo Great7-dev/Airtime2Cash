@@ -9,7 +9,7 @@ const supertest_1 = __importDefault(require("supertest"));
 const database_config_1 = __importDefault(require("../config/database.config"));
 const request = (0, supertest_1.default)(app_1.default);
 beforeAll(async () => {
-    await database_config_1.default.sync({ force: true }).then(() => {
+    await database_config_1.default.sync().then(() => {
         console.log('Database successfully created for test');
     });
 });
@@ -76,11 +76,15 @@ describe('it should test all apis', () => {
             password: '12345678'
         });
         const { id } = response.body.record;
+        const { token } = response.body;
         const response2 = await request.patch(`/users/change-password/${id}`).send({
             password: '1234567890',
             confirmPassword: '1234567890'
         });
         expect(response2.status).toBe(200);
+        const response4 = await request
+            .delete(`/users/delete/${id}`)
+            .set('authorization', `Bearer ${token}`);
     });
 });
 beforeAll(async () => {
@@ -110,11 +114,14 @@ describe("it should test our API", () => {
             .patch(`/users/update/${id}`)
             .set('authorization', `Bearer ${token}`)
             .send({
-            firstname: "Imeh",
-            lastname: "Usoro",
+            firstname: "Felix",
+            lastname: "Temikotan",
         });
         expect(response3.status).toBe(201);
         expect(response3.body.message).toBe('you have successfully updated your profile');
         expect(response3.body).toHaveProperty('record');
+        const response4 = await request
+            .delete(`/users/delete/${id}`)
+            .set('authorization', `Bearer ${token}`);
     });
 });

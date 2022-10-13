@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.9% </span>
+                <span class="strong">45.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>172/383</span>
+                <span class='fraction'>185/405</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.37% </span>
+                <span class="strong">40.62% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/29</span>
+                <span class='fraction'>13/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">53.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/14</span>
+                <span class='fraction'>8/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.9% </span>
+                <span class="strong">45.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>172/383</span>
+                <span class='fraction'>185/405</span>
             </div>
         
             
@@ -446,7 +446,29 @@
 <a name='L381'></a><a href='#L381'>381</a>
 <a name='L382'></a><a href='#L382'>382</a>
 <a name='L383'></a><a href='#L383'>383</a>
-<a name='L384'></a><a href='#L384'>384</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -829,12 +851,34 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 var __importDefault = (this &amp;&amp; this.__importDefault) || function (mod) {
     return (mod &amp;&amp; mod.__esModule) <span class="branch-0 cbranch-no" title="branch not covered" >? mod </span>: { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.twoFactorAuth = exports.UpdateWallet = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.deleteUser = exports.twoFactorAuth = exports.UpdateWallet = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -1212,6 +1256,28 @@ exports.UpdateWallet = UpdateWallet;
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 exports.twoFactorAuth = twoFactorAuth;
+async function deleteUser(req, res, next) {
+    try {
+        const { id } = req.params;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        if (!record) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({</span>
+<span class="cstat-no" title="statement not covered" >                msg: "User not found",</span>
+<span class="cstat-no" title="statement not covered" >            });</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+        const deletedRecord = await record.destroy();
+        return res.status(200).json({
+            msg: "User deleted successfully",
+        });
+    }
+<span class="branch-0 cbranch-no" title="branch not covered" >    catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(500).json({</span>
+<span class="cstat-no" title="statement not covered" >            msg: "failed to delete",</span>
+<span class="cstat-no" title="statement not covered" >            route: "/deleteuser/:id",</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+}
+exports.deleteUser = deleteUser;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -1219,7 +1285,7 @@ exports.twoFactorAuth = twoFactorAuth;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-11T16:03:01.553Z
+                at 2022-10-13T08:05:23.176Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

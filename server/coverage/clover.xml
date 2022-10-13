@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1665504181859" clover="3.2.0">
-  <project timestamp="1665504181860" name="All files">
-    <metrics statements="3394" coveredstatements="1726" conditionals="147" coveredconditionals="88" methods="111" coveredmethods="53" elements="3652" coveredelements="1867" complexity="0" loc="3394" ncloc="3394" packages="16" files="38" classes="38"/>
+<coverage generated="1665648323363" clover="3.2.0">
+  <project timestamp="1665648323363" name="All files">
+    <metrics statements="3443" coveredstatements="1757" conditionals="153" coveredconditionals="90" methods="113" coveredmethods="55" elements="3709" coveredelements="1902" complexity="0" loc="3443" ncloc="3443" packages="16" files="38" classes="38"/>
     <package name="dist">
       <metrics statements="36" coveredstatements="34" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
       <file name="app.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/app.js">
@@ -60,7 +60,7 @@
       </file>
     </package>
     <package name="dist.controller">
-      <metrics statements="1129" coveredstatements="367" conditionals="49" coveredconditionals="28" methods="44" coveredmethods="16"/>
+      <metrics statements="1151" coveredstatements="380" conditionals="52" coveredconditionals="29" methods="45" coveredmethods="17"/>
       <file name="accounts.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/controller/accounts.js">
         <metrics statements="428" coveredstatements="77" conditionals="2" coveredconditionals="2" methods="13" coveredmethods="1"/>
         <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
@@ -688,7 +688,7 @@
         <line num="67" count="1" type="stmt"/>
       </file>
       <file name="users.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/controller/users.js">
-        <metrics statements="383" coveredstatements="172" conditionals="29" coveredconditionals="12" methods="14" coveredmethods="7"/>
+        <metrics statements="405" coveredstatements="185" conditionals="32" coveredconditionals="13" methods="15" coveredmethods="8"/>
         <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="2" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="3" count="2" type="cond" truecount="0" falsecount="1"/>
@@ -1072,6 +1072,28 @@
         <line num="381" count="0" type="stmt"/>
         <line num="382" count="0" type="stmt"/>
         <line num="383" count="1" type="stmt"/>
+        <line num="384" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="385" count="2" type="stmt"/>
+        <line num="386" count="2" type="stmt"/>
+        <line num="387" count="2" type="stmt"/>
+        <line num="388" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="389" count="0" type="stmt"/>
+        <line num="390" count="0" type="stmt"/>
+        <line num="391" count="0" type="stmt"/>
+        <line num="392" count="0" type="stmt"/>
+        <line num="393" count="2" type="stmt"/>
+        <line num="394" count="2" type="stmt"/>
+        <line num="395" count="2" type="stmt"/>
+        <line num="396" count="2" type="stmt"/>
+        <line num="397" count="2" type="stmt"/>
+        <line num="398" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="399" count="0" type="stmt"/>
+        <line num="400" count="0" type="stmt"/>
+        <line num="401" count="0" type="stmt"/>
+        <line num="402" count="0" type="stmt"/>
+        <line num="403" count="0" type="stmt"/>
+        <line num="404" count="2" type="stmt"/>
+        <line num="405" count="1" type="stmt"/>
       </file>
       <file name="withdrawal.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/controller/withdrawal.js">
         <metrics statements="132" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="1"/>
@@ -1253,45 +1275,45 @@
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="10" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="23" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="32" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="41" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="42" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
       </file>
     </package>
@@ -1500,7 +1522,7 @@
       </file>
     </package>
     <package name="dist.routes">
-      <metrics statements="68" coveredstatements="60" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="5"/>
+      <metrics statements="69" coveredstatements="61" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="5"/>
       <file name="account.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/routes/account.js">
         <metrics statements="22" coveredstatements="22" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
@@ -1527,7 +1549,7 @@
         <line num="22" count="1" type="stmt"/>
       </file>
       <file name="user.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/routes/user.js">
-        <metrics statements="35" coveredstatements="27" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="36" coveredstatements="28" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="2" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="3" count="1" type="cond" truecount="0" falsecount="1"/>
@@ -1563,6 +1585,7 @@
         <line num="33" count="1" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
       </file>
       <file name="withdrawal.js" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/dist/routes/withdrawal.js">
         <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
@@ -1750,7 +1773,7 @@
       </file>
     </package>
     <package name="src.controller">
-      <metrics statements="1272" coveredstatements="439" conditionals="31" coveredconditionals="13" methods="35" coveredmethods="7"/>
+      <metrics statements="1297" coveredstatements="455" conditionals="34" coveredconditionals="14" methods="36" coveredmethods="8"/>
       <file name="accounts.ts" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/src/controller/accounts.ts">
         <metrics statements="491" coveredstatements="111" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -2445,7 +2468,7 @@
         <line num="71" count="0" type="stmt"/>
       </file>
       <file name="users.ts" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/src/controller/users.ts">
-        <metrics statements="435" coveredstatements="207" conditionals="25" coveredconditionals="9" methods="12" coveredmethods="5"/>
+        <metrics statements="460" coveredstatements="223" conditionals="28" coveredconditionals="10" methods="13" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -2881,6 +2904,31 @@
         <line num="433" count="0" type="stmt"/>
         <line num="434" count="0" type="stmt"/>
         <line num="435" count="0" type="stmt"/>
+        <line num="436" count="1" type="stmt"/>
+        <line num="437" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="438" count="2" type="stmt"/>
+        <line num="439" count="2" type="stmt"/>
+        <line num="440" count="2" type="stmt"/>
+        <line num="441" count="2" type="stmt"/>
+        <line num="442" count="2" type="stmt"/>
+        <line num="443" count="2" type="stmt"/>
+        <line num="444" count="2" type="stmt"/>
+        <line num="445" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="446" count="0" type="stmt"/>
+        <line num="447" count="0" type="stmt"/>
+        <line num="448" count="0" type="stmt"/>
+        <line num="449" count="0" type="stmt"/>
+        <line num="450" count="2" type="stmt"/>
+        <line num="451" count="2" type="stmt"/>
+        <line num="452" count="2" type="stmt"/>
+        <line num="453" count="2" type="stmt"/>
+        <line num="454" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="455" count="0" type="stmt"/>
+        <line num="456" count="0" type="stmt"/>
+        <line num="457" count="0" type="stmt"/>
+        <line num="458" count="0" type="stmt"/>
+        <line num="459" count="0" type="stmt"/>
+        <line num="460" count="2" type="stmt"/>
       </file>
       <file name="withdrawal.ts" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/src/controller/withdrawal.ts">
         <metrics statements="156" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
@@ -3076,50 +3124,50 @@
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="23" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="32" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
+        <line num="32" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="42" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="cond" truecount="0" falsecount="1"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.models">
@@ -3362,7 +3410,7 @@
       </file>
     </package>
     <package name="src.routes">
-      <metrics statements="73" coveredstatements="63" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="74" coveredstatements="64" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="account.ts" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/src/routes/account.ts">
         <metrics statements="21" coveredstatements="21" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -3388,7 +3436,7 @@
         <line num="21" count="1" type="stmt"/>
       </file>
       <file name="user.ts" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/src/routes/user.ts">
-        <metrics statements="40" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="41" coveredstatements="31" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -3429,6 +3477,7 @@
         <line num="38" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
       </file>
       <file name="withdrawal.ts" path="/Users/decagon/Desktop/week-10-15/live-project-pod-h/server/src/routes/withdrawal.ts">
         <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
