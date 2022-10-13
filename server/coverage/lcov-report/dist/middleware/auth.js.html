@@ -23,9 +23,15 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">22.22% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>10/45</span>
+=======
+                <span class="strong">20.4% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>10/49</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
             </div>
         
             
@@ -44,9 +50,15 @@
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">22.22% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>10/45</span>
+=======
+                <span class="strong">20.4% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>10/49</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
             </div>
         
             
@@ -113,6 +125,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<<<<<<< HEAD
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -122,6 +135,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+=======
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -152,6 +167,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<<<<<<< HEAD
+=======
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 var __importDefault = (this &amp;&amp; this.__importDefault) || function (mod) {
@@ -166,7 +193,12 @@ const user_1 = require("../models/user");
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >        const authorization = req.headers.authorization;</span>
 <span class="cstat-no" title="statement not covered" >        if (!authorization) {</span>
+<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >            res.status(401).json({</span>
+=======
+<span class="cstat-no" title="statement not covered" >            res.status(401);</span>
+<span class="cstat-no" title="statement not covered" >            res.json({</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
 <span class="cstat-no" title="statement not covered" >                Error: 'kindly sign in as a user'</span>
 <span class="cstat-no" title="statement not covered" >            });</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
@@ -174,7 +206,12 @@ const user_1 = require("../models/user");
 <span class="cstat-no" title="statement not covered" >        const token = authorization?.slice(7, authorization.length) || req.cookies.mytoken;</span>
 <span class="cstat-no" title="statement not covered" >        const verified = jsonwebtoken_1.default.verify(token, secret);</span>
 <span class="cstat-no" title="statement not covered" >        if (!verified) {</span>
+<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >            res.status(401).json({</span>
+=======
+<span class="cstat-no" title="statement not covered" >            res.status(401);</span>
+<span class="cstat-no" title="statement not covered" >            res.json({</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
 <span class="cstat-no" title="statement not covered" >                Error: 'User not verified, you cant access this route'</span>
 <span class="cstat-no" title="statement not covered" >            });</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
@@ -182,7 +219,12 @@ const user_1 = require("../models/user");
 <span class="cstat-no" title="statement not covered" >        const { id } = verified;</span>
 <span class="cstat-no" title="statement not covered" >        const user = await user_1.UserInstance.findOne({ where: { id } });</span>
 <span class="cstat-no" title="statement not covered" >        if (!user) {</span>
+<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >            res.status(404).json({</span>
+=======
+<span class="cstat-no" title="statement not covered" >            res.status(404);</span>
+<span class="cstat-no" title="statement not covered" >            res.json({</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
 <span class="cstat-no" title="statement not covered" >                Error: 'user not verified'</span>
 <span class="cstat-no" title="statement not covered" >            });</span>
 <span class="cstat-no" title="statement not covered" >            return;</span>
@@ -191,7 +233,12 @@ const user_1 = require("../models/user");
 <span class="cstat-no" title="statement not covered" >        next();</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    catch (error) {</span>
+<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >        res.status(500).json({</span>
+=======
+<span class="cstat-no" title="statement not covered" >        res.status(500);</span>
+<span class="cstat-no" title="statement not covered" >        res.json({</span>
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
 <span class="cstat-no" title="statement not covered" >            Error: "user not logged in"</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
@@ -205,7 +252,11 @@ exports.auth = auth;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at 2022-10-10T14:41:09.532Z
+=======
+                at 2022-10-10T15:26:38.875Z
+>>>>>>> f1dbfb222279d54af68dc5f28110d9b2b8ec00da
             </div>
         <script src="../../prettify.js"></script>
         <script>

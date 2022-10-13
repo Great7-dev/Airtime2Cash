@@ -15,7 +15,7 @@ async function withdrawal(req, res, next) {
         let wallet;
         const userID = req.user.id;
         const { amount, bankName, accNumber } = req.body;
-        const validateInput = await utils_1.withdrawalSchema.validate(req.body);
+        const validateInput = utils_1.withdrawalSchema.validate(req.body);
         if (validateInput.error) {
             return res.status(400).json(validateInput.error.details[0].message);
         }
@@ -31,16 +31,16 @@ async function withdrawal(req, res, next) {
         if (validateAccount.userId !== userID) {
             return res.status(401).json({ message: ' Sorry this account is not registered by this customer!' });
         }
-        wallet = customer.wallet;
+        wallet = Number(customer.wallet);
         if (amount > wallet) {
             return res.status(401).json({ message: 'Insufficient fund!' });
         }
         // fluterwave function here...
         let allBanks = await (0, flutter_1.getAllBanksNG)();
-        console.log(allBanks);
+        // console.log(allBanks)
         const bankCode = allBanks.data.filter((item) => item.name.toLowerCase() == bankName.toLowerCase());
         let code = bankCode[0].code;
-        console.log(code);
+        //console.log(code);
         const details = {
             // account_bank: "044",
             account_bank: code,
@@ -62,8 +62,8 @@ async function withdrawal(req, res, next) {
         // const statusUrl = `${BASE_API_URL}/transfers/${response.data.id}`;
         // const respo = await axios.get(statusUrl, options);
         console.log('this is what i want', flutta.status);
-        if (flutta.status === 'success') {
-            const newwallet = wallet - amount;
+        if (flutta.status !== 'error') {
+            const newwallet = wallet - Number(amount);
             const customerUpdatedRecord = await user_1.UserInstance.update({ wallet: newwallet }, { where: { id: userID } });
             const withdrawalHistory = await withdrawal_1.WithdrawalInstance.create({
                 id: withdrawalId,
@@ -84,7 +84,7 @@ async function withdrawal(req, res, next) {
                 userID,
                 status: false
             });
-            return res.status(401).json({ message: `S0rry yourwithdrawal was not successful service error`, flutta });
+            return res.status(401).json({ message: `S0rry your withdrawal was not successful service error`, flutta });
         }
     }
     catch (error) {
@@ -119,7 +119,7 @@ exports.getAllWithdrawals = getAllWithdrawals;
 async function getAllUserWithdrawals(req, res, next) {
     try {
         const { id } = req.params;
-        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id } });
+        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id }, order: [['createdAt', 'DESC']] });
         if (!allWithdrawalHistory) {
             return res.status(404).json({ message: 'Sorry there is currently no withdrawal history!' });
         }

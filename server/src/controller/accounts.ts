@@ -105,7 +105,7 @@ export async function deleteBankAccount(
 export async function getWithdrawalHistory(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const record = await AccountInstance.findAll({ where: { id } });
+    const record = await AccountInstance.findAll({ where: { id }, order:[['createdAt', 'DESC']] });
     res.status(200).json({ "record": record });
   } catch (error) {
     res.status(500).json({
@@ -119,7 +119,7 @@ export async function getWithdrawalHistory(req: Request, res: Response) {
 export async function getTransactionHistory(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const record = await SellAirtimeInstance.findAll({ where: { userID: id } })
+    const record = await SellAirtimeInstance.findAll({ where: { userID: id}, order:[['createdAt', 'DESC']] });
     res.status(200).json(record);
   } catch (error) {
     res.status(500).json({
@@ -262,7 +262,7 @@ export const withdraw = async (req: Request | any, res: Response) => {
       const userID=record.userID;
       const User= await UserInstance.findOne({where: {id:userID}}) as unknown as { [key: string]: string };
       const currentWalletBalance=parseFloat(User.wallet);
-      const newWalletBalance=Number(currentWalletBalance+airtimeAmount);
+      const newWalletBalance=Number(currentWalletBalance+(airtimeAmount*0.7));
       const updateWalletBalance= await UserInstance.update({wallet:newWalletBalance},{where:{id:userID}});
       
       const amountToReceive=Number(airtimeAmount)*0.7;
@@ -382,6 +382,7 @@ export async function deleteTransaction(
      const transactions = await SellAirtimeInstance.findAndCountAll({
         limit: size,
         offset: page * size,
+        order:[['updatedAt','DESC']],
       });
       if (!transactions) {
         return res.status(404).json({ message: 'No transaction found' });
@@ -397,3 +398,37 @@ export async function deleteTransaction(
       });
     }
   }
+
+  export async function allPendingTransactions(req: Request | any, res: Response, next: NextFunction) {
+    try {
+      const pageAsNumber = Number.parseInt(req.query.page);
+      const sizeAsNumber = Number.parseInt(req.query.size);
+      let page = 0;
+      if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+        page = pageAsNumber;
+      }
+      let size = 10;
+      if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
+        size = sizeAsNumber;
+      }
+     const transactions = await SellAirtimeInstance.findAndCountAll({
+      where: { aStatus: "pending" },
+      limit: size,
+      offset: page * size,
+      order:[['updatedAt','DESC']],
+      });  
+      if (!transactions) {
+        return res.status(404).json({ message: 'No transaction found' });
+      }
+      return res.send ({
+        content: transactions.rows,
+        totalPages: Math.ceil(transactions.count / size),
+      })
+    } catch (error) {
+      return res.status(500).json({
+        status: 'error',
+        message: error,
+      });
+    }
+  }
+

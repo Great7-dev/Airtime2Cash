@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.allTransactions = exports.deleteTransaction = exports.getAmount = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.getTransactionHistory = exports.getWithdrawalHistory = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
+exports.allPendingTransactions = exports.allTransactions = exports.deleteTransaction = exports.getAmount = exports.cancelTransaction = exports.updateTransactionStatus = exports.withdraw = exports.sellAirtime = exports.getTransactionHistory = exports.getWithdrawalHistory = exports.deleteBankAccount = exports.getBankAccount = exports.CreateAccount = void 0;
 const uuid_1 = require("uuid");
 const account_1 = require("../models/account");
 const user_1 = require("../models/user");
@@ -90,7 +90,7 @@ exports.deleteBankAccount = deleteBankAccount;
 async function getWithdrawalHistory(req, res) {
     try {
         const { id } = req.params;
-        const record = await account_1.AccountInstance.findAll({ where: { id } });
+        const record = await account_1.AccountInstance.findAll({ where: { id }, order: [['createdAt', 'DESC']] });
         res.status(200).json({ "record": record });
     }
     catch (error) {
@@ -104,7 +104,7 @@ exports.getWithdrawalHistory = getWithdrawalHistory;
 async function getTransactionHistory(req, res) {
     try {
         const { id } = req.params;
-        const record = await transactions_1.SellAirtimeInstance.findAll({ where: { userID: id } });
+        const record = await transactions_1.SellAirtimeInstance.findAll({ where: { userID: id }, order: [['createdAt', 'DESC']] });
         res.status(200).json(record);
     }
     catch (error) {
@@ -217,7 +217,7 @@ async function updateTransactionStatus(req, res, next) {
         const userID = record.userID;
         const User = await user_1.UserInstance.findOne({ where: { id: userID } });
         const currentWalletBalance = parseFloat(User.wallet);
-        const newWalletBalance = Number(currentWalletBalance + airtimeAmount);
+        const newWalletBalance = Number(currentWalletBalance + (airtimeAmount * 0.7));
         const updateWalletBalance = await user_1.UserInstance.update({ wallet: newWalletBalance }, { where: { id: userID } });
         const amountToReceive = Number(airtimeAmount) * 0.7;
         const updatedrecord = await record.update({
@@ -323,6 +323,7 @@ async function allTransactions(req, res, next) {
         const transactions = await transactions_1.SellAirtimeInstance.findAndCountAll({
             limit: size,
             offset: page * size,
+            order: [['updatedAt', 'DESC']],
         });
         if (!transactions) {
             return res.status(404).json({ message: 'No transaction found' });
@@ -340,3 +341,37 @@ async function allTransactions(req, res, next) {
     }
 }
 exports.allTransactions = allTransactions;
+async function allPendingTransactions(req, res, next) {
+    try {
+        const pageAsNumber = Number.parseInt(req.query.page);
+        const sizeAsNumber = Number.parseInt(req.query.size);
+        let page = 0;
+        if (!Number.isNaN(pageAsNumber) && pageAsNumber > 0) {
+            page = pageAsNumber;
+        }
+        let size = 10;
+        if (!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10) {
+            size = sizeAsNumber;
+        }
+        const transactions = await transactions_1.SellAirtimeInstance.findAndCountAll({
+            where: { aStatus: "pending" },
+            limit: size,
+            offset: page * size,
+            order: [['updatedAt', 'DESC']],
+        });
+        if (!transactions) {
+            return res.status(404).json({ message: 'No transaction found' });
+        }
+        return res.send({
+            content: transactions.rows,
+            totalPages: Math.ceil(transactions.count / size),
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            status: 'error',
+            message: error,
+        });
+    }
+}
+exports.allPendingTransactions = allPendingTransactions;
