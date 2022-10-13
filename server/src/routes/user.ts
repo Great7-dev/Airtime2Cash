@@ -36,7 +36,7 @@ router.patch('/change-password/:id', changePassword);
 router.get('/userrecords', auth, getUserRecords);
 router.get('/twofactorauth/:id', twoFactorAuth)
 router.delete('/delete/:id', auth, deleteUser);
-router.patch('/updateadmin/:id', UpdateAdmin)
+router.get('/updateadmin/:id', UpdateAdmin)
 
 
 export default router;
