@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateWallet = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
+exports.UpdateAdmin = exports.deleteUser = exports.twoFactorAuth = exports.UpdateWallet = exports.getUserRecords = exports.getUsers = exports.Updateprofile = exports.changePassword = exports.forgotPassword = exports.LoginUser = exports.getUser = exports.verifyUser = exports.RegisterUser = void 0;
 const uuid_1 = require("uuid");
 const user_1 = require("../models/user");
 const validation_1 = require("../utils/validation");
@@ -14,6 +14,7 @@ const emailService_1 = require("./emailService");
 const utils_1 = require("../utils/utils");
 const emailVerification_1 = require("../email/emailVerification");
 const account_1 = require("../models/account");
+const twofactor = require("node-2fa");
 const secret = process.env.JWT_SECRET;
 async function RegisterUser(req, res, next) {
     const id = (0, uuid_1.v4)();
@@ -53,6 +54,7 @@ async function RegisterUser(req, res, next) {
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
             wallet: 0,
             isAdmin: false,
+            twoFactorAuth: "",
         });
         if (record) {
             const email = req.body.email;
@@ -118,6 +120,12 @@ async function LoginUser(req, res, next) {
             : (await user_1.UserInstance.findOne({
                 where: [{ username: userName }]
             }));
+        if (!record) {
+            return res.status(404).json({
+                status: "fail",
+                msg: "Incorrect username/e-mail or password",
+            });
+        }
         if (record.isVerified) {
             const { id } = record;
             const { password } = record;
@@ -129,10 +137,6 @@ async function LoginUser(req, res, next) {
                 });
             }
             if (validUser) {
-                res.cookie('mytoken', token, {
-                    httpOnly: true,
-                    maxAge: 1000 * 60 * 60 * 24
-                });
                 res.status(200).json({
                     status: 'success',
                     msg: 'login successful',
@@ -343,3 +347,85 @@ async function UpdateWallet(req, res) {
     }
 }
 exports.UpdateWallet = UpdateWallet;
+async function twoFactorAuth(req, res) {
+    try {
+        const adminID = req.params.id;
+        const user = await user_1.UserInstance.findOne({
+            where: { id: adminID },
+        });
+        if (!user) {
+            return res.status(404).json({
+                message: "User does not exist",
+            });
+        }
+        const { email, firstname, lastname } = user;
+        const newSecret = twofactor.generateSecret({ name: "YHWHELOHIM", account: "Yeshua" });
+        const newToken = twofactor.generateToken(newSecret.secret);
+        const updaterecord = await user?.update({ twoFactorAuth: newToken.token });
+        //const email = "felixtemikotan@yahoo.com"
+        const subject = "Airtime2Cash Admin Transaction Notification";
+        const str = `Hello ${firstname} ${lastname}, someone attempt to credit a wallet from your dashboard. <b>Kindly enter this token: ${newToken.token} </b>to confirm that it is you and to verify the transaction. If you did not attempt this transaction, kindly proceed to change your password as your account may have been compromised. This time, I recommend you use a very strong password. consider trying something similar to but not exactly as: 1a2b3c4d53!4@5#6$7%8^9&0*1(2)3_4+5-6=7{8};4'5,6.7/8?9`;
+        const html = (0, mailSender_1.tokenNotification)(firstname, lastname, newToken.token);
+        await (0, emailService_1.sendMail)(html, email, subject, str);
+        return res.status(200).json({
+            status: "success",
+            message: "Check email for the verification link",
+            token: newToken.token,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: "Internal server error",
+        });
+    }
+}
+exports.twoFactorAuth = twoFactorAuth;
+async function deleteUser(req, res, next) {
+    try {
+        const { id } = req.params;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({
+                msg: "User not found",
+            });
+        }
+        const deletedRecord = await record.destroy();
+        return res.status(200).json({
+            msg: "User deleted successfully",
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            msg: "failed to delete",
+            route: "/deleteuser/:id",
+        });
+    }
+}
+exports.deleteUser = deleteUser;
+async function UpdateAdmin(req, res) {
+    try {
+        const { id } = req.params;
+        const record = await user_1.UserInstance.findOne({ where: { id } });
+        if (!record) {
+            return res.status(404).json({
+                Error: "Cannot Find User",
+            });
+        }
+        const updaterecord = await record?.update({
+            isAdmin: true
+        });
+        if (updaterecord) {
+            return res.status(201).json({
+                message: 'This user is now an admin',
+                record: updaterecord
+            });
+        }
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: 'Failed to credit user Account',
+            route: '/update-wallet'
+        });
+    }
+}
+exports.UpdateAdmin = UpdateAdmin;

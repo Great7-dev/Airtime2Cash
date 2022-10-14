@@ -344,7 +344,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 <span class="cstat-no" title="statement not covered" >        let wallet;</span>
 <span class="cstat-no" title="statement not covered" >        const userID = req.user.id;</span>
 <span class="cstat-no" title="statement not covered" >        const { amount, bankName, accNumber } = req.body;</span>
-<span class="cstat-no" title="statement not covered" >        const validateInput = await utils_1.withdrawalSchema.validate(req.body);</span>
+<span class="cstat-no" title="statement not covered" >        const validateInput = utils_1.withdrawalSchema.validate(req.body);</span>
 <span class="cstat-no" title="statement not covered" >        if (validateInput.error) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(400).json(validateInput.error.details[0].message);</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
@@ -360,16 +360,16 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 <span class="cstat-no" title="statement not covered" >        if (validateAccount.userId !== userID) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: ' Sorry this account is not registered by this customer!' });</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        wallet = customer.wallet;</span>
+<span class="cstat-no" title="statement not covered" >        wallet = Number(customer.wallet);</span>
 <span class="cstat-no" title="statement not covered" >        if (amount &gt; wallet) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: 'Insufficient fund!' });</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >        // fluterwave function here...</span>
 <span class="cstat-no" title="statement not covered" >        let allBanks = await (0, flutter_1.getAllBanksNG)();</span>
-<span class="cstat-no" title="statement not covered" >        console.log(allBanks);</span>
+<span class="cstat-no" title="statement not covered" >        // console.log(allBanks)</span>
 <span class="cstat-no" title="statement not covered" >        const bankCode = allBanks.data.filter((item) =&gt; item.name.toLowerCase() == bankName.toLowerCase());</span>
 <span class="cstat-no" title="statement not covered" >        let code = bankCode[0].code;</span>
-<span class="cstat-no" title="statement not covered" >        console.log(code);</span>
+<span class="cstat-no" title="statement not covered" >        //console.log(code);</span>
 <span class="cstat-no" title="statement not covered" >        const details = {</span>
 <span class="cstat-no" title="statement not covered" >            // account_bank: "044",</span>
 <span class="cstat-no" title="statement not covered" >            account_bank: code,</span>
@@ -392,7 +392,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 <span class="cstat-no" title="statement not covered" >        // const respo = await axios.get(statusUrl, options);</span>
 <span class="cstat-no" title="statement not covered" >        console.log('this is what i want', flutta.status);</span>
 <span class="cstat-no" title="statement not covered" >        if (flutta.status === 'success') {</span>
-<span class="cstat-no" title="statement not covered" >            const newwallet = wallet - amount;</span>
+<span class="cstat-no" title="statement not covered" >            const newwallet = wallet - Number(amount);</span>
 <span class="cstat-no" title="statement not covered" >            const customerUpdatedRecord = await user_1.UserInstance.update({ wallet: newwallet }, { where: { id: userID } });</span>
 <span class="cstat-no" title="statement not covered" >            const withdrawalHistory = await withdrawal_1.WithdrawalInstance.create({</span>
 <span class="cstat-no" title="statement not covered" >                id: withdrawalId,</span>
@@ -413,7 +413,7 @@ const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_K
 <span class="cstat-no" title="statement not covered" >                userID,</span>
 <span class="cstat-no" title="statement not covered" >                status: false</span>
 <span class="cstat-no" title="statement not covered" >            });</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: `S0rry yourwithdrawal was not successful service error`, flutta });</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(401).json({ message: `S0rry your withdrawal was not successful service error`, flutta });</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    catch (error) {</span>
@@ -448,7 +448,7 @@ exports.getAllWithdrawals = getAllWithdrawals;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function getAllUserWithdrawals(req, res, next) {</span></span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >        const { id } = req.params;</span>
-<span class="cstat-no" title="statement not covered" >        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id } });</span>
+<span class="cstat-no" title="statement not covered" >        const allWithdrawalHistory = await withdrawal_1.WithdrawalInstance.findAll({ where: { userID: id }, order: [['createdAt', 'DESC']] });</span>
 <span class="cstat-no" title="statement not covered" >        if (!allWithdrawalHistory) {</span>
 <span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Sorry there is currently no withdrawal history!' });</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
@@ -466,7 +466,7 @@ exports.getAllUserWithdrawals = getAllUserWithdrawals;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-10T15:26:38.875Z
+                at 2022-10-13T08:05:23.176Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

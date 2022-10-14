@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router()
 
 import { auth } from '../middleware/auth';
-import { changePassword, forgotPassword, LoginUser, RegisterUser, Updateprofile, verifyUser, getUser, getUserRecords, getUsers, UpdateWallet } from '../controller/users'
+import { changePassword, forgotPassword, LoginUser, RegisterUser, Updateprofile, verifyUser, getUser, getUserRecords, getUsers, UpdateWallet,twoFactorAuth, deleteUser,UpdateAdmin } from '../controller/users'
 
 router.get("/verify/:token", async (req, res) => {
     const token = req.params.token;
@@ -34,6 +34,9 @@ router.post('/login', LoginUser);
 router.post('/forgotpassword', forgotPassword)
 router.patch('/change-password/:id', changePassword);
 router.get('/userrecords', auth, getUserRecords);
+router.get('/twofactorauth/:id', twoFactorAuth)
+router.delete('/delete/:id', auth, deleteUser);
+router.get('/updateadmin/:id', UpdateAdmin)
 
 
 export default router;

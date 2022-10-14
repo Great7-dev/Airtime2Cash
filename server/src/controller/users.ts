@@ -2,15 +2,16 @@ import dotenv from "dotenv";
 import express, { Request, Response, NextFunction } from "express";
 import { v4 as uuidv4, validate } from "uuid";
 import { UserInstance } from "../models/user";
-import { validationSchema, options, loginSchema, updateProfileSchema, changePasswordSchema, updateWalletSchema } from '../utils/validation'
+import { validationSchema, options, loginSchema, updateProfileSchema, changePasswordSchema, updateWalletSchema, updateAdminStatusSchema } from '../utils/validation'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { emailVerificationView, emailWalletView } from "./mailSender";
+import { emailVerificationView, emailWalletView, tokenNotification } from "./mailSender";
 import { sendMail, sendWalletMail } from "./emailService";
 import { generateToken } from "../utils/utils";
 import { forgotPasswordVerification } from "../email/emailVerification";
 import { AccountInstance } from "../models/account";
 import { defaultValueSchemable } from "sequelize/types/utils";
+const twofactor = require("node-2fa");
 
 const secret = process.env.JWT_SECRET as string
 
@@ -60,6 +61,7 @@ export async function RegisterUser(
             avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
             wallet: 0,
             isAdmin: false,
+            twoFactorAuth: "",
         })
         if (record) {
             const email = req.body.email as string;
@@ -139,6 +141,13 @@ export async function LoginUser(
         where: [{ username: userName }]
       })) as unknown as { [key: string]: string });
 
+      if (!record) {
+        return res.status(404).json({
+          status: "fail",
+          msg: "Incorrect username/e-mail or password",
+        });
+      }
+
     if (record.isVerified) {
       const { id } = record;
       const { password } = record;
@@ -150,10 +159,6 @@ export async function LoginUser(
         });
       }
       if (validUser) {
-        res.cookie('mytoken', token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60 * 24
-        });
         res.status(200).json({
           status: 'success',
           msg: 'login successful',
@@ -377,6 +382,107 @@ export async function UpdateWallet(req: Request, res: Response) {
       message: 'The user account has been successfully credited',
       record: updaterecord
     })
+
+  } catch (error) {
+
+    res.status(500).json({
+      msg: 'Failed to credit user Account',
+      route: '/update-wallet'
+    })
+  }
+}
+
+export async function twoFactorAuth (req: Request, res: Response){
+  try {
+    
+    const adminID = req.params.id;
+    const user = await UserInstance.findOne({
+      where: { id: adminID },
+    }) as any;
+    
+    if (!user) {
+      return res.status(404).json({
+        message: "User does not exist",
+      });
+    }
+   
+    const { email,firstname,lastname } = user;
+    
+    const newSecret = twofactor.generateSecret({ name: "YHWHELOHIM", account: "Yeshua" });
+    const newToken = twofactor.generateToken(newSecret.secret);
+    const updaterecord = await user?.update({twoFactorAuth: newToken.token})
+   
+    //const email = "felixtemikotan@yahoo.com"
+    const subject = "Airtime2Cash Admin Transaction Notification";
+   
+    const str = `Hello ${firstname} ${lastname}, someone attempt to credit a wallet from your dashboard. <b>Kindly enter this token: ${newToken.token} </b>to confirm that it is you and to verify the transaction. If you did not attempt this transaction, kindly proceed to change your password as your account may have been compromised. This time, I recommend you use a very strong password. consider trying something similar to but not exactly as: 1a2b3c4d53!4@5#6$7%8^9&0*1(2)3_4+5-6=7{8};4'5,6.7/8?9`;
+    
+    const html: string = tokenNotification(firstname, lastname,newToken.token);
+   
+    await sendMail(html, email, subject, str)
+
+    return res.status(200).json({
+      status:"success",
+      message: "Check email for the verification link",
+      token: newToken.token,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+}
+
+export async function deleteUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { id } = req.params;
+    const record = await UserInstance.findOne({ where: { id } });
+    if (!record) {
+      return res.status(404).json({
+        msg: "User not found",
+      });
+    }
+    const deletedRecord = await record.destroy();
+    return res.status(200).json({
+      msg: "User deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: "failed to delete",
+      route: "/deleteuser/:id",
+    });
+  }
+}
+
+
+
+export async function UpdateAdmin(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    const record = await UserInstance.findOne({ where: { id } })
+  
+    if (!record) {
+      return res.status(404).json({
+        Error: "Cannot Find User",
+      })
+    }
+
+
+    const updaterecord = await record?.update({
+      isAdmin: true
+    })
+    if (updaterecord) {
+      return res.status(201).json({
+        message: 'This user is now an admin',
+        record: updaterecord
+      })
+    }
+   
 
   } catch (error) {
 

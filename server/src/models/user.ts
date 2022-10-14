@@ -14,6 +14,7 @@ interface UserAtrribute {
   avatar: string;
   wallet:number;
   isAdmin:boolean;
+  twoFactorAuth:string;
 }
 export class UserInstance extends Model<UserAtrribute> { }
 
@@ -65,6 +66,10 @@ UserInstance.init(
       type:DataTypes.BOOLEAN,
       allowNull:false
     },
+    twoFactorAuth:{
+      type:DataTypes.STRING,
+      defaultValue:'',
+  },
   },
   {
     sequelize: db,

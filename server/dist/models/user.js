@@ -56,6 +56,10 @@ UserInstance.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false
     },
+    twoFactorAuth: {
+        type: sequelize_1.DataTypes.STRING,
+        defaultValue: '',
+    },
 }, {
     sequelize: database_config_1.default,
     tableName: 'userTable'

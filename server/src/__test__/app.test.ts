@@ -9,7 +9,7 @@ import db from '../config/database.config';
 const request = supertest(app);
 
 beforeAll(async () => {
-  await db.sync({ force: true }).then(() => {
+  await db.sync().then(() => {
     console.log('Database successfully created for test');
   });
 });
@@ -78,7 +78,7 @@ describe('it should test all apis', () => {
   });
   it('it should not login unregestered user', async () => {
     const response = await request.post('/users/login').send({
-      username: '4444444',
+      username: 'felixalok',
 
       password: '12345678'
     });
@@ -106,11 +106,15 @@ describe('it should test all apis', () => {
     });
 
     const { id } = response.body.record;
+    const {token} = response.body
     const response2 = await request.patch(`/users/change-password/${id}`).send({
       password: '1234567890',
       confirmPassword: '1234567890'
     });
     expect(response2.status).toBe(200);
+    const response4= await request
+    .delete(`/users/delete/${id}`)
+    .set('authorization', `Bearer ${token}`)
   });
 });
 
@@ -144,11 +148,15 @@ it("update user profile", async () => {
     .patch(`/users/update/${id}`)
     .set('authorization', `Bearer ${token}`)
     .send({
-        firstname: "Imeh",
-        lastname: "Usoro",
+        firstname: "Felix",
+        lastname: "Temikotan",
     })
     expect(response3.status).toBe(201)
     expect(response3.body.message).toBe('you have successfully updated your profile')
     expect(response3.body).toHaveProperty('record')
+    const response4= await request
+    .delete(`/users/delete/${id}`)
+    .set('authorization', `Bearer ${token}`)
+
 })
 })

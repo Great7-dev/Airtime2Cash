@@ -147,7 +147,7 @@ const sellAirtime = async (req, res) => {
             aStatus: "pending",
         });
         if (record) {
-            const email = "felixtemikotan@yahoo.com";
+            const email = "greatokhawere51@gmail.com";
             const subject = "Airtime Transaction Notification";
             const str = `${firstname}  ${lastname} with phone number ${req.body.phoneNumber} has just sent an airtime transaction of ${req.body.airtimeAmount} to ${req.body.destinationPhoneNumber} on ${req.body.network} network.`;
             const html = (0, mailSender_1.transactionNotification)(firstname, lastname, req.body.phoneNumber, req.body.airtimeAmount, req.body.network, req.body.destinationPhoneNumber);
