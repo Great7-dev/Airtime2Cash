@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../utils/Logo/Logo';
 import InputField from '../utils/Input/Input';
 //import { Button } from '../utils/Button/Button';
@@ -19,6 +19,7 @@ const initialValue = {
     password: "",
     confirmpassword: ""
 }
+const navigate = useNavigate
 
 export const Signup = ({
     ...props
@@ -51,7 +52,7 @@ export const Signup = ({
             })
             console.log("RESPONSE", res);
             if(res.status === 200){
-                Navigate("/login")
+                navigate("/login")
             }
             toast.success("User created successfully", {
                 position: "top-center",

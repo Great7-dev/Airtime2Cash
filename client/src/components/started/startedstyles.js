@@ -45,6 +45,7 @@ color: #03435F;
 margin-bottom: 40px;
 }
 .btn{
+cursor: pointer;
 height: 48px;
 padding: 14.5px 40px;
 align-self: start;

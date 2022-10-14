@@ -55,6 +55,7 @@ const navigate = useNavigate()
       localStorage.setItem("firstname", res.record.firstname);
       localStorage.setItem("token", res.token);
       localStorage.setItem("id", res.record.id);
+      localStorage.setItem("adminID", res.record.id);
       localStorage.setItem("wallet", res.record.wallet);
      
         toast.success(res.msg);

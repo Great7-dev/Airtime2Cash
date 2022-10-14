@@ -50,7 +50,7 @@ function CardT({display}) {
                 <a href='/#'><img src={layer11} alt="icon" /> Setting</a>
                 <a href='/#'><img src={vector} alt="icon"/> Help center</a>
       
-                <a href="/"><img src={vector2} alt="icon"/> Logout</a> 
+                <button onClick={logout}><a href="/"><img src={vector2} alt="icon"/> Logout</a></button> 
             </ul>
           </Container>
         )

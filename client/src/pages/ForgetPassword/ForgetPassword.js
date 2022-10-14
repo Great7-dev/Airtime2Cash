@@ -56,9 +56,9 @@ const ForgetPassword = () => {
         <p className="forget-paragraph">Enter the email associated with your account and we’ll send an email with instruction to reset your password</p>
           </div>
 
-            <div className='label_title'> 
+            {/* <div className='label_title'> 
           <label>Email</label>
-          </div>
+          </div> */}
           
             <div className='input_container'>
             <input type="email" className="form-control" placeholder="Enter your email" onChange={handleInput} name={'email'} value={email.email || ''} />

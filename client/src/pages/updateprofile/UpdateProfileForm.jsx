@@ -6,6 +6,7 @@ import {updateProfile,getUser} from "../../api/auth"
 import {SaveBtnStyle,InputStyle,Container, AfterNavBar} from "./Styled.updateProfile.jsx"
 import Navbar from "../../components/NavBar/NavBar";
 import CardT from "./CardT";
+import { useNavigate } from "react-router-dom";
 
 //React Form
 function Form() {
@@ -18,10 +19,11 @@ function Form() {
     }
     loadUser()
   },[])
-  
+  const navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit } = useForm()
     const onSubmit = (data) => {
         updateProfile(data)
+        navigate("/dashboard");
       };
     
   return (

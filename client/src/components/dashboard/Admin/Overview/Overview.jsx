@@ -16,6 +16,7 @@ import axios from "axios";
 import { amount } from "../../../../atoms/bankFormAtom";
 import { currentTransactionState } from "../../../../atoms/currentTransactionAtom";
 import { result } from "../../../../api/auth";
+import {notifyAdmin} from "../../../../api/auth";
 
 const Overview = () => {
   const [ShowModal, setShowModal] = useRecoilState(minModalState);
@@ -30,12 +31,15 @@ const Overview = () => {
   const [controlledPageCount, setControlledPageCount] = useState(1);
   
  
-  const handleClick = (row) => {
+  const handleClick = async (row) => {
     setAllDetails(row);
     setOpenModal(false);
     setShowModal(true);
     setEditModal(false);
     
+    const res = await notifyAdmin();
+   
+    // setAllDetails(e);
   };
   
   const getresult = async () => {
